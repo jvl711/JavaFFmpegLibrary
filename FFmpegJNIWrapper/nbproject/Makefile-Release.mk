@@ -38,9 +38,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/AVCodecContextJNI.o \
 	${OBJECTDIR}/AVCodecJNI.o \
 	${OBJECTDIR}/AVCodecParametersJNI.o \
+	${OBJECTDIR}/AVFormatJNI.o \
 	${OBJECTDIR}/AVFrameJNI.o \
 	${OBJECTDIR}/AVPacketJNI.o \
-	${OBJECTDIR}/_ext/27d9921d/AVFormatJNI.o
+	${OBJECTDIR}/AVStreamJNI.o
 
 
 # C Compiler Flags
@@ -82,6 +83,11 @@ ${OBJECTDIR}/AVCodecParametersJNI.o: AVCodecParametersJNI.c
 	${RM} "$@.d"
 	$(COMPILE.c) -O2  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVCodecParametersJNI.o AVCodecParametersJNI.c
 
+${OBJECTDIR}/AVFormatJNI.o: AVFormatJNI.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVFormatJNI.o AVFormatJNI.c
+
 ${OBJECTDIR}/AVFrameJNI.o: AVFrameJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -92,10 +98,10 @@ ${OBJECTDIR}/AVPacketJNI.o: AVPacketJNI.c
 	${RM} "$@.d"
 	$(COMPILE.c) -O2  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVPacketJNI.o AVPacketJNI.c
 
-${OBJECTDIR}/_ext/27d9921d/AVFormatJNI.o: /C/Users/jolewis/Documents/Code/Personal/JavaFFmpegLibrary/FFmpegJNIWrapper/AVFormatJNI.c
-	${MKDIR} -p ${OBJECTDIR}/_ext/27d9921d
+${OBJECTDIR}/AVStreamJNI.o: AVStreamJNI.c
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/27d9921d/AVFormatJNI.o /C/Users/jolewis/Documents/Code/Personal/JavaFFmpegLibrary/FFmpegJNIWrapper/AVFormatJNI.c
+	$(COMPILE.c) -O2  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVStreamJNI.o AVStreamJNI.c
 
 # Subprojects
 .build-subprojects:

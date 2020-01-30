@@ -21,6 +21,22 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getCodecType
 
 /*
  * Class:     jvl_FFmpeg_jni_AVCodecParameters
+ * Method:    getSampleAspectRatioNumerator
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getSampleAspectRatioNumerator
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecParameters
+ * Method:    getSampleAspectRatioDenominator
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getSampleAspectRatioDenominator
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecParameters
  * Method:    getWidth
  * Signature: (J)I
  */
@@ -89,6 +105,14 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getBitrate
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getCodecID
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecParameters
+ * Method:    getFieldOrder
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getFieldOrder
   (JNIEnv *, jobject, jlong);
 
 #ifdef __cplusplus

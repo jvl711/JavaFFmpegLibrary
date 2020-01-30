@@ -33,13 +33,21 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_openInput(JNIEnv *env
     filePathPointer = (*env)->GetStringUTFChars(env,filePath, 0);
     
     (*env)->ReleaseStringUTFChars(env, filePath, filePathPointer);
-    
+
     return avformat_open_input(&pFormatContext, filePathPointer, NULL, NULL);
+}
+
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_closeInput(JNIEnv *env, jobject obj, jlong avFormatPointer)
+{
+    AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;    
+
+    avformat_close_input(&pFormatContext);
 }
 
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_findStreamInfo(JNIEnv *env, jobject obj, jlong avFormatPointer)
 {
     AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;
+    
     
     return avformat_find_stream_info(pFormatContext, NULL);
 }
@@ -48,7 +56,7 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_findStreamInfo(JNIEnv
 JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getDuration(JNIEnv *env, jobject obj, jlong avFormatPointer)
 {
     AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;
-    
+
     return (jlong)pFormatContext->duration;
 }
 
@@ -80,13 +88,24 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getNumberOfStreams(JN
     return (jlong)pFormatContext->nb_streams;
 }
 
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getAVCodecParameters(JNIEnv *env, jobject obj, jlong avFormatPointer, jint streamIndex)
+JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getAVCodecParameters(JNIEnv *env, jobject obj, jlong avFormatPointer, jint streamIndex)
 {
     AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;
     
     AVCodecParameters *pTestContext = pFormatContext->streams[streamIndex]->codecpar;
+
+    jlong pointer = (intptr_t)pTestContext;
     
-    jint pointer = (intptr_t)pTestContext;
+    return pointer;
+}
+
+JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getAVStream(JNIEnv *env, jobject obj, jlong avFormatPointer, jint streamIndex)
+{
+    AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;
+    
+    AVStream *pTestContext = pFormatContext->streams[streamIndex];
+
+    jlong pointer = (intptr_t)pTestContext;
     
     return pointer;
 }
@@ -94,6 +113,8 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getAVCodecParameters(
 JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getBitrate(JNIEnv *env, jobject obj, jlong avFormatPointer)
 {
     AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;
+    
+    
     
     return pFormatContext->bit_rate;
 }
@@ -105,3 +126,15 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_readFrame(JNIEnv *env
     
     return av_read_frame(pFormatContext, pPacket);
 }
+
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_debug(JNIEnv *env, jobject obj, jlong avFormatPointer)
+{
+    AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;
+    
+    //AVStream *pTestContext = pFormatContext->streams[0];
+    
+    
+    
+    //return av_read_frame(pFormatContext, pPacket);
+}
+

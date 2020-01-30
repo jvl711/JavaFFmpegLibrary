@@ -24,7 +24,9 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFrame_allocate(JNIEnv* env, jobjec
 JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFrame_getPTS(JNIEnv* env, jobject obj, jlong AVFramePointer)
 {
     AVFrame * pAVFrame = (AVFrame *)(intptr_t)AVFramePointer;
-      
+    
+    
+            
     return pAVFrame->pts;
 }
 
@@ -96,6 +98,7 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFrame_getHeight(JNIEnv* env, jobjec
       
     return pAVFrame->height;
 }
+
 
 JNIEXPORT jbyte JNICALL Java_jvl_FFmpeg_jni_AVFrame_getData(JNIEnv* env, jobject obj, jlong AVFramePointer, jint i, jint j)
 {

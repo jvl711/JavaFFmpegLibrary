@@ -1,8 +1,7 @@
-build/Debug/MinGW-Windows/_ext/27d9921d/AVFormatJNI.o: \
- c:/Users/jolewis/Documents/Code/Personal/JavaFFmpegLibrary/FFmpegJNIWrapper/AVFormatJNI.c \
- c:/Program\ Files/Java/jdk1.8.0_201/include/jni.h \
- c:/Program\ Files/Java/jdk1.8.0_201/include/win32/jni_md.h \
- c:/Users/jolewis/Documents/Code/Personal/JavaFFmpegLibrary/FFmpegJNIWrapper/jvl_FFmpeg_jni_AVFormatContext.h \
+build/Debug/MinGW-Windows/AVStreamJNI.o: AVStreamJNI.c \
+ c:/Program\ Files/Java/jdk1.8.0_231/include/jni.h \
+ c:/Program\ Files/Java/jdk1.8.0_231/include/win32/jni_md.h \
+ jvl_FFmpeg_jni_AVStream.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavformat/avformat.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavcodec/avcodec.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavutil/samplefmt.h \
@@ -40,11 +39,11 @@ build/Debug/MinGW-Windows/_ext/27d9921d/AVFormatJNI.o: \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavutil/common.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavformat/version.h
 
-c:/Program\ Files/Java/jdk1.8.0_201/include/jni.h:
+c:/Program\ Files/Java/jdk1.8.0_231/include/jni.h:
 
-c:/Program\ Files/Java/jdk1.8.0_201/include/win32/jni_md.h:
+c:/Program\ Files/Java/jdk1.8.0_231/include/win32/jni_md.h:
 
-c:/Users/jolewis/Documents/Code/Personal/JavaFFmpegLibrary/FFmpegJNIWrapper/jvl_FFmpeg_jni_AVFormatContext.h:
+jvl_FFmpeg_jni_AVStream.h:
 
 libraries/ffmpeg-4.2.1-win64-dev/include/libavformat/avformat.h:
 

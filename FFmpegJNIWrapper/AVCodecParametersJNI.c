@@ -41,6 +41,13 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getCodecType(JNIEnv
     return pAVCodecParamContext->codec_type;
 }
 
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getFieldOrder(JNIEnv* env, jobject obj, jlong AVCodecParametersPointer)
+{
+    AVCodecParameters * pAVCodecParamContext = (AVCodecParameters *)(intptr_t)AVCodecParametersPointer;
+    
+    return pAVCodecParamContext->field_order;
+}
+
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getWidth(JNIEnv* env, jobject obj, jlong AVCodecParametersPointer)
 {
     AVCodecParameters * pAVCodecParamContext = (AVCodecParameters *)(intptr_t)AVCodecParametersPointer;
@@ -98,6 +105,8 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getBitrate(JNIEnv*
 {
     AVCodecParameters * pAVCodecParamContext = (AVCodecParameters *)(intptr_t)AVCodecParametersPointer;
     
+    printf("Bitrate: %I64d\n", pAVCodecParamContext->bit_rate);
+    
     return pAVCodecParamContext->bit_rate;
 }
 
@@ -106,4 +115,18 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getCodecID(JNIEnv* 
     AVCodecParameters * pAVCodecParamContext = (AVCodecParameters *)(intptr_t)AVCodecParametersPointer;
     
     return pAVCodecParamContext->codec_id;
+}
+
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getSampleAspectRatioNumerator(JNIEnv* env, jobject obj, jlong AVCodecParametersPointer)
+{
+    AVCodecParameters * pAVCodecParamContext = (AVCodecParameters *)(intptr_t)AVCodecParametersPointer;
+    
+    return pAVCodecParamContext->sample_aspect_ratio.num;
+}
+
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getSampleAspectRatioDenominator(JNIEnv* env, jobject obj, jlong AVCodecParametersPointer)
+{
+    AVCodecParameters * pAVCodecParamContext = (AVCodecParameters *)(intptr_t)AVCodecParametersPointer;
+
+    return pAVCodecParamContext->sample_aspect_ratio.den;
 }

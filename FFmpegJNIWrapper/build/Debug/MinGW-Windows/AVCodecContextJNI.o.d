@@ -1,8 +1,7 @@
 build/Debug/MinGW-Windows/AVCodecContextJNI.o: AVCodecContextJNI.c \
- c:/Program\ Files/Java/jdk1.8.0_201/include/jni.h \
- c:/Program\ Files/Java/jdk1.8.0_201/include/win32/jni_md.h \
+ c:/Program\ Files/Java/jdk1.8.0_231/include/jni.h \
+ c:/Program\ Files/Java/jdk1.8.0_231/include/win32/jni_md.h \
  jvl_FFmpeg_jni_AVCodecContext.h \
- libraries/ffmpeg-4.2.1-win64-dev/include/libavformat/avformat.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavcodec/avcodec.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavutil/samplefmt.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavutil/avutil.h \
@@ -35,17 +34,16 @@ build/Debug/MinGW-Windows/AVCodecContextJNI.o: AVCodecContextJNI.c \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavutil/rational.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavcodec/version.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavutil/version.h \
+ libraries/ffmpeg-4.2.1-win64-dev/include/libavformat/avformat.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavformat/avio.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavutil/common.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavformat/version.h
 
-c:/Program\ Files/Java/jdk1.8.0_201/include/jni.h:
+c:/Program\ Files/Java/jdk1.8.0_231/include/jni.h:
 
-c:/Program\ Files/Java/jdk1.8.0_201/include/win32/jni_md.h:
+c:/Program\ Files/Java/jdk1.8.0_231/include/win32/jni_md.h:
 
 jvl_FFmpeg_jni_AVCodecContext.h:
-
-libraries/ffmpeg-4.2.1-win64-dev/include/libavformat/avformat.h:
 
 libraries/ffmpeg-4.2.1-win64-dev/include/libavcodec/avcodec.h:
 
@@ -110,6 +108,8 @@ libraries/ffmpeg-4.2.1-win64-dev/include/libavutil/rational.h:
 libraries/ffmpeg-4.2.1-win64-dev/include/libavcodec/version.h:
 
 libraries/ffmpeg-4.2.1-win64-dev/include/libavutil/version.h:
+
+libraries/ffmpeg-4.2.1-win64-dev/include/libavformat/avformat.h:
 
 libraries/ffmpeg-4.2.1-win64-dev/include/libavformat/avio.h:
 

@@ -10,6 +10,7 @@
       <itemPath>jvl_FFmpeg_jni_AVFormatContext.h</itemPath>
       <itemPath>jvl_FFmpeg_jni_AVFrame.h</itemPath>
       <itemPath>jvl_FFmpeg_jni_AVPacket.h</itemPath>
+      <itemPath>jvl_FFmpeg_jni_AVStream.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -21,9 +22,10 @@
       <itemPath>AVCodecContextJNI.c</itemPath>
       <itemPath>AVCodecJNI.c</itemPath>
       <itemPath>AVCodecParametersJNI.c</itemPath>
-      <itemPath>C:/Users/jolewis/Documents/Code/Personal/JavaFFmpegLibrary/FFmpegJNIWrapper/AVFormatJNI.c</itemPath>
+      <itemPath>AVFormatJNI.c</itemPath>
       <itemPath>AVFrameJNI.c</itemPath>
       <itemPath>AVPacketJNI.c</itemPath>
+      <itemPath>AVStreamJNI.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -51,20 +53,24 @@
       <compileType>
         <cTool>
           <incDir>
+            <pElem>C:/Program Files/Java/jdk1.8.0_231/include/win32</pElem>
+            <pElem>C:/Program Files/Java/jdk1.8.0_231/include/</pElem>
             <pElem>libraries/ffmpeg-4.2.1-win64-dev/include</pElem>
-            <pElem>C:/Program Files/Java/jdk1.8.0_201/include/win32</pElem>
-            <pElem>C:/Program Files/Java/jdk1.8.0_201/include/</pElem>
           </incDir>
         </cTool>
         <linkerTool>
           <linkerAddLib>
-            <pElem>"C:/Program Files/Java/jdk1.8.0_201/lib"</pElem>
             <pElem>libraries/ffmpeg-4.1.3/lib</pElem>
+            <pElem>"C:/Program Files/Java/jdk1.8.0_231/lib"</pElem>
           </linkerAddLib>
           <linkerLibItems>
             <linkerLibLibItem>avcodec</linkerLibLibItem>
+            <linkerLibLibItem>avdevice</linkerLibLibItem>
+            <linkerLibLibItem>avfilter</linkerLibLibItem>
             <linkerLibLibItem>avformat</linkerLibLibItem>
             <linkerLibLibItem>avutil</linkerLibLibItem>
+            <linkerLibLibItem>postproc</linkerLibLibItem>
+            <linkerLibLibItem>swscale</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
@@ -74,14 +80,13 @@
       </item>
       <item path="AVCodecParametersJNI.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="AVFormatJNI.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="AVFrameJNI.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="AVPacketJNI.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="C:/Users/jolewis/Documents/Code/Personal/JavaFFmpegLibrary/FFmpegJNIWrapper/AVFormatJNI.c"
-            ex="false"
-            tool="0"
-            flavor2="0">
+      <item path="AVStreamJNI.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="jvl_FFmpeg_jni_AVCodec.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -94,6 +99,8 @@
       <item path="jvl_FFmpeg_jni_AVFrame.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="jvl_FFmpeg_jni_AVPacket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="jvl_FFmpeg_jni_AVStream.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="2">
@@ -122,14 +129,13 @@
       </item>
       <item path="AVCodecParametersJNI.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="AVFormatJNI.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="AVFrameJNI.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="AVPacketJNI.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="C:/Users/jolewis/Documents/Code/Personal/JavaFFmpegLibrary/FFmpegJNIWrapper/AVFormatJNI.c"
-            ex="false"
-            tool="0"
-            flavor2="0">
+      <item path="AVStreamJNI.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="jvl_FFmpeg_jni_AVCodec.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -142,6 +148,8 @@
       <item path="jvl_FFmpeg_jni_AVFrame.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="jvl_FFmpeg_jni_AVPacket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="jvl_FFmpeg_jni_AVStream.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

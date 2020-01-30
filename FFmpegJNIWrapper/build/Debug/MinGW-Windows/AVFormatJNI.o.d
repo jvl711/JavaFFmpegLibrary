@@ -1,7 +1,7 @@
-build/Debug/MinGW-Windows/AVCodecJNI.o: AVCodecJNI.c \
+build/Debug/MinGW-Windows/AVFormatJNI.o: AVFormatJNI.c \
  c:/Program\ Files/Java/jdk1.8.0_231/include/jni.h \
  c:/Program\ Files/Java/jdk1.8.0_231/include/win32/jni_md.h \
- jvl_FFmpeg_jni_AVCodec.h \
+ jvl_FFmpeg_jni_AVFormatContext.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavformat/avformat.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavcodec/avcodec.h \
  libraries/ffmpeg-4.2.1-win64-dev/include/libavutil/samplefmt.h \
@@ -43,7 +43,7 @@ c:/Program\ Files/Java/jdk1.8.0_231/include/jni.h:
 
 c:/Program\ Files/Java/jdk1.8.0_231/include/win32/jni_md.h:
 
-jvl_FFmpeg_jni_AVCodec.h:
+jvl_FFmpeg_jni_AVFormatContext.h:
 
 libraries/ffmpeg-4.2.1-win64-dev/include/libavformat/avformat.h:
 

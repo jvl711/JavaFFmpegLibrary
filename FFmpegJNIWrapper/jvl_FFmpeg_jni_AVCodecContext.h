@@ -31,6 +31,22 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_sendPacket
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_receiveFrame
   (JNIEnv *, jobject, jlong, jlong);
 
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    getFramerateNumerator
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getFramerateNumerator
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    getFramerateDenominator
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getFramerateDenominator
+  (JNIEnv *, jobject, jlong);
+
 #ifdef __cplusplus
 }
 #endif

@@ -17,19 +17,19 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_allocateContext
 
 /*
  * Class:     jvl_FFmpeg_jni_AVFormatContext
- * Method:    freeContext
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_freeContext
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     jvl_FFmpeg_jni_AVFormatContext
  * Method:    openInput
  * Signature: (JLjava/lang/String;)I
  */
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_openInput
   (JNIEnv *, jobject, jlong, jstring);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVFormatContext
+ * Method:    closeInput
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_closeInput
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     jvl_FFmpeg_jni_AVFormatContext
@@ -82,9 +82,17 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getNumberOfStreams
 /*
  * Class:     jvl_FFmpeg_jni_AVFormatContext
  * Method:    getAVCodecParameters
- * Signature: (JI)I
+ * Signature: (JI)J
  */
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getAVCodecParameters
+JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getAVCodecParameters
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVFormatContext
+ * Method:    getAVStream
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getAVStream
   (JNIEnv *, jobject, jlong, jint);
 
 /*
@@ -102,6 +110,14 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getBitrate
  */
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_readFrame
   (JNIEnv *, jobject, jlong, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVFormatContext
+ * Method:    debug
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_debug
+  (JNIEnv *, jobject, jlong);
 
 #ifdef __cplusplus
 }
