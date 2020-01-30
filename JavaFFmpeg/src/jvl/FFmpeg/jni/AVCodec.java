@@ -5,15 +5,17 @@ package jvl.FFmpeg.jni;
 public class AVCodec
 {
     private final long AVCodecPointer;
+    private final AVCodecParameters avparams;
     
     static
     {
         Global.loadLibraries();
     }
     
-    protected AVCodec(long AVCodecPointer)
+    protected AVCodec(long AVCodecPointer, AVCodecParameters avparams)
     {
         this.AVCodecPointer = AVCodecPointer;
+        this.avparams = avparams;
     }
     
     public static AVCodec getAVCodec(AVCodecParameters avparam)
@@ -25,7 +27,7 @@ public class AVCodec
             throw new RuntimeException("Codec not found");
         }
         
-        AVCodec avcodec = new AVCodec(pointer);
+        AVCodec avcodec = new AVCodec(pointer, avparam);
         
         return avcodec;
     }
@@ -51,16 +53,28 @@ public class AVCodec
     
     private native String getName(long AVCodecPointer);
     
+    /**
+     * Allocates the context, Copies the Codec Parameters and opens the Codec
+     * 
+     * Make sure to free the resource when done with it.
+     * 
+     * @return A new instance
+     */
     public AVCodecContext allocateContext()
     {
         long pointer = allocateContext(this.AVCodecPointer);
         
-        return new AVCodecContext(pointer);
+        AVCodecContext context = new AVCodecContext(pointer);
+        
+        this.copyParamsToContext(context, this.avparams);
+        this.open(context);
+        
+        return context;
     }
     
     private native long allocateContext(long AVCodecPointer);
     
-    public void copyParamsToContext(AVCodecContext avcodecContext, AVCodecParameters avcodecParameters)
+    private void copyParamsToContext(AVCodecContext avcodecContext, AVCodecParameters avcodecParameters)
     {
         int ret = copyParamsToContext(avcodecContext.getPointer(), avcodecParameters.getPointer());
         
@@ -72,7 +86,7 @@ public class AVCodec
     
     private native int copyParamsToContext(long AVCodePointer, long AVCodecParamPointer);
     
-    public void open(AVCodecContext avcodeccontext)
+    private void open(AVCodecContext avcodeccontext)
     {
         int ret = open(avcodeccontext.getPointer(), this.AVCodecPointer);
         

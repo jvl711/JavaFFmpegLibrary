@@ -44,6 +44,68 @@ public class AVCodecParameters
         return getHeight(this.AVCodeParamPointer);
     }
     
+    public double getAspectRatio()
+    {
+        return (this.getWidth() * 1.0) / (this.getHeight() * 1.0);
+    }
+    
+    public String getAspectRatioString()
+    {
+        int gcd;
+        int samp_num = 1;
+        int samp_den = 1;
+        
+        if(this.getSampleAspectRatioDenominator() > 0 && this.getSampleAspectRatioNumerator() > 0)
+        {
+            samp_num = this.getSampleAspectRatioDenominator();
+            samp_den = this.getSampleAspectRatioNumerator();
+        }
+        
+        int width = this.getWidth() * samp_num;
+        int height = this.getHeight() * samp_den;
+        
+        gcd = gcd(height, width);
+        
+        int dar_num = this.getWidth() / gcd;
+        int dar_den = this.getHeight()  / gcd;
+        
+        return dar_num + ":" + dar_den;
+    }
+    
+    private static int gcd(int a, int b)
+    {
+        while (b > 0)
+        {
+            int temp = b;
+            b = a % b; // % is remainder
+            a = temp;
+        }
+        return a;
+    }
+    
+     /* * The Numerator of the aspect ration or 0 if it is unknown
+     * 
+     * @return Numerator 
+     */
+    public int getSampleAspectRatioNumerator()
+    {
+        return this.getSampleAspectRatioNumerator(AVCodeParamPointer);
+    }
+    
+    private native int getSampleAspectRatioNumerator(long AVCodeParamPointer);
+    
+    /**
+     * The denominator of the aspect ration
+     * 
+     * @return Denominator 
+     */
+    public int getSampleAspectRatioDenominator()
+    {
+        return this.getSampleAspectRatioDenominator(AVCodeParamPointer);
+    }
+   
+    private native int getSampleAspectRatioDenominator(long AVCodeParamPointer);
+    
     private native int getWidth(long AVCodeParamPointer);
     
     private native int getHeight(long AVCodeParamPointer);
@@ -115,5 +177,19 @@ public class AVCodecParameters
     {
         return streamIndex;
     }
+    
+    /**
+     * Video only. The order of the fields in interlaced video.
+     */
+    public AVFieldOrder getFieldOrder()
+    {
+        int temp = this.getFieldOrder(this.AVCodeParamPointer);
+        
+        System.out.println(temp);
+        
+        return AVFieldOrder.parse(temp);
+    }
+    
+    private native int getFieldOrder(long AVCodecParamPointer);
     
 }

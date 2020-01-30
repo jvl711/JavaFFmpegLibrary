@@ -37,16 +37,21 @@ public class AVFormatTest
     {
         avformat = AVFormatContext.buildAVFormatContext();
         
-        avformat.openInput("src/examples/H265_60_seconds.mkv");       
+        //avformat.openInput("src/examples/H265_60_seconds.mkv");       
+        //avformat.openInput("C:\\Users\\jvl711.CORE\\Documents\\TestData\\The Man in the High Castle - S01E01 - The New World1.mkv");       
+        avformat.openInput("\\\\egypt\\tv\\Anthony Bourdain No Reservations\\Season 04\\Anthony.Bourdain.No.Reservations.S04E20.At.the.Table.with.Anthony.Bourdain.mkv");
+        //System.out.println("Finished open");
     }
     
     @After
     public void tearDown()
     {
-        avformat.freeContext();
+        avformat.closeInput();
         
     }
 
+     
+    
     
     @Test
     public void testFormatLongName()
@@ -112,5 +117,12 @@ public class AVFormatTest
     public void getDuration()
     {
         System.out.println(avformat.getDuration());
+    }
+    
+    @Test
+    public void debug()
+    {
+        //avformat.findStreamInfo();
+        //avformat.debug();
     }
 }

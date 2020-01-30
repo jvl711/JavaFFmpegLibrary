@@ -79,6 +79,7 @@
             <class name="jvl.FFmpeg.jni.AVCodecContext"/>
             <class name="jvl.FFmpeg.jni.AVFrame"/>
             <class name="jvl.FFmpeg.jni.AVPacket"/>
+            <class name="jvl.FFmpeg.jni.AVStream"/>
         </javah>
     </target>
     

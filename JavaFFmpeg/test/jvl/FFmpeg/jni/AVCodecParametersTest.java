@@ -39,8 +39,10 @@ public class AVCodecParametersTest
         avformat = AVFormatContext.buildAVFormatContext();
         
         //avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
-        avformat.openInput("src/examples/H265_60_seconds.mkv");
-        
+        //avformat.openInput("src/examples/H265_60_seconds.mkv");
+        //AmericanDad-S14E01-FantasyBaseball-44300642-0
+        //avformat.openInput("\\\\egypt\\recordings\\MythbustersJr-S01E03-BatteryBlast-43044941-0.ts");
+        avformat.openInput("\\\\egypt\\recordings\\BobsBurgers-S09E05-LiveandLetFly-42251446-0.ts");
         avparamVideo = avformat.getAVCodecParameters(0);
         avparamAudio = avformat.getAVCodecParameters(1);
     }
@@ -49,7 +51,7 @@ public class AVCodecParametersTest
     @After
     public void tearDown()
     {
-        avformat.freeContext();
+        avformat.closeInput();
         
     }
     
@@ -79,6 +81,12 @@ public class AVCodecParametersTest
     }
     
     @Test
+    public void testBitrate()
+    {
+        System.out.println(this.avparamAudio.getBitrate());
+    }
+    
+    @Test
     public void testGetChannels()
     {
         System.out.println(this.avparamAudio.getChannels());
@@ -94,5 +102,20 @@ public class AVCodecParametersTest
     public void testGetCodecID()
     {
         System.out.println(avparamVideo.getCodecID());
+    }
+    
+    @Test 
+    public void testGetFieldOrder()
+    {
+        System.out.println(avparamVideo.getFieldOrder());
+    }
+    
+    @Test
+    public void TestgetAspectRatio()
+    {
+        System.out.println("Aspect Ratio " + avparamVideo.getAspectRatio());
+        System.out.println("Aspect Ratio String " + avparamVideo.getAspectRatioString());
+        System.out.println("Samp aspect den " + avparamVideo.getSampleAspectRatioDenominator());
+        System.out.println("Samp aspect num " + avparamVideo.getSampleAspectRatioNumerator());
     }
 }

@@ -37,6 +37,8 @@ public class AVCodecTest
         avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
         //avformat.openInput("src/examples/H265_60_seconds.mkv");
         
+        avformat.getNumberOfStreams();
+        
         avparamVideo = avformat.getAVCodecParameters(0);
         avparamAudio = avformat.getAVCodecParameters(1);
         
@@ -46,7 +48,7 @@ public class AVCodecTest
     @After
     public void tearDown()
     {
-        avformat.freeContext();
+        avformat.closeInput();
     }
 
     @Test
@@ -70,14 +72,6 @@ public class AVCodecTest
     }
     
     @Test
-    public void testOpen()
-    {
-        AVCodecContext avcodecContext = avcodecVideo.allocateContext();
-        avcodecVideo.open(avcodecContext);
-        avcodecContext.freeContext();
-    }
-    
-    @Test
     public void testReadFrame()
     {
         
@@ -85,9 +79,8 @@ public class AVCodecTest
         
         System.out.println("AVCodecContext: " + avcodecContext.getPointer());
         
-        avcodecVideo.copyParamsToContext(avcodecContext, avparamVideo);
-        
-        avcodecVideo.open(avcodecContext);
+        //avcodecVideo.copyParamsToContext(avcodecContext, avparamVideo);
+        //avcodecVideo.open(avcodecContext);
         
         AVPacket packet = AVPacket.buildAVPacket();
         
@@ -110,9 +103,8 @@ public class AVCodecTest
         
         System.out.println("AVCodecContext: " + avcodecContext.getPointer());
         
-        avcodecVideo.copyParamsToContext(avcodecContext, avparamVideo);
-        
-        avcodecVideo.open(avcodecContext);
+        //avcodecVideo.copyParamsToContext(avcodecContext, avparamVideo);
+        //avcodecVideo.open(avcodecContext);
         
         AVPacket packet = AVPacket.buildAVPacket();
         AVFrame frame = AVFrame.buildAVFrame();
@@ -172,8 +164,8 @@ public class AVCodecTest
         
         AVCodecContext avcodecContext = avcodecVideo.allocateContext();
         
-        avcodecVideo.copyParamsToContext(avcodecContext, avparamVideo);
-        avcodecVideo.open(avcodecContext);
+        //avcodecVideo.copyParamsToContext(avcodecContext, avparamVideo);
+        //avcodecVideo.open(avcodecContext);
         
         AVPacket packet = AVPacket.buildAVPacket();
         AVFrame frame = AVFrame.buildAVFrame();
@@ -223,8 +215,8 @@ public class AVCodecTest
         
         AVCodecContext avcodecContext = avcodecVideo.allocateContext();
         
-        avcodecVideo.copyParamsToContext(avcodecContext, avparamVideo);
-        avcodecVideo.open(avcodecContext);
+        //avcodecVideo.copyParamsToContext(avcodecContext, avparamVideo);
+        //avcodecVideo.open(avcodecContext);
         
         AVPacket packet = AVPacket.buildAVPacket();
         AVFrame frame = AVFrame.buildAVFrame();
@@ -276,13 +268,48 @@ public class AVCodecTest
     }
     
     @Test
-    public void test()
+    public void testFramerate()
     {
         
-        //byte value = AVFrame.test();
+        AVCodecContext avcodecContext = avcodecVideo.allocateContext();
         
-        //char cvalue = (char)value;
+        //avcodecVideo.copyParamsToContext(avcodecContext, avparamVideo);
         
-        //System.out.println("Value: " + cvalue);
+        //avcodecVideo.open(avcodecContext);
+        
+        System.out.println("Framerate den: " + avcodecContext.getFrameRateDenominator());
+        System.out.println("Framerate num: " + avcodecContext.getFrameRateNumerator());
+        System.out.println("Framerate " + avcodecContext.getFramerate());
+       
+    }
+    
+    @Test
+    public void test()
+    {
+        long temp = gcd(1920, 1080);
+        
+        System.out.println(temp);
+        
+        System.out.println((1920 / temp) + ":" + (1080 / temp));
+                
+    }
+    
+    private static long lcm(long a, long b)
+    {
+        return a * (b / gcd(a, b));
+    }
+    
+    private static long gcd(long a, long b)
+    {
+        while (b > 0)
+        {
+            long temp = b;
+            b = a % b; // % is remainder
+            a = temp;
+        }
+        return a;
     }
 }
+
+    
+
