@@ -2,19 +2,13 @@
 package jvl.FFmpeg.jni;
 
 
-public class AVCodec
+public class AVCodec extends AbstractJNIObject
 {
-    private final long AVCodecPointer;
     private final AVCodecParameters avparams;
-    
-    static
-    {
-        Global.loadLibraries();
-    }
-    
+
     protected AVCodec(long AVCodecPointer, AVCodecParameters avparams)
     {
-        this.AVCodecPointer = AVCodecPointer;
+        super(AVCodecPointer);        
         this.avparams = avparams;
     }
     
@@ -34,21 +28,21 @@ public class AVCodec
     
     public long getPointer()
     {
-        return this.AVCodecPointer;
+        return this.getPointer();
     }
     
     private static native long findDecoder(int codec_id);
     
     public String getLongName()
     {
-        return this.getLongName(this.AVCodecPointer);
+        return this.getLongName(this.getPointer());
     }
     
     private native String getLongName(long AVCodecPointer);
     
     public String getName()
     {
-        return this.getName(this.AVCodecPointer);
+        return this.getName(this.getPointer());
     }
     
     private native String getName(long AVCodecPointer);
@@ -62,7 +56,7 @@ public class AVCodec
      */
     public AVCodecContext allocateContext()
     {
-        long pointer = allocateContext(this.AVCodecPointer);
+        long pointer = allocateContext(this.getPointer());
         
         AVCodecContext context = new AVCodecContext(pointer);
         
@@ -88,7 +82,7 @@ public class AVCodec
     
     private void open(AVCodecContext avcodeccontext)
     {
-        int ret = open(avcodeccontext.getPointer(), this.AVCodecPointer);
+        int ret = open(avcodeccontext.getPointer(), this.getPointer());
         
         if (ret < 0)
         {

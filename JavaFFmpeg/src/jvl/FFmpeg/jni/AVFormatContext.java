@@ -7,23 +7,20 @@ package jvl.FFmpeg.jni;
 
 //TODO: Split out AVFormat and AVFormatContext.  Everything that needs the pointer shoulr probably use the context
 
-public class AVFormatContext
+public class AVFormatContext extends AbstractJNIObject
 {
-    private final long AVFormatContextPointer;
+    //private final long AVFormatContextPointer;
     
     private boolean isFindStreamInfoCalled;
     private boolean isFileOpen;
     
-    static
-    {
-        Global.loadLibraries();
-    }
     
     private AVFormatContext(long AVFormatContextPointer)
     {
+        super(AVFormatContextPointer);
         this.isFindStreamInfoCalled = false;
         this.isFileOpen = false;
-        this.AVFormatContextPointer = AVFormatContextPointer;
+        //this.AVFormatContextPointer = AVFormatContextPointer;
     }
     
     public static AVFormatContext buildAVFormatContext()
@@ -31,6 +28,14 @@ public class AVFormatContext
         long pointer = allocateContext();
         
         return new AVFormatContext(pointer);
+    }
+    
+    private void validateFileOpen()
+    {
+        if(!this.isFileOpen)
+        {
+            throw new RuntimeException("There is no open file to execute request against.");
+        }
     }
     
     private static native long allocateContext();
@@ -47,7 +52,7 @@ public class AVFormatContext
     
     public void openInput(String filePath)
     {
-        int ret = openInput(this.AVFormatContextPointer, filePath);
+        int ret = openInput(this.getPointer(), filePath);
 
         if(ret < 0)
         {
@@ -74,7 +79,7 @@ public class AVFormatContext
         
         if(this.isFileOpen)
         {
-            this.closeInput(this.AVFormatContextPointer);
+            this.closeInput(this.getPointer());
         }
     }
         
@@ -93,10 +98,12 @@ public class AVFormatContext
     */
     public void findStreamInfo()
     {
+        validateFileOpen();
+        
         if(!this.isFindStreamInfoCalled)
         {
             System.out.println("Find stream info called");
-            int ret = this.findStreamInfo(this.AVFormatContextPointer);
+            int ret = this.findStreamInfo(this.getPointer());
             
             if(ret >= 0)
             {
@@ -133,7 +140,9 @@ public class AVFormatContext
      */
     public long getDuration()
     {
-        return this.getDuration(this.AVFormatContextPointer);
+        validateFileOpen();
+        
+        return this.getDuration(this.getPointer());
     }
     
     private native long getDuration(long AVFormatContextPointer);
@@ -145,7 +154,9 @@ public class AVFormatContext
      */
     public String getFormatLongName()
     {
-        return this.getFormatLongName(this.AVFormatContextPointer);
+        validateFileOpen();
+        
+        return this.getFormatLongName(this.getPointer());
     }
     
     private native String getFormatLongName(long AVFormatContextPointer);
@@ -156,7 +167,9 @@ public class AVFormatContext
      */
     public String getFormatName()
     {
-        return this.getFormatName(this.AVFormatContextPointer);
+        validateFileOpen();
+        
+        return this.getFormatName(this.getPointer());
     }
     
     private native String getFormatName(long AVFormatContextPointer);
@@ -167,38 +180,48 @@ public class AVFormatContext
      */
     public String getMimeType()
     {
-        return this.getMimeType(this.AVFormatContextPointer);
+        validateFileOpen();
+        
+        return this.getMimeType(this.getPointer());
     }
     
     private native String getMimeType(long AVFormatContextPointer);
     
     public int getNumberOfStreams()
     {
-        return this.getNumberOfStreams(this.AVFormatContextPointer);
+        validateFileOpen();
+        
+        return this.getNumberOfStreams(this.getPointer());
     }
     
     private native int getNumberOfStreams(long AVFormatContextPointer);
     
     public AVCodecParameters getAVCodecParameters(int streamIndex)
     {
+        validateFileOpen();
+        
         this.findStreamInfo();
-        return new AVCodecParameters(this.getAVCodecParameters(this.AVFormatContextPointer, streamIndex), streamIndex);
+        return new AVCodecParameters(this.getAVCodecParameters(this.getPointer(), streamIndex), streamIndex);
     }
     
     private native long getAVCodecParameters(long AVFormatContextPointer, int streamIndex);
     
     public AVStream getAVStream(int streamIndex)
     {
+        validateFileOpen();
+        
         this.findStreamInfo();
-        return new AVStream(this.getAVStream(this.AVFormatContextPointer, streamIndex), streamIndex);
+        return new AVStream(this.getAVStream(this.getPointer(), streamIndex), streamIndex);
     }
     
     private native long getAVStream(long AVFormatContextPointer, int streamIndex);
     
     public long getBitrate()
     {
+        validateFileOpen();
+        
         this.findStreamInfo();
-        return this.getBitrate(AVFormatContextPointer);
+        return this.getBitrate(getPointer());
     }
     
     private native long getBitrate(long AVFormatContextPointer);
@@ -231,7 +254,9 @@ public class AVFormatContext
     */
     public int readFrame(AVPacket packet)
     {
-        return readFrame(this.AVFormatContextPointer, packet.getPointer());    
+        validateFileOpen();
+        
+        return readFrame(this.getPointer(), packet.getPointer());    
     }
     
     private native int readFrame(long AVFormatContextPointer, long AVFramePointer);
@@ -239,7 +264,9 @@ public class AVFormatContext
     
     public void debug()
     {
-        this.debug(this.AVFormatContextPointer);
+        validateFileOpen();
+        
+        this.debug(this.getPointer());
     }
     
     private native void debug(long pointer);

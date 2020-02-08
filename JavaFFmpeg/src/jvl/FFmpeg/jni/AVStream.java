@@ -32,6 +32,21 @@ public class AVStream
         return this.AVStreamPointer;
     }
     
+    
+    public boolean isForced()
+    {
+        return this.isForced(AVStreamPointer);
+    }
+    
+    private native boolean isForced(long AVStreamPointer);
+    
+    public boolean isDefault()
+    {
+        return this.isForced(AVStreamPointer);
+    }
+    
+    private native boolean isDefault(long AVStreamPointer);
+    
     /**
      * The Numerator of the framerate or 0 if it is unknown
      * 

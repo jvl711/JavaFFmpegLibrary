@@ -13,7 +13,9 @@ import org.junit.Assert;
 
 public class AVFormatTest
 {
-    AVFormatContext avformat;
+    AVFormatContext avformaterr;
+    AVFormatContext avformat1;
+    
     
     
     public AVFormatTest()
@@ -35,18 +37,17 @@ public class AVFormatTest
     @Before
     public void setUp()
     {
-        avformat = AVFormatContext.buildAVFormatContext();
+        avformat1 = AVFormatContext.buildAVFormatContext();
+        avformaterr = AVFormatContext.buildAVFormatContext();
         
-        //avformat.openInput("src/examples/H265_60_seconds.mkv");       
-        //avformat.openInput("C:\\Users\\jvl711.CORE\\Documents\\TestData\\The Man in the High Castle - S01E01 - The New World1.mkv");       
-        avformat.openInput("\\\\egypt\\tv\\Anthony Bourdain No Reservations\\Season 04\\Anthony.Bourdain.No.Reservations.S04E20.At.the.Table.with.Anthony.Bourdain.mkv");
-        //System.out.println("Finished open");
+        avformat1.openInput("src/examples/H265_60_seconds.mkv");       
     }
     
     @After
     public void tearDown()
     {
-        avformat.closeInput();
+        avformat1.closeInput();
+        avformaterr.closeInput();
         
     }
 
@@ -54,35 +55,33 @@ public class AVFormatTest
     
     
     @Test
-    public void testFormatLongName()
+    public void TestFormatLongName()
     {
-        String ret = avformat.getFormatLongName();
+        String ret = avformat1.getFormatLongName();
         
-        System.out.println(ret);        
+        Assert.assertEquals("Matroska / WebM", avformat1.getFormatLongName());
     }
     
     @Test
-    public void testFormatName()
+    public void TestFormatName()
     {
-        String ret = avformat.getFormatName();
+        String ret = avformat1.getFormatName();
         
-        System.out.println(ret);
+        Assert.assertEquals("matroska,webm", avformat1.getFormatName());
     }
     
     @Test
-    public void testMimeType()
+    public void TestMimeType()
     {
-        String ret = avformat.getMimeType();
-        
-        System.out.println(ret);
+        Assert.assertEquals("audio/webm,audio/x-matroska,video/webm,video/x-matroska", avformat1.getMimeType());
     }
     
     @Test
     public void testGetNumberOfStreams()
     {
-        avformat.findStreamInfo();
+        avformat1.findStreamInfo();
         
-        int streams = avformat.getNumberOfStreams();
+        int streams = avformat1.getNumberOfStreams();
         
         System.out.println(streams);
     }
@@ -92,7 +91,7 @@ public class AVFormatTest
     {
         //avformat.getAVCodecParameters(0);
         
-        System.out.println(avformat.getAVCodecParameters(0).getPointer());
+        System.out.println(avformat1.getAVCodecParameters(0).getPointer());
     }
     
     @Test 
@@ -102,7 +101,7 @@ public class AVFormatTest
         
         //avformat.findStreamInfo();
         
-        System.out.println(avformat.getAVCodecParameters(0).getCodecType());
+        System.out.println(avformat1.getAVCodecParameters(0).getCodecType());
     }
     
     @Test
@@ -110,13 +109,13 @@ public class AVFormatTest
     {
         //avformat.findStreamInfo();
         
-        System.out.println(avformat.getBitrate());
+        System.out.println(avformat1.getBitrate());
     }
     
     @Test
     public void getDuration()
     {
-        System.out.println(avformat.getDuration());
+        System.out.println(avformat1.getDuration());
     }
     
     @Test

@@ -1,29 +1,17 @@
 
 package jvl.FFmpeg.jni;
 
-public class AVPacket
+public class AVPacket extends AbstractJNIObject
 {
-    private final long AVPacketPointer;
-
-    static
-    {
-        Global.loadLibraries();
-    }
     
     protected AVPacket(long AVPacketPointer)
     {
-        this.AVPacketPointer = AVPacketPointer;
-    }
-    
-    public long getPointer()
-    {
-        return this.AVPacketPointer;
+        super(AVPacketPointer);
     }
     
     public static AVPacket buildAVPacket()
     {
         long pointer = allocate();
-        
         return new AVPacket(pointer);
     }
     
@@ -37,7 +25,7 @@ public class AVPacket
     */
     public void unreference()
     {
-        unreference(this.AVPacketPointer);
+        unreference(this.getPointer());
     }
     
     private native void unreference(long AVPacketPointer);
@@ -55,7 +43,7 @@ public class AVPacket
      */
     public long getPTS()
     {
-        return getPTS(this.AVPacketPointer);
+        return getPTS(this.getPointer());
     }
     
     private native long getPTS(long AVPacketPointer);
@@ -69,7 +57,7 @@ public class AVPacket
      */
     public long getDTS()
     {
-        return getDTS(this.AVPacketPointer);
+        return getDTS(this.getPointer());
     }
     
     private native long getDTS(long AVPacketPointer);
@@ -79,12 +67,12 @@ public class AVPacket
      */
     public long getPosition()
     {
-        return getPosition(this.AVPacketPointer);
+        return getPosition(this.getPointer());
     }
     
     public int getStreamIndex()
     {
-        return this.getStreamIndex(AVPacketPointer);
+        return this.getStreamIndex(getPointer());
     }
     
     private native int getStreamIndex(long AVPacketPointer);
@@ -93,7 +81,7 @@ public class AVPacket
     
     public void free()
     {
-        this.free(AVPacketPointer);
+        this.free(getPointer());
     }
     
     private native void free(long AVPacketPointer);

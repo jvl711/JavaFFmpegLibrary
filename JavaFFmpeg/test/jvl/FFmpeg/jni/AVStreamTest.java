@@ -116,6 +116,7 @@ public class AVStreamTest
 
             if(avparm.getCodecType() == AVMediaType.VIDEO)
             {
+                System.out.println("\t\tFFMPEG Default: " + avstream.isDefault());
                 //System.out.println("\tSage Duration: " + this.GetAiring().GetDuration());
                 System.out.println("\t\tFFMPEG Duration: " + avformat.getDuration());
                 System.out.println("\t\tFFMPEG Lang: " + avstream.getLanguage());
@@ -155,6 +156,7 @@ public class AVStreamTest
             }
             else if(avparm.getCodecType() == AVMediaType.AUDIO)
             {
+                System.out.println("\t\tFFMPEG Default: " + avstream.isDefault());
                 System.out.println("\t\tFFMPEG Lang: " + avstream.debug());
                 System.out.println("\t\tFFMPEG Channels: " + avparm.getChannels());
                 System.out.println("\t\tFFMPEG Bitrate: " + avparm.getBitrate());
@@ -164,10 +166,12 @@ public class AVStreamTest
             }
             else if(avparm.getCodecType() == AVMediaType.SUBTITLE)
             {
+                System.out.println("\t\tFFMPEG Default: " + avstream.isDefault());
                 System.out.println("\t\tFFMPEG Languag: " + avstream.getLanguage());
                 System.out.println("\t\tFFMPEG Codec: " + avcodec.getName());
                 System.out.println("\t\tFFMPEG Codec Long: " + avcodec.getLongName());
                 System.out.println("\t\tFFMPEG Codec ID: " + avparm.getCodecID());
+                System.out.println("\t\tFFMPEG Forced: " + avstream.isForced());
             }
             else if(avparm.getCodecType() == AVMediaType.DATA)
             {

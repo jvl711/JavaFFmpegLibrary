@@ -1,42 +1,36 @@
 
 package jvl.FFmpeg.jni;
 
-public class AVCodecContext
+public class AVCodecContext extends AbstractJNIObject
 {
-    private final long AVCodecContextPointer;
-    
-    static
-    {
-        Global.loadLibraries();
-    }
-    
+
     protected AVCodecContext(long AVCodecContextPointer)
     {
-        this.AVCodecContextPointer = AVCodecContextPointer;
+        super(AVCodecContextPointer);
     }
     
     public long getPointer()
     {
-        return this.AVCodecContextPointer;
+        return this.getPointer();
     }
     
     public void freeContext()
     {
-        this.freeContext(this.AVCodecContextPointer);
+        this.freeContext(this.getPointer());
     }
     
     private native void freeContext(long AVCodecContextPointer);
     
     public int sendPacket(AVPacket packet)
     {
-        return this.sendPacket(AVCodecContextPointer, packet.getPointer());
+        return this.sendPacket(getPointer(), packet.getPointer());
     }
     
     private native int sendPacket(long AVCodecContextPointer, long AVPacketPointer);
     
     public int receiveFrame(AVFrame frame)
     {
-        return this.receiveFrame(this.AVCodecContextPointer, frame.getPointer());
+        return this.receiveFrame(this.getPointer(), frame.getPointer());
     }
     
     private native int receiveFrame(long AVCodecContextPointer, long AVFramePointer);
@@ -48,7 +42,7 @@ public class AVCodecContext
      */
     public int getFrameRateNumerator()
     {
-        return this.getFramerateNumerator(AVCodecContextPointer);
+        return this.getFramerateNumerator(getPointer());
     }
     
     private native int getFramerateNumerator(long AVCodecContextPointer);
@@ -60,7 +54,7 @@ public class AVCodecContext
      */
     public int getFrameRateDenominator()
     {
-        return this.getFramerateDenominator(AVCodecContextPointer);
+        return this.getFramerateDenominator(getPointer());
     }
    
     private native int getFramerateDenominator(long AVCodecContextPointer);

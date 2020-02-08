@@ -1,47 +1,35 @@
 
 package jvl.FFmpeg.jni;
 
-public class AVCodecParameters
+public class AVCodecParameters extends AbstractJNIObject
 {
     public static final int FF_PROFILE_UNKNOWN = -99; 
     public static final int FF_LEVEL_UNKNOWN = -99;
     
-    private final long AVCodeParamPointer;
-    private int streamIndex;
-    
-    static
-    {
-        Global.loadLibraries();
-    }
-    
+    private final int streamIndex;
+   
     protected AVCodecParameters(long AVCodeParamPointer, int streamIndex)
     {
-        this.AVCodeParamPointer = AVCodeParamPointer;
+        super(AVCodeParamPointer);
         this.streamIndex = streamIndex;
-    }
-    
-    
-    public long getPointer()
-    {
-        return this.AVCodeParamPointer;
     }
     
     
     public AVMediaType getCodecType()
     {
-        return AVMediaType.parse(this.getCodecType(this.AVCodeParamPointer));
+        return AVMediaType.parse(this.getCodecType(this.getPointer()));
     }
     
     private native int getCodecType(long AVCodeParamPointer);
     
     public int getWidth()
     {
-        return getWidth(this.AVCodeParamPointer);
+        return getWidth(this.getPointer());
     }
     
     public int getHeight()
     {
-        return getHeight(this.AVCodeParamPointer);
+        return getHeight(this.getPointer());
     }
     
     public double getAspectRatio()
@@ -89,7 +77,7 @@ public class AVCodecParameters
      */
     public int getSampleAspectRatioNumerator()
     {
-        return this.getSampleAspectRatioNumerator(AVCodeParamPointer);
+        return this.getSampleAspectRatioNumerator(getPointer());
     }
     
     private native int getSampleAspectRatioNumerator(long AVCodeParamPointer);
@@ -101,7 +89,7 @@ public class AVCodecParameters
      */
     public int getSampleAspectRatioDenominator()
     {
-        return this.getSampleAspectRatioDenominator(AVCodeParamPointer);
+        return this.getSampleAspectRatioDenominator(getPointer());
     }
    
     private native int getSampleAspectRatioDenominator(long AVCodeParamPointer);
@@ -112,14 +100,14 @@ public class AVCodecParameters
     
     public String getProfileName()
     {
-        return getProfileName(this.AVCodeParamPointer);
+        return getProfileName(this.getPointer());
     }
     
     private native String getProfileName(long AVCodeParamPointer);
     
     public int getProfile()
     {
-        return getProfile(this.AVCodeParamPointer);
+        return getProfile(this.getPointer());
     }
     
     private native int getProfile(long AVCodeParamPointer);
@@ -128,7 +116,7 @@ public class AVCodecParameters
     {
         if(this.getCodecType() == AVMediaType.AUDIO)
         {
-            return getChannels(this.AVCodeParamPointer);
+            return getChannels(this.getPointer());
         }
         else
         {
@@ -142,7 +130,7 @@ public class AVCodecParameters
     {
         if(this.getCodecType() == AVMediaType.AUDIO)
         {
-            return getSampleRate(this.AVCodeParamPointer);
+            return getSampleRate(this.getPointer());
         }
         else
         {
@@ -154,21 +142,21 @@ public class AVCodecParameters
     
     public int getLevel()
     {
-        return this.getLevel(this.AVCodeParamPointer);
+        return this.getLevel(this.getPointer());
     }
     
     private native int getLevel(long AVCodeParamPointer);
     
     public long getBitrate()
     {
-        return this.getBitrate(this.AVCodeParamPointer);
+        return this.getBitrate(this.getPointer());
     }
     
     private native long getBitrate(long AVCodeParamPointer);
     
     public int getCodecID()
     {
-        return this.getCodecID(this.AVCodeParamPointer);
+        return this.getCodecID(this.getPointer());
     }
     
     private native int getCodecID(long AVCodecParamPointer);
@@ -183,7 +171,7 @@ public class AVCodecParameters
      */
     public AVFieldOrder getFieldOrder()
     {
-        int temp = this.getFieldOrder(this.AVCodeParamPointer);
+        int temp = this.getFieldOrder(this.getPointer());
         
         System.out.println(temp);
         
