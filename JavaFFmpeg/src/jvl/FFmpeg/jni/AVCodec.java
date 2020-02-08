@@ -26,11 +26,6 @@ public class AVCodec extends AbstractJNIObject
         return avcodec;
     }
     
-    public long getPointer()
-    {
-        return this.getPointer();
-    }
-    
     private static native long findDecoder(int codec_id);
     
     public String getLongName()
