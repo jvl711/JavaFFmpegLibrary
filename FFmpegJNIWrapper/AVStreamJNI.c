@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "jvl_FFmpeg_jni_AVStream.h"
 #include "libavformat/avformat.h"
+#include <stdbool.h> 
 
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVStream_getFramerateNumerator(JNIEnv* env, jobject obj, jlong AVStreamPointer)
 {
@@ -14,8 +15,31 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVStream_getFramerateDenominator(JNIE
 {
     AVStream * pAVStream = (AVStream *)(intptr_t)AVStreamPointer;
     
-    
     return pAVStream->r_frame_rate.den;
+}
+
+JNIEXPORT jboolean JNICALL Java_jvl_FFmpeg_jni_AVStream_isForced(JNIEnv* env, jobject obj, jlong AVStreamPointer)
+{
+    AVStream * pAVStream = (AVStream *)(intptr_t)AVStreamPointer;
+    
+    if (pAVStream->disposition & AV_DISPOSITION_FORCED)
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+JNIEXPORT jboolean JNICALL Java_jvl_FFmpeg_jni_AVStream_isDefault(JNIEnv* env, jobject obj, jlong AVStreamPointer)
+{
+    AVStream * pAVStream = (AVStream *)(intptr_t)AVStreamPointer;
+    
+    if (pAVStream->disposition & AV_DISPOSITION_DEFAULT)
+    {
+        return true;
+    }
+    
+    return false;
 }
 
 JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVStream_getLanguage(JNIEnv* env, jobject obj, jlong AVStreamPointer)

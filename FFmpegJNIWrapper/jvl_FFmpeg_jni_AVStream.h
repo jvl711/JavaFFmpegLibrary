@@ -9,6 +9,22 @@ extern "C" {
 #endif
 /*
  * Class:     jvl_FFmpeg_jni_AVStream
+ * Method:    isForced
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_jvl_FFmpeg_jni_AVStream_isForced
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVStream
+ * Method:    isDefault
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_jvl_FFmpeg_jni_AVStream_isDefault
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVStream
  * Method:    getFramerateNumerator
  * Signature: (J)I
  */
