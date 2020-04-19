@@ -1,0 +1,20 @@
+# NetBeans specific #
+JavaFFmpeg/nbproject/private/
+#JavaFFmpeg/build/
+JavaFFmpeg/nbbuild/
+#JavaFFmpeg/dist/
+JavaFFmpeg/nbdist/
+JavaFFmpeg/nbactions.xml
+JavaFFmpeg/nb-configuration.xml
+
+
+# Class Files #
+JavaFFmpeg/*.class
+
+FFmpegJNIWrapper/nbproject/private/
+#FFmpegJNIWrapper/build/
+FFmpegJNIWrapper/nbbuild/
+#FFmpegJNIWrapper/dist/
+FFmpegJNIWrapper/nbdist/
+FFmpegJNIWrapper/nbactions.xml
+FFmpegJNIWrapper/nb-configuration.xml
