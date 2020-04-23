@@ -19,7 +19,7 @@ and places them into the FFmpegJNIWrapper project.  When you build the FFmpegJNI
 it creates a dll and places it and all of the FFmpeg dlls into the JavaFFmpeg project.
 
 The project uses the mingw64 to build the FFmpegJNIWrapper dll.  You would need to have
-that library setup to add addition wrapper methods to the project.
+that library setup to be able to add addition wrapper methods to the project.
 
 ### Prerequisites
 * mingw64
