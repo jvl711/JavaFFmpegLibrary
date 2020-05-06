@@ -18,7 +18,11 @@
                     <type>2</type>
                 </confElem>
                 <confElem>
-                    <name>Release</name>
+                    <name>Release_32bit</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>Release_64bit</name>
                     <type>2</type>
                 </confElem>
             </confList>

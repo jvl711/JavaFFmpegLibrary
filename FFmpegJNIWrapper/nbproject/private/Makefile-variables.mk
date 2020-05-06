@@ -4,4 +4,5 @@
 # NOCDDL
 #
 # Debug configuration
-# Release configuration
+# Release_32bit configuration
+# Release_64bit configuration

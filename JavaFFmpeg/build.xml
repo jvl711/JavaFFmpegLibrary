@@ -10,6 +10,7 @@
 <project name="JavaFFmpeg" default="default" basedir=".">
     <description>Builds, tests, and runs the project JavaFFmpeg.</description>
     <import file="nbproject/build-impl.xml"/>
+    <property name="version" value="0.2-alpha"/>
     <!--
 
     There exist several targets which are by default empty and which can be 
@@ -81,6 +82,17 @@
             <class name="jvl.FFmpeg.jni.AVPacket"/>
             <class name="jvl.FFmpeg.jni.AVStream"/>
         </javah>
+        
+        <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${version}.zip">
+            <fileset dir="libraries/FFmpegJNIWrapperWin64"/>
+            <fileset dir="${dist.jar.dir}" includes="*.jar"/>
+        </zip>
+        
+        <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${version}.zip">
+            <fileset dir="libraries/FFmpegJNIWrapperWin32"/>
+            <fileset dir="${dist.jar.dir}" includes="*.jar"/>
+        </zip>
+        
     </target>
     
 </project>

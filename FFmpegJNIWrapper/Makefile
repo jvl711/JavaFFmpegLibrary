@@ -57,11 +57,33 @@ build: .build-post
 # Add your pre 'build' code here...
 
 .build-post: .build-impl
-# Add your post 'build' code here...
-	cp dist/Debug/MinGW-Windows/${CND_ARTIFACT_NAME_${CONF}} ../JavaFFmpeg/src/libraries
-	cp libraries/ffmpeg-4.1.3/lib/*.dll ../JavaFFmpeg/src/libraries
 
+	@echo ${CONF}
+	@echo ${CND_ARTIFACT_NAME_${CONF}}
+        ifeq (${CONF}, Release_32bit)
+		@echo 32 ------------------------------------------------- 
+	
+		if [ ! -d "../JavaFFmpeg/libraries/FFmpegJNIWrapperWin32" ];then \
+			mkdir -p ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin32; \
+		fi
+	
+		cp -u -v dist/Debug/MinGW-Windows/${CND_ARTIFACT_NAME_${CONF}} ../JavaFFmpeg/libraries/FFmpegJNIWrapperWin32
+		cp -u -v libraries/ffmpeg-4.2.2-win32-dev/lib/*.dll ../JavaFFmpeg/libraries/FFmpegJNIWrapperWin32
 
+        else ifeq (${CONF}, Release_64bit)
+		@echo 64 -------------------------------------------------
+	
+		if [ ! -d "../JavaFFmpeg/libraries/FFmpegJNIWrapperWin64" ];then \
+			mkdir -p ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64; \
+		fi
+	
+		cp -u -v dist/Debug/MinGW-Windows/${CND_ARTIFACT_NAME_${CONF}} ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64
+		cp -u -v libraries/ffmpeg-4.2.2-win64-dev/lib/*.dll ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64
+        else
+		@echo Unknown build profile
+	
+        endif
+	
 # clean
 clean: .clean-post
 
