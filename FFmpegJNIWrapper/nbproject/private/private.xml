@@ -11,5 +11,9 @@
             <file>file:/C:/Users/jolewis/Documents/Code/Personal/JavaFFmpegLibrary/FFmpegJNIWrapper/AVPacketJNI.c</file>
         </group>
         <group/>
+        <group name="Git">
+            <file>file:/C:/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Makefile</file>
+            <file>file:/C:/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/AVCodecJNI.c</file>
+        </group>
     </open-files>
 </project-private>

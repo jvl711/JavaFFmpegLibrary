@@ -85,13 +85,15 @@
         
         <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${version}.zip">
             <fileset dir="libraries/FFmpegJNIWrapperWin64"/>
-            <fileset dir="${dist.jar.dir}" includes="*.jar"/>
+            <zipfileset  dir="${dist.jar.dir}" includes="*.jar" prefix="JARs"/>
         </zip>
+        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${version}.zip" fileext=".md5"/>
         
         <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${version}.zip">
             <fileset dir="libraries/FFmpegJNIWrapperWin32"/>
-            <fileset dir="${dist.jar.dir}" includes="*.jar"/>
+            <zipfileset  dir="${dist.jar.dir}" includes="*.jar" prefix="JARs"/>
         </zip>
+        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${version}.zip" fileext=".md5"/>
         
     </target>
     
