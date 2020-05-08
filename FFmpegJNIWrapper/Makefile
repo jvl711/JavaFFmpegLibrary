@@ -60,6 +60,7 @@ build: .build-post
 
 	@echo ${CONF}
 	@echo ${CND_ARTIFACT_NAME_${CONF}}
+	@echo ${CND_ARTIFACT_DIR_${CONF}}
         ifeq (${CONF}, Release_32bit)
 		@echo 32 ------------------------------------------------- 
 	
@@ -67,7 +68,7 @@ build: .build-post
 			mkdir -p ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin32; \
 		fi
 	
-		cp -u -v dist/Debug/MinGW-Windows/${CND_ARTIFACT_NAME_${CONF}} ../JavaFFmpeg/libraries/FFmpegJNIWrapperWin32
+		cp -u -v ${CND_ARTIFACT_DIR_${CONF}}/${CND_ARTIFACT_NAME_${CONF}} ../JavaFFmpeg/libraries/FFmpegJNIWrapperWin32
 		cp -u -v libraries/ffmpeg-4.2.2-win32-dev/lib/*.dll ../JavaFFmpeg/libraries/FFmpegJNIWrapperWin32
 
         else ifeq (${CONF}, Release_64bit)
@@ -77,7 +78,7 @@ build: .build-post
 			mkdir -p ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64; \
 		fi
 	
-		cp -u -v dist/Debug/MinGW-Windows/${CND_ARTIFACT_NAME_${CONF}} ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64
+		cp -u -v ${CND_ARTIFACT_DIR_${CONF}}/${CND_ARTIFACT_NAME_${CONF}} ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64
 		cp -u -v libraries/ffmpeg-4.2.2-win64-dev/lib/*.dll ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64
         else
 		@echo Unknown build profile
