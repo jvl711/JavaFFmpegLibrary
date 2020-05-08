@@ -26,6 +26,7 @@
       <itemPath>AVFrameJNI.c</itemPath>
       <itemPath>AVPacketJNI.c</itemPath>
       <itemPath>AVStreamJNI.c</itemPath>
+      <itemPath>test.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -102,6 +103,8 @@
       </item>
       <item path="jvl_FFmpeg_jni_AVStream.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="test.c" ex="false" tool="0" flavor2="0">
+      </item>
     </conf>
     <conf name="Release_32bit" type="2">
       <toolsSet>
@@ -162,6 +165,8 @@
       </item>
       <item path="jvl_FFmpeg_jni_AVStream.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="test.c" ex="false" tool="0" flavor2="0">
+      </item>
     </conf>
     <conf name="Release_64bit" type="2">
       <toolsSet>
@@ -220,6 +225,69 @@
       <item path="jvl_FFmpeg_jni_AVPacket.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="jvl_FFmpeg_jni_AVStream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test.c" ex="false" tool="0" flavor2="0">
+      </item>
+    </conf>
+    <conf name="TESTING_64bit" type="1">
+      <toolsSet>
+        <compilerSet>MinGW_64|MinGW</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <incDir>
+            <pElem>C:/Program Files/Java/jdk1.8.0_231/include/win32</pElem>
+            <pElem>libraries/ffmpeg-4.2.2-win64-dev/include</pElem>
+            <pElem>C:/Program Files/Java/jdk1.8.0_231/include/</pElem>
+          </incDir>
+        </cTool>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>libraries/ffmpeg-4.2.2-win64-dev/lib</pElem>
+            <pElem>"C:/Program Files/Java/jdk1.8.0_231/lib"</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerLibLibItem>avcodec</linkerLibLibItem>
+            <linkerLibLibItem>avdevice</linkerLibLibItem>
+            <linkerLibLibItem>avfilter</linkerLibLibItem>
+            <linkerLibLibItem>avformat</linkerLibLibItem>
+            <linkerLibLibItem>avutil</linkerLibLibItem>
+            <linkerLibLibItem>postproc</linkerLibLibItem>
+            <linkerLibLibItem>swscale</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="AVCodecContextJNI.c" ex="false" tool="0" flavor2="9">
+      </item>
+      <item path="AVCodecJNI.c" ex="false" tool="0" flavor2="9">
+      </item>
+      <item path="AVCodecParametersJNI.c" ex="false" tool="0" flavor2="9">
+      </item>
+      <item path="AVFormatJNI.c" ex="false" tool="0" flavor2="9">
+      </item>
+      <item path="AVFrameJNI.c" ex="false" tool="0" flavor2="9">
+      </item>
+      <item path="AVPacketJNI.c" ex="false" tool="0" flavor2="9">
+      </item>
+      <item path="AVStreamJNI.c" ex="false" tool="0" flavor2="9">
+      </item>
+      <item path="jvl_FFmpeg_jni_AVCodec.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="jvl_FFmpeg_jni_AVCodecContext.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="jvl_FFmpeg_jni_AVCodecParameters.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="jvl_FFmpeg_jni_AVFormatContext.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="jvl_FFmpeg_jni_AVFrame.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="jvl_FFmpeg_jni_AVPacket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="jvl_FFmpeg_jni_AVStream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
   </confs>

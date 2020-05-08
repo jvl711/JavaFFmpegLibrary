@@ -41,7 +41,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/AVFormatJNI.o \
 	${OBJECTDIR}/AVFrameJNI.o \
 	${OBJECTDIR}/AVPacketJNI.o \
-	${OBJECTDIR}/AVStreamJNI.o
+	${OBJECTDIR}/AVStreamJNI.o \
+	${OBJECTDIR}/test.o
 
 
 # C Compiler Flags
@@ -102,6 +103,11 @@ ${OBJECTDIR}/AVStreamJNI.o: AVStreamJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -I/C/Program\ Files/Java/jdk1.8.0_231/include/ -Ilibraries/ffmpeg-4.2.2-win32-dev/include  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVStreamJNI.o AVStreamJNI.c
+
+${OBJECTDIR}/test.o: test.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -I/C/Program\ Files/Java/jdk1.8.0_231/include/ -Ilibraries/ffmpeg-4.2.2-win32-dev/include  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/test.o test.c
 
 # Subprojects
 .build-subprojects:

@@ -31,7 +31,7 @@ DEFAULTCONF=Debug
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=Debug Release_32bit Release_64bit 
+ALLCONFS=Debug Release_32bit Release_64bit TESTING_64bit 
 
 
 # build

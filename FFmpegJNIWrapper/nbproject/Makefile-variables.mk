@@ -30,6 +30,14 @@ CND_ARTIFACT_PATH_Release_64bit=dist/Release_64bit/MinGW_64-Windows/libFFmpegJNI
 CND_PACKAGE_DIR_Release_64bit=dist/Release_64bit/MinGW_64-Windows/package
 CND_PACKAGE_NAME_Release_64bit=libFFmpegJNIWrapper.dll.tar
 CND_PACKAGE_PATH_Release_64bit=dist/Release_64bit/MinGW_64-Windows/package/libFFmpegJNIWrapper.dll.tar
+# TESTING_64bit configuration
+CND_PLATFORM_TESTING_64bit=MinGW_64-Windows
+CND_ARTIFACT_DIR_TESTING_64bit=dist/TESTING_64bit/MinGW_64-Windows
+CND_ARTIFACT_NAME_TESTING_64bit=ffmpegjniwrapper
+CND_ARTIFACT_PATH_TESTING_64bit=dist/TESTING_64bit/MinGW_64-Windows/ffmpegjniwrapper
+CND_PACKAGE_DIR_TESTING_64bit=dist/TESTING_64bit/MinGW_64-Windows/package
+CND_PACKAGE_NAME_TESTING_64bit=ffmpegjniwrapper.tar
+CND_PACKAGE_PATH_TESTING_64bit=dist/TESTING_64bit/MinGW_64-Windows/package/ffmpegjniwrapper.tar
 #
 # include compiler specific variables
 #
