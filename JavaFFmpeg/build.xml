@@ -10,7 +10,7 @@
 <project name="JavaFFmpeg" default="default" basedir=".">
     <description>Builds, tests, and runs the project JavaFFmpeg.</description>
     <import file="nbproject/build-impl.xml"/>
-    <property name="version" value="0.2-alpha"/>
+    <property name="version" value="0.3-alpha"/>
     <!--
 
     There exist several targets which are by default empty and which can be 
