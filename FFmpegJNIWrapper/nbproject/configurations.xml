@@ -39,8 +39,20 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
   </logicalFolder>
   <sourceRootList>
+    <Elem>C:\Users\jolewis\Documents\Code\Personal\JavaFFmpegLibrary\FFmpegJNIWrapper</Elem>
     <Elem>C:\Users\jolewis\Documents\Code\Personal\JavaFFmpegLibrary\FFmpegJNIWrapper</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
@@ -116,15 +128,16 @@
         <cTool>
           <architecture>1</architecture>
           <incDir>
-            <pElem>C:/Program Files/Java/jdk1.8.0_231/include/win32</pElem>
-            <pElem>C:/Program Files/Java/jdk1.8.0_231/include/</pElem>
             <pElem>libraries/ffmpeg-4.2.2-win32-dev/include</pElem>
+            <pElem>C:/Program Files (x86)/Java/jdk1.8.0_251/include</pElem>
+            <pElem>C:/Program Files (x86)/Java/jdk1.8.0_251/include/win32</pElem>
           </incDir>
+          <commandLine>-static-libgcc -Wl,--add-stdcall-alias</commandLine>
         </cTool>
         <linkerTool>
           <linkerAddLib>
-            <pElem>"C:/Program Files/Java/jdk1.8.0_231/lib"</pElem>
             <pElem>libraries/ffmpeg-4.2.2-win32-dev/lib</pElem>
+            <pElem>"C:/Program Files (x86)/Java/jdk1.8.0_251/lib"</pElem>
           </linkerAddLib>
           <linkerLibItems>
             <linkerLibLibItem>avcodec</linkerLibLibItem>

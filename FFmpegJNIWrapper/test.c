@@ -1,3 +1,5 @@
+/* Using this as example code only...  This is not my code */
+
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libavfilter/buffersink.h>
@@ -60,13 +62,18 @@ static int open_input_file(const char *filename)
             return ret;
         }
         /* Reencode video & audio and remux subtitles etc. */
-        if (codec_ctx->codec_type == AVMEDIA_TYPE_VIDEO
-                || codec_ctx->codec_type == AVMEDIA_TYPE_AUDIO) {
+        if (codec_ctx->codec_type == AVMEDIA_TYPE_VIDEO || codec_ctx->codec_type == AVMEDIA_TYPE_AUDIO) 
+        {
             if (codec_ctx->codec_type == AVMEDIA_TYPE_VIDEO)
+            {
                 codec_ctx->framerate = av_guess_frame_rate(ifmt_ctx, stream, NULL);
+            }
+            
             /* Open decoder */
             ret = avcodec_open2(codec_ctx, dec, NULL);
-            if (ret < 0) {
+            
+            if (ret < 0) 
+            {
                 av_log(NULL, AV_LOG_ERROR, "Failed to open decoder for stream #%u\n", i);
                 return ret;
             }

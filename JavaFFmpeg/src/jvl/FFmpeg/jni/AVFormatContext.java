@@ -30,6 +30,29 @@ public class AVFormatContext extends AbstractJNIObject
         return new AVFormatContext(pointer);
     }
     
+    /**
+    * Allocate an AVFormatContext for an output format.
+    * avformat_free_context() can be used to free the context and
+    * everything allocated by the framework within it.
+    *
+    * @param *ctx is set to the created format context, or to NULL in
+    * case of failure
+    * @param oformat format to use for allocating the context, if NULL
+    * format_name and filename are used instead
+    * @param format_name the name of output format to use for allocating the
+    * context, if NULL filename is used instead
+    * @param filename the name of the filename to use for allocating the
+    * context, may be NULL
+    * @return >= 0 in case of success, a negative AVERROR code in case of
+    * failure
+    */
+    public static AVFormatContext buildAVFormatOutputContext(String filePath)
+    {
+        long pointer = allocateOutputContext(filePath);
+        
+        return new AVFormatContext(pointer);
+    }
+    
     private void validateFileOpen()
     {
         if(!this.isFileOpen)
@@ -39,6 +62,17 @@ public class AVFormatContext extends AbstractJNIObject
     }
     
     private static native long allocateContext();
+    
+    private static native long allocateOutputContext(String filePath);
+    
+    public AVStream allocateNewStream()
+    {
+        long pointer = this.allocateNewStream(this.getPointer());
+        
+        return new AVStream(pointer);
+    }
+    
+    private static native long allocateNewStream(long AVFormatPointer);
     
     
     /*
@@ -50,6 +84,14 @@ public class AVFormatContext extends AbstractJNIObject
     private native void freeContext(long AVFormatPointer);
     */
     
+    /**
+    * Open an input stream and read the header. The codecs are not opened.
+    * The stream must be closed with closeInput()
+    *
+    * @param filePath URL of the stream to open.
+    *
+    * @return 0 on success, a negative AVERROR on failure.
+    */
     public void openInput(String filePath)
     {
         int ret = openInput(this.getPointer(), filePath);
@@ -77,6 +119,8 @@ public class AVFormatContext extends AbstractJNIObject
     {
         //TODO: Change all pointer calls to getPointer, and throw error if deallocated
         
+        //TODO: If the context is not open, but the pointer is valid, then need to avformat_free_context()
+        
         if(this.isFileOpen)
         {
             this.closeInput(this.getPointer());
@@ -102,7 +146,6 @@ public class AVFormatContext extends AbstractJNIObject
         
         if(!this.isFindStreamInfoCalled)
         {
-            System.out.println("Find stream info called");
             int ret = this.findStreamInfo(this.getPointer());
             
             if(ret >= 0)
@@ -211,7 +254,7 @@ public class AVFormatContext extends AbstractJNIObject
         validateFileOpen();
         
         this.findStreamInfo();
-        return new AVStream(this.getAVStream(this.getPointer(), streamIndex), streamIndex);
+        return new AVStream(this.getAVStream(this.getPointer(), streamIndex));
     }
     
     private native long getAVStream(long AVFormatContextPointer, int streamIndex);

@@ -17,6 +17,22 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVCodec_findDecoder
 
 /*
  * Class:     jvl_FFmpeg_jni_AVCodec
+ * Method:    findEncoderByName
+ * Signature: (Ljava/lang/String;)J
+ */
+JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVCodec_findEncoderByName
+  (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodec
+ * Method:    findEncoder
+ * Signature: (I)J
+ */
+JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVCodec_findEncoder
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodec
  * Method:    getLongName
  * Signature: (J)Ljava/lang/String;
  */

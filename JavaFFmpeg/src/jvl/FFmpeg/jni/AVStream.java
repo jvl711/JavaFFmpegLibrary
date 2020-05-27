@@ -14,17 +14,15 @@ import java.util.HashMap;
 public class AVStream 
 {
     private final long AVStreamPointer;
-    private int streamIndex;
 
     static
     {
         Global.loadLibraries();
     }
     
-    protected AVStream(long AVStreamPointer, int streamIndex)
+    protected AVStream(long AVStreamPointer)
     {
         this.AVStreamPointer = AVStreamPointer;
-        this.streamIndex = streamIndex;
     }
     
     public long getPointer()

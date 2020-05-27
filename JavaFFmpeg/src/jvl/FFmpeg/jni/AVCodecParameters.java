@@ -173,8 +173,6 @@ public class AVCodecParameters extends AbstractJNIObject
     {
         int temp = this.getFieldOrder(this.getPointer());
         
-        System.out.println(temp);
-        
         return AVFieldOrder.parse(temp);
     }
     

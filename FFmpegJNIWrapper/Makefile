@@ -80,6 +80,13 @@ build: .build-post
 	
 		cp -u -v ${CND_ARTIFACT_DIR_${CONF}}/${CND_ARTIFACT_NAME_${CONF}} ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64
 		cp -u -v libraries/ffmpeg-4.2.2-win64-dev/lib/*.dll ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64
+	
+        else ifeq (${CONF}, TESTING_64bit)
+	    
+		@echo Testing build ----------------------------------------------------------------------------------
+	
+		cp -u -v libraries/ffmpeg-4.2.2-win64-dev/lib/*.dll ${CND_ARTIFACT_DIR_${CONF}}
+	
         else
 		@echo Unknown build profile
 	

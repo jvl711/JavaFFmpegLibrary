@@ -12,7 +12,7 @@ public class AVCodec extends AbstractJNIObject
         this.avparams = avparams;
     }
     
-    public static AVCodec getAVCodec(AVCodecParameters avparam)
+    public static AVCodec getAVCodecDecoder(AVCodecParameters avparam)
     {
         long pointer = findDecoder(avparam.getCodecID());
         
@@ -32,6 +32,38 @@ public class AVCodec extends AbstractJNIObject
     {
         return this.getLongName(this.getPointer());
     }
+    
+    public static AVCodec findEncoderByName(String name, AVCodecParameters avparam)
+    {
+        long pointer = findEncoderByName(name);
+        
+        if(pointer == 0)
+        {
+            throw new RuntimeException("Codec not found");
+        }
+        
+        AVCodec avcodec = new AVCodec(pointer, avparam);
+        
+        return avcodec;
+    }
+    
+    private static native long findEncoderByName(String name);
+    
+    public static AVCodec getAVCodecEncoder(AVCodecParameters avparam)
+    {
+        long pointer = findEncoder(avparam.getCodecID());
+        
+        if(pointer == 0)
+        {
+            throw new RuntimeException("Codec not found");
+        }
+        
+        AVCodec avcodec = new AVCodec(pointer, avparam);
+        
+        return avcodec;
+    }
+    
+    private static native long findEncoder(int codec_id);
     
     private native String getLongName(long AVCodecPointer);
     
@@ -86,5 +118,6 @@ public class AVCodec extends AbstractJNIObject
     }
     
     private native int open(long AVCodecContextPointer, long AVCodecPointer);
+    
     
 }

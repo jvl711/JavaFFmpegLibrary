@@ -13,6 +13,29 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVCodec_findDecoder(JNIEnv* env, job
     return pointer;
 }
 
+JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVCodec_findEncoder(JNIEnv* env, jobject obj, jint codec_id)
+{
+    AVCodec *pAVCodec = avcodec_find_encoder(codec_id);
+    
+    jlong pointer = (intptr_t)pAVCodec;    
+    
+    return pointer;
+}
+
+JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVCodec_findEncoderByName(JNIEnv* env, jobject obj, jstring name)
+{
+    const char * namePointer;
+    
+    namePointer = (*env)->GetStringUTFChars(env,name, 0);   
+    (*env)->ReleaseStringUTFChars(env, name, namePointer);
+    
+    AVCodec *pAVCodec = avcodec_find_encoder_by_name(namePointer);
+    
+    jlong pointer = (intptr_t)pAVCodec;    
+    
+    return pointer;
+}
+
 JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVCodec_getLongName(JNIEnv* env, jobject obj, jlong AVCodecPointer)
 {
     AVCodec * pAVCodec = (AVCodec *)(intptr_t)AVCodecPointer;

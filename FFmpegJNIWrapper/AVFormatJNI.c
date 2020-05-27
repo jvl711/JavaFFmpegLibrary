@@ -17,6 +17,35 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_allocateContext(JNIE
     return pointer;
 }
 
+JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_allocateOutputContext(JNIEnv* env, jobject obj, jstring filePath)
+{
+    AVFormatContext * pTestContext;
+    const char * filePathPointer;
+    
+    filePathPointer = (*env)->GetStringUTFChars(env,filePath, 0);
+    
+    (*env)->ReleaseStringUTFChars(env, filePath, filePathPointer);
+    
+    avformat_alloc_output_context2(&pTestContext, NULL, NULL, filePathPointer);
+    
+    jlong pointer = (intptr_t)pTestContext;
+    
+    return pointer;
+}
+
+JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_allocateNewStream(JNIEnv* env, jobject obj, jlong avFormatPointer)
+{
+    AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;
+    AVStream * out_stream;
+    
+    out_stream = avformat_new_stream(pFormatContext, NULL);
+    
+    jlong pointer = (intptr_t)out_stream;
+    
+    return pointer;
+}
+
+
 JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_freeContext(JNIEnv* env, jobject obj, jlong avFormatPointer)
 {
     AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;

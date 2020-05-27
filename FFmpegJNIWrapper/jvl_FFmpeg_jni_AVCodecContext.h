@@ -47,6 +47,54 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getFramerateNumerator
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getFramerateDenominator
   (JNIEnv *, jobject, jlong);
 
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    setHeight
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setHeight
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    setWidth
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setWidth
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    getHeight
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getHeight
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    getWidth
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getWidth
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    getSampleAspectRatioDen
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getSampleAspectRatioDen
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    getSampleAspectRatioNum
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getSampleAspectRatioNum
+  (JNIEnv *, jobject, jlong);
+
 #ifdef __cplusplus
 }
 #endif

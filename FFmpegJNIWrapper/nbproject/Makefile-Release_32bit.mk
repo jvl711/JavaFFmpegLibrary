@@ -46,7 +46,7 @@ OBJECTFILES= \
 
 
 # C Compiler Flags
-CFLAGS=-m32
+CFLAGS=-m32 -static-libgcc -Wl,--add-stdcall-alias
 
 # CC Compiler Flags
 CCFLAGS=
@@ -59,7 +59,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-L\"C\:/Program\ Files/Java/jdk1.8.0_231/lib\" -Llibraries/ffmpeg-4.2.2-win32-dev/lib -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lpostproc -lswscale
+LDLIBSOPTIONS=-Llibraries/ffmpeg-4.2.2-win32-dev/lib -L\"C\:/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/lib\" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lpostproc -lswscale
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -72,42 +72,42 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libFFmpegJNIWrapper.${CND_DLIB_EXT}: 
 ${OBJECTDIR}/AVCodecContextJNI.o: AVCodecContextJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -I/C/Program\ Files/Java/jdk1.8.0_231/include/ -Ilibraries/ffmpeg-4.2.2-win32-dev/include  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVCodecContextJNI.o AVCodecContextJNI.c
+	$(COMPILE.c) -g -Ilibraries/ffmpeg-4.2.2-win32-dev/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVCodecContextJNI.o AVCodecContextJNI.c
 
 ${OBJECTDIR}/AVCodecJNI.o: AVCodecJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -I/C/Program\ Files/Java/jdk1.8.0_231/include/ -Ilibraries/ffmpeg-4.2.2-win32-dev/include  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVCodecJNI.o AVCodecJNI.c
+	$(COMPILE.c) -g -Ilibraries/ffmpeg-4.2.2-win32-dev/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVCodecJNI.o AVCodecJNI.c
 
 ${OBJECTDIR}/AVCodecParametersJNI.o: AVCodecParametersJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -I/C/Program\ Files/Java/jdk1.8.0_231/include/ -Ilibraries/ffmpeg-4.2.2-win32-dev/include  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVCodecParametersJNI.o AVCodecParametersJNI.c
+	$(COMPILE.c) -g -Ilibraries/ffmpeg-4.2.2-win32-dev/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVCodecParametersJNI.o AVCodecParametersJNI.c
 
 ${OBJECTDIR}/AVFormatJNI.o: AVFormatJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -I/C/Program\ Files/Java/jdk1.8.0_231/include/ -Ilibraries/ffmpeg-4.2.2-win32-dev/include  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVFormatJNI.o AVFormatJNI.c
+	$(COMPILE.c) -g -Ilibraries/ffmpeg-4.2.2-win32-dev/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVFormatJNI.o AVFormatJNI.c
 
 ${OBJECTDIR}/AVFrameJNI.o: AVFrameJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -I/C/Program\ Files/Java/jdk1.8.0_231/include/ -Ilibraries/ffmpeg-4.2.2-win32-dev/include  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVFrameJNI.o AVFrameJNI.c
+	$(COMPILE.c) -g -Ilibraries/ffmpeg-4.2.2-win32-dev/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVFrameJNI.o AVFrameJNI.c
 
 ${OBJECTDIR}/AVPacketJNI.o: AVPacketJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -I/C/Program\ Files/Java/jdk1.8.0_231/include/ -Ilibraries/ffmpeg-4.2.2-win32-dev/include  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVPacketJNI.o AVPacketJNI.c
+	$(COMPILE.c) -g -Ilibraries/ffmpeg-4.2.2-win32-dev/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVPacketJNI.o AVPacketJNI.c
 
 ${OBJECTDIR}/AVStreamJNI.o: AVStreamJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -I/C/Program\ Files/Java/jdk1.8.0_231/include/ -Ilibraries/ffmpeg-4.2.2-win32-dev/include  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVStreamJNI.o AVStreamJNI.c
+	$(COMPILE.c) -g -Ilibraries/ffmpeg-4.2.2-win32-dev/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVStreamJNI.o AVStreamJNI.c
 
 ${OBJECTDIR}/test.o: test.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -I/C/Program\ Files/Java/jdk1.8.0_231/include/ -Ilibraries/ffmpeg-4.2.2-win32-dev/include  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/test.o test.c
+	$(COMPILE.c) -g -Ilibraries/ffmpeg-4.2.2-win32-dev/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include -I/C/Program\ Files\ \(x86\)/Java/jdk1.8.0_251/include/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/test.o test.c
 
 # Subprojects
 .build-subprojects:

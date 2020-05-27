@@ -17,6 +17,22 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_allocateContext
 
 /*
  * Class:     jvl_FFmpeg_jni_AVFormatContext
+ * Method:    allocateOutputContext
+ * Signature: (Ljava/lang/String;)J
+ */
+JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_allocateOutputContext
+  (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVFormatContext
+ * Method:    allocateNewStream
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_allocateNewStream
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVFormatContext
  * Method:    openInput
  * Signature: (JLjava/lang/String;)I
  */

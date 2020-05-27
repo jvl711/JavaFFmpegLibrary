@@ -9,10 +9,12 @@ public class AVCodecContext extends AbstractJNIObject
         super(AVCodecContextPointer);
     }
     
+    /*
     public long getPointer()
     {
-        return this.getPointer();
+        return this.
     }
+    */
     
     public void freeContext()
     {
@@ -80,4 +82,45 @@ public class AVCodecContext extends AbstractJNIObject
             return (num * 1.0) / (den * 1.0);
         }
     }
+    
+    public void setHeight(int value)
+    {
+        this.setHeight(this.getPointer(), value);
+    }
+    
+    private native void setHeight(long AVCodecContextPointer, int value);
+    
+    public void setwidth(int value)
+    {
+        this.setWidth(this.getPointer(), value);
+    }
+    
+    private native void setWidth(long AVCodecContextPointer, int value);
+    
+    public int getHeight()
+    {
+        return this.getHeight(this.getPointer());
+    }
+    
+    private native int getHeight(long AVCodecContextPointer);
+    
+    public int getWidth()
+    {
+        return this.getWidth(this.getPointer());
+    }
+    
+    private native int getWidth(long AVCodecContextPointer);
+    
+    //TODO:  THis is where I left off
+    /*
+    public AVRational getSampleAspectRatio()
+    {
+         
+    }
+    */
+    
+    private native int getSampleAspectRatioDen(long AVCodecContextPointer);
+    
+    private native int getSampleAspectRatioNum(long AVCodecContextPointer);
+    
 }

@@ -1,6 +1,7 @@
 
 package jvl.FFmpeg.jni;
 
+import org.junit.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -42,7 +43,7 @@ public class AVCodecTest
         avparamVideo = avformat.getAVCodecParameters(0);
         avparamAudio = avformat.getAVCodecParameters(1);
         
-        avcodecVideo = AVCodec.getAVCodec(avparamVideo);
+        avcodecVideo = AVCodec.getAVCodecDecoder(avparamVideo);
     }
     
     @After
@@ -61,6 +62,22 @@ public class AVCodecTest
     public void testGetName()
     {
         System.out.println(avcodecVideo.getName());
+    }
+    
+    @Test 
+    public void testGetEncoder()
+    {
+        AVCodec encoder = AVCodec.getAVCodecEncoder(avparamVideo);
+        
+        Assert.assertTrue(encoder.getPointer() > 0);
+    }
+    
+    @Test 
+    public void testGetEncoderByName()
+    {
+        AVCodec encoder = AVCodec.findEncoderByName("libx265", avparamVideo);
+        
+        Assert.assertTrue(encoder.getPointer() > 0);
     }
     
     @Test
@@ -155,103 +172,6 @@ public class AVCodecTest
         System.out.println("Length of time: " + (end - start));
         
         packet.unreference();
-       
-    }
-    
-    @Test
-    public void testJNITime()
-    {
-        
-        AVCodecContext avcodecContext = avcodecVideo.allocateContext();
-        
-        //avcodecVideo.copyParamsToContext(avcodecContext, avparamVideo);
-        //avcodecVideo.open(avcodecContext);
-        
-        AVPacket packet = AVPacket.buildAVPacket();
-        AVFrame frame = AVFrame.buildAVFrame();
-        
-        //int ret = this.avformat.readFrame(packet);
-
-        
-        int amount = frame.getWidth() * frame.getHeight();
-        
-        long start;
-        long end;
-        
-        start = System.currentTimeMillis();
-        
-        for(int j = 0; j < 80; j++)
-        {
-            this.avformat.readFrame(packet);
-            avcodecContext.sendPacket(packet);
-            avcodecContext.receiveFrame(frame);
-            
-            if(packet.getStreamIndex() == avparamVideo.getStreamIndex())
-            {
-            
-                System.out.println(frame.getPTS());
-
-                for(int i = 0; i < amount; i++)
-                {
-                    byte test = frame.getData(0, i);
-                }
-
-                packet.unreference();
-            }
-        }
-        
-        packet.free();
-        frame.free();
-        
-        end = System.currentTimeMillis();
-
-        System.out.println("Length of time: " + (end - start));
-       
-    }
-    
-    @Test
-    public void testNativeTime()
-    {
-        
-        AVCodecContext avcodecContext = avcodecVideo.allocateContext();
-        
-        //avcodecVideo.copyParamsToContext(avcodecContext, avparamVideo);
-        //avcodecVideo.open(avcodecContext);
-        
-        AVPacket packet = AVPacket.buildAVPacket();
-        AVFrame frame = AVFrame.buildAVFrame();
-        
-        int amount = frame.getWidth() * frame.getHeight();
-        
-        long start;
-        long end;
-        
-        start = System.currentTimeMillis();
-        
-        for(int j = 0; j < 250; j++)
-        {
-            this.avformat.readFrame(packet);
-            avcodecContext.sendPacket(packet);
-            avcodecContext.receiveFrame(frame);
-            
-            if(packet.getStreamIndex() == avparamVideo.getStreamIndex())
-            {
-            
-                System.out.println(frame.getPTS());
-
-                for(int i = 0; i < amount; i++)
-                {
-                    frame.test();
-                }
-
-                packet.unreference();
-            }
-        }
-        
-        end = System.currentTimeMillis();
-
-        System.out.println("Length of time: " + (end - start));
-
        
     }
     

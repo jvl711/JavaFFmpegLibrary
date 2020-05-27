@@ -14,8 +14,7 @@ public class Global
     public static void loadLibraries()
     {
         if(!isLibrariesLoaded())
-        {
-        
+        {        
             /* Load Ffmpeg lirbaries */
             System.loadLibrary("avutil-56");
             System.loadLibrary("swresample-3");
@@ -27,7 +26,7 @@ public class Global
             System.loadLibrary("avdevice-58");
 
             /* Load JNI library */
-            System.loadLibrary("libFFmpegJNIWrapper");
+            System.loadLibrary("libFFmpegJNIWrapper");           
             
             isLirariesLoaded = true;
         }

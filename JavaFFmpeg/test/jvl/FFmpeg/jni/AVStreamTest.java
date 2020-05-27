@@ -50,9 +50,9 @@ public class AVStreamTest
         avformat.openInput("//egypt/tv/The Man in the High Castle/Season 04/The Man in the High Castle - S04E01 - Hexagram 64.mkv");
         //AVCodecParameters avparams = avformat.getAVCodecParameters(0);
         avstream = avformat.getAVStream(0);
-        avstream = avformat.getAVStream(1);
+        //avstream = avformat.getAVStream(1);
         avparams = avformat.getAVCodecParameters(2);
-        avcodec = AVCodec.getAVCodec(avparams);
+        avcodec = AVCodec.getAVCodecDecoder(avparams);
         avstreamSub = avformat.getAVStream(3);
         
         

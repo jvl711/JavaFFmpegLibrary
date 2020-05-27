@@ -42,3 +42,31 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getFramerateDenominato
     
     return pAVCodecContext->framerate.den;
 }
+
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getHeight(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)
+{
+    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
+    
+    return pAVCodecContext->height;
+}
+
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getWidth(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)
+{
+    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
+    
+    return pAVCodecContext->width;
+}
+
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setHeight(JNIEnv* env, jobject obj, jlong AVCodecContextPointer, jint value)
+{
+    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
+    
+    pAVCodecContext->height = value;
+}
+
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setWidth(JNIEnv* env, jobject obj, jlong AVCodecContextPointer, jint value)
+{
+    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
+    
+    pAVCodecContext->width = value;
+}

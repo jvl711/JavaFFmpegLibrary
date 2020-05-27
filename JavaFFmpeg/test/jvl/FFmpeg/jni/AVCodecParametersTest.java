@@ -10,7 +10,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
+import static org.junit.Assert.*;
 
 
 public class AVCodecParametersTest
@@ -37,14 +37,12 @@ public class AVCodecParametersTest
     public void setUp()
     {
         avformat = AVFormatContext.buildAVFormatContext();
-        
-        //avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
-        //avformat.openInput("src/examples/H265_60_seconds.mkv");
-        //AmericanDad-S14E01-FantasyBaseball-44300642-0
-        //avformat.openInput("\\\\egypt\\recordings\\MythbustersJr-S01E03-BatteryBlast-43044941-0.ts");
-        avformat.openInput("\\\\egypt\\recordings\\BobsBurgers-S09E05-LiveandLetFly-42251446-0.ts");
+        avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
+        assertTrue(avformat.getPointer() > 0);
         avparamVideo = avformat.getAVCodecParameters(0);
+        assertTrue(avparamVideo.getPointer() > 0);
         avparamAudio = avformat.getAVCodecParameters(1);
+        assertTrue(avparamAudio.getPointer() > 0);
     }
     
     
@@ -52,7 +50,13 @@ public class AVCodecParametersTest
     public void tearDown()
     {
         avformat.closeInput();
-        
+    }
+    
+    @Test 
+    public void getAVCodecParametersCodecType()
+    {
+        assertTrue(avparamVideo.getCodecType() == AVMediaType.VIDEO);
+        assertTrue(avparamAudio.getCodecType() == AVMediaType.AUDIO);
     }
     
     @Test
