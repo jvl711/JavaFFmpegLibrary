@@ -129,11 +129,35 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_readFrame
 
 /*
  * Class:     jvl_FFmpeg_jni_AVFormatContext
- * Method:    debug
- * Signature: (J)V
+ * Method:    getMetadataCount
+ * Signature: (J)I
  */
-JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_debug
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getMetadataCount
   (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVFormatContext
+ * Method:    getMetadataKey
+ * Signature: (JI)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getMetadataKey
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVFormatContext
+ * Method:    getMetadataValue
+ * Signature: (JI)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getMetadataValue
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVFormatContext
+ * Method:    getMetadataValueByKey
+ * Signature: (JLjava/lang/String;)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getMetadataValueByKey
+  (JNIEnv *, jobject, jlong, jstring);
 
 #ifdef __cplusplus
 }

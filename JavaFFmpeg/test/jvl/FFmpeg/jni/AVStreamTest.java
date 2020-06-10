@@ -1,14 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package jvl.FFmpeg.jni;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,10 +24,12 @@ public class AVStreamTest
 {
     
     AVFormatContext avformat;
+    AVFormatContext avformat2;
     AVCodecParameters avparams;
     AVCodec avcodec;
-    AVStream avstream;
-    AVStream avstreamSub;
+    AVStream avstreamVideo;
+    AVStream avstreamAudio;
+    AVStream avstreamAttachedPicture;
     
     public AVStreamTest() 
     {
@@ -44,158 +48,75 @@ public class AVStreamTest
     @Before
     public void setUp() 
     {
-        avformat = AVFormatContext.buildAVFormatContext();
-        //avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
-        //avformat.openInput("src/examples/H265_60_seconds.mkv");
-        avformat.openInput("//egypt/tv/The Man in the High Castle/Season 04/The Man in the High Castle - S04E01 - Hexagram 64.mkv");
-        //AVCodecParameters avparams = avformat.getAVCodecParameters(0);
-        avstream = avformat.getAVStream(0);
-        //avstream = avformat.getAVStream(1);
-        avparams = avformat.getAVCodecParameters(2);
-        avcodec = AVCodec.getAVCodecDecoder(avparams);
-        avstreamSub = avformat.getAVStream(3);
-        
-        
-        //AVCodec avcodecVideo = AVCodec.getAVCodec(avparams);
-        
+        avformat = AVFormatContext.buildAVFormatInputContext("src/examples/Sample_BeeMoved_96kHz24bit.flac");
+        avformat2 = AVFormatContext.buildAVFormatInputContext("src/examples/SampleVideo_1280x720_2mb.mp4");
+        avstreamVideo = avformat2.getAVStream(0);
+        avstreamAudio = avformat2.getAVStream(1);
+        avstreamAttachedPicture = avformat.getAVStream(1);
     }
     
     @After
     public void tearDown() 
     {
+        avformat.close();
+        avformat2.close();
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    @Test 
+    public void TestIsDefault()
+    {
+        Assert.assertTrue(avstreamVideo.isDefault());
+        Assert.assertTrue(!avstreamAttachedPicture.isDefault());
+    }
     
+    @Test 
+    public void TestIsForced()
+    {
+        //TODO: Add an example file that has a forced subtitle
+        Assert.assertTrue(!avstreamVideo.isForced());
+        Assert.assertTrue(!avstreamAttachedPicture.isForced());
+        
+    }
+    
+    @Test
+    public void testIsAttachedPicture()
+    {
+        Assert.assertTrue(avstreamAttachedPicture.isAttachedPicture());
+        Assert.assertFalse(avstreamAudio.isAttachedPicture());
+        
+    }
+    
+    @Test
+    public void testGetAttachedPicture()
+    {
+        AVPacket picture = avstreamAttachedPicture.getAttachedPicturePacket();
+        
+        Assert.assertEquals(picture.getPosition(), 251);
+        Assert.assertEquals(picture.getSize(), 58336);
+        Assert.assertEquals(picture.getData().length, 58336);
+    }
+
     @Test
     public void testFramerate()
     {
-        System.out.println("Framerate den: " + avstream.getFramerateDenominator());
-        System.out.println("Framerate num: " + avstream.getFramerateNumerator());
-        System.out.println("Framerate num: " + avstream.getFramerate());
-                
+        Assert.assertEquals(avstreamVideo.getFramerateDenominator(), 1);
+        Assert.assertEquals(avstreamVideo.getFramerateNumerator(), 25);
+        Assert.assertEquals(avstreamVideo.getFramerate(), 25.0,  0.0);
     }
 
     @Test
     public void testGetLanguage()
     {
-        System.out.println("Language: " + avstream.getLanguage());
+        Assert.assertEquals(avstreamVideo.getLanguage(), "und");
     }
     
     @Test
-    public void testSub()
+    public void getMetadata()
     {
-        System.out.println("Language: " + avstreamSub.debug());
+        HashMap<String, String> metadata = avstreamAttachedPicture.getMetadata();
+        
+        Assert.assertEquals(metadata.size(), 2);
+        Assert.assertEquals(metadata.get("title"), "image/jpeg");
     }
-    
-    @Test
-    public void debug()
-    {
-        System.out.println("Create Context");
-        AVFormatContext avformat = AVFormatContext.buildAVFormatContext();
 
-        System.out.println("Open file");
-        avformat.openInput("//egypt/tv/The Man in the High Castle/Season 04/The Man in the High Castle - S04E01 - Hexagram 64.mkv");
-
-        System.out.println("Number of streams: " + avformat.getNumberOfStreams());
-
-        for(int i = 0; i < avformat.getNumberOfStreams(); i++)
-        {
-            //System.out.println("Checking stream: " + i);
-
-            AVCodecParameters avparm = avformat.getAVCodecParameters(i);
-            //AVCodec avcodec = AVCodec.getAVCodec(avparm);
-            AVStream avstream = avformat.getAVStream(i);
-            //AVCodecContext avcodecContext = avcodec.allocateContext();
-
-            System.out.println(i + " - " + avparm.getCodecType());
-
-            if(avparm.getCodecType() == AVMediaType.VIDEO)
-            {
-                System.out.println("\t\tFFMPEG Default: " + avstream.isDefault());
-                //System.out.println("\tSage Duration: " + this.GetAiring().GetDuration());
-                System.out.println("\t\tFFMPEG Duration: " + avformat.getDuration());
-                System.out.println("\t\tFFMPEG Lang: " + avstream.getLanguage());
-
-                
-                //System.out.println("\tSage Resolution: " + this.GetVideoResolution());
-                //System.out.println("\tSage Height: " + this.GetVideoHeight());
-                //System.out.println("\tSage Width: " + this.GetVideoWidth());
-                //System.out.println("\tSage Progressive:" + this.GetVideoProgressive());
-                System.out.println("\t\tFFMPEG Height: " + avparm.getHeight());
-                System.out.println("\t\tFFMPEG Width: " + avparm.getWidth());
-                System.out.println("\t\tFFMPEG Field Order: " + avparm.getFieldOrder());
-
-                //System.out.println("\tSage FPS: " + this.GetVideoFPS());
-                System.out.println("\t\tFFMPEG FPS: " + avstream.getFramerate());
-                System.out.println("\t\tFFMPEG FPS Num: " + avstream.getFramerateNumerator());
-                System.out.println("\t\tFFMPEG FPS Den: " + avstream.getFramerateDenominator());
-
-                //System.out.println("\tSage Codec: " + this.GetVideoCodec());
-                //System.out.println("\tSage Codec.ID: " + this.GetMetadata("Format.Video.ID"));
-                System.out.println("\t\tFFMPEG Codec: " + avcodec.getName());
-                System.out.println("\t\tFFMPEG Codec Long: " + avcodec.getLongName());
-                System.out.println("\t\tFFMPEG Codec ID: " + avparm.getCodecID());
-
-
-                //System.out.println("\tSage Bitrate: " + this.GetMetadata("Format.Video.Bitrate"));
-                System.out.println("\t\tFFMPEG Video Params Bitrate: " + avparm.getBitrate());
-                System.out.println("\t\tFFMPEG AVFormat Bitrate: " + avformat.getBitrate());
-
-
-                //System.out.println("\tSage Aspect Ratio: " + this.GetVideoAspect());
-                System.out.println("\t\tFFMPEG Aspect Num: " + avparm.getSampleAspectRatioNumerator());
-                System.out.println("\t\tFFMPEG Aspect Den: " + avparm.getSampleAspectRatioDenominator());
-                System.out.println("\t\tFFMPEG Aspect: " + avparm.getAspectRatio());
-                System.out.println("\t\tFFMPEG Aspect: " + avparm.getAspectRatioString());
-                
-            }
-            else if(avparm.getCodecType() == AVMediaType.AUDIO)
-            {
-                System.out.println("\t\tFFMPEG Default: " + avstream.isDefault());
-                System.out.println("\t\tFFMPEG Lang: " + avstream.debug());
-                System.out.println("\t\tFFMPEG Channels: " + avparm.getChannels());
-                System.out.println("\t\tFFMPEG Bitrate: " + avparm.getBitrate());
-                System.out.println("\t\tFFMPEG Codec: " + avcodec.getName());
-                System.out.println("\t\tFFMPEG Codec Long: " + avcodec.getLongName());
-                System.out.println("\t\tFFMPEG Codec ID: " + avparm.getCodecID());
-            }
-            else if(avparm.getCodecType() == AVMediaType.SUBTITLE)
-            {
-                System.out.println("\t\tFFMPEG Default: " + avstream.isDefault());
-                System.out.println("\t\tFFMPEG Languag: " + avstream.getLanguage());
-                System.out.println("\t\tFFMPEG Codec: " + avcodec.getName());
-                System.out.println("\t\tFFMPEG Codec Long: " + avcodec.getLongName());
-                System.out.println("\t\tFFMPEG Codec ID: " + avparm.getCodecID());
-                System.out.println("\t\tFFMPEG Forced: " + avstream.isForced());
-            }
-            else if(avparm.getCodecType() == AVMediaType.DATA)
-            {
-
-            }
-            else if(avparm.getCodecType() == AVMediaType.ATTACHMENT)
-            {
-
-            }
-            else if(avparm.getCodecType() == AVMediaType.NB)
-            {
-
-            }
-            else //Unknown
-            {
-
-            }
-        }
-        
-        
-        System.out.println("Close AVFormat");    
-        avformat.closeInput();
-        
-        //System.out.println("Free Context");    
-        //avformat.freeContext();
-    }
 }

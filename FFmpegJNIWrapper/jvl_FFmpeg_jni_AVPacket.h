@@ -41,14 +41,6 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVPacket_getDTS
 
 /*
  * Class:     jvl_FFmpeg_jni_AVPacket
- * Method:    getStreamIndex
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVPacket_getStreamIndex
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     jvl_FFmpeg_jni_AVPacket
  * Method:    getPosition
  * Signature: (J)J
  */
@@ -57,10 +49,42 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVPacket_getPosition
 
 /*
  * Class:     jvl_FFmpeg_jni_AVPacket
+ * Method:    setPosition
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVPacket_setPosition
+  (JNIEnv *, jobject, jlong, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVPacket
+ * Method:    getStreamIndex
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVPacket_getStreamIndex
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVPacket
  * Method:    free
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVPacket_free
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVPacket
+ * Method:    getSize
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVPacket_getSize
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVPacket
+ * Method:    getData
+ * Signature: (J)[B
+ */
+JNIEXPORT jbyteArray JNICALL Java_jvl_FFmpeg_jni_AVPacket_getData
   (JNIEnv *, jobject, jlong);
 
 #ifdef __cplusplus

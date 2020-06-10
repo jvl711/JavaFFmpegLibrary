@@ -17,6 +17,14 @@ JNIEXPORT jboolean JNICALL Java_jvl_FFmpeg_jni_AVStream_isForced
 
 /*
  * Class:     jvl_FFmpeg_jni_AVStream
+ * Method:    isAttachedPicture
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_jvl_FFmpeg_jni_AVStream_isAttachedPicture
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVStream
  * Method:    isDefault
  * Signature: (J)Z
  */
@@ -41,18 +49,42 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVStream_getFramerateDenominator
 
 /*
  * Class:     jvl_FFmpeg_jni_AVStream
- * Method:    debug
- * Signature: (J)Ljava/lang/String;
+ * Method:    getMetadataCount
+ * Signature: (J)I
  */
-JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVStream_debug
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVStream_getMetadataCount
   (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     jvl_FFmpeg_jni_AVStream
- * Method:    getLanguage
- * Signature: (J)Ljava/lang/String;
+ * Method:    getMetadataKey
+ * Signature: (JI)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVStream_getLanguage
+JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVStream_getMetadataKey
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVStream
+ * Method:    getMetadataValue
+ * Signature: (JI)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVStream_getMetadataValue
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVStream
+ * Method:    getMetadataValueByKey
+ * Signature: (JLjava/lang/String;)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVStream_getMetadataValueByKey
+  (JNIEnv *, jobject, jlong, jstring);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVStream
+ * Method:    getAttachedPicturePacket
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVStream_getAttachedPicturePacket
   (JNIEnv *, jobject, jlong);
 
 #ifdef __cplusplus

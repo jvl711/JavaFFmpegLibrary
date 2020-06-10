@@ -1,6 +1,7 @@
 
 package jvl.FFmpeg.jni;
 
+import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -30,15 +31,15 @@ public class AVFormatContextTest
     @Before
     public void setUp()
     {
-        avformat = AVFormatContext.buildAVFormatContext();
+        avformat = AVFormatContext.buildAVFormatInputContext("src/examples/SampleVideo_1280x720_1mb.mkv");
         assertTrue(avformat.getPointer() > 0);        
-        avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
+        //avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
     }
     
     @After
     public void tearDown()
     {
-        avformat.closeInput();    
+        avformat.close();    
     }
 
      
@@ -46,6 +47,13 @@ public class AVFormatContextTest
     public void buildOutputContext()
     {
         AVFormatContext context = AVFormatContext.buildAVFormatOutputContext("test.mkv");
+        assertTrue(context.getPointer() > 0);
+    }
+    
+    @Test
+    public void buildInputContext()
+    {
+        AVFormatContext context = AVFormatContext.buildAVFormatInputContext("test.mkv");
         assertTrue(context.getPointer() > 0);
     }
     
@@ -97,5 +105,27 @@ public class AVFormatContextTest
     public void getDuration()
     {
         assertTrue(avformat.getDuration() == 3600000);
+    }
+    
+    @Test
+    public void getMetadataCount()
+    {
+        AVFormatContext avformat2 = AVFormatContext.buildAVFormatInputContext("C:\\Users\\jvl711.CORE\\Documents\\TestDataMusic\\02 Awolnation - Some Sort of Creature2.flac");
+        //avformat2.openInput("C:\\Users\\jvl711.CORE\\Documents\\TestDataMusic\\02 Awolnation - Some Sort of Creature2.flac");
+        System.out.println(avformat2.getMetadataCount());
+    }
+    
+    @Test
+    public void getMetadata()
+    {
+        AVFormatContext avformat2 = AVFormatContext.buildAVFormatInputContext("C:\\Users\\jvl711.CORE\\Documents\\TestDataMusic\\02 Awolnation - Some Sort of Creature2.flac");
+        //avformat2.openInput("C:\\Users\\jvl711.CORE\\Documents\\TestDataMusic\\02 Awolnation - Some Sort of Creature2.flac");
+        
+        HashMap<String, String> metadata = avformat2.getMetadata();
+        
+        for(String key : metadata.keySet())
+        {
+            System.out.println("Key: " + key + " Value: " + metadata.get(key));
+        }
     }
 }

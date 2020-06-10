@@ -49,9 +49,11 @@ public class General
     @Test
     public void transcodeDevelopmentTesting() 
     {
-        AVFormatContext avcontext = AVFormatContext.buildAVFormatContext();
+        //"C:\\Users\\jvl711.CORE\\Documents\\TestData\\june.ts"
+        //AVFormatContext avcontext = AVFormatContext.buildAVFormatInputContext("src/examples/SampleVideo_1280x720_1mb.mkv");
+        AVFormatContext avcontext = AVFormatContext.buildAVFormatInputContext("C:\\Users\\jvl711.CORE\\Documents\\TestData\\june.ts");
         
-        avcontext.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
+        //avcontext.openInput();
         avcontext.findStreamInfo();
         
         AVStreamMap [] streamMaps = new AVStreamMap[avcontext.getNumberOfStreams()];
@@ -84,7 +86,7 @@ public class General
         
         
         //Temp        
-        avcontext.closeInput();
+        avcontext.close();
     }
     
     @Test
@@ -96,14 +98,15 @@ public class General
         
         try
         {
+            //"C:\\Users\\jvl711.CORE\\Documents\\TestData\\june.ts"
             System.out.println("MediaFormatParserPlugin processing: " + "src/examples/SampleVideo_1280x720_1mb.mkv");
-            avformat = AVFormatContext.buildAVFormatContext();
-            avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
+            avformat = AVFormatContext.buildAVFormatInputContext("src/examples/SampleVideo_1280x720_1mb.mkv");
+            //avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
         
             //format.setFormatName(FormatParser.substituteName(avformat.getFormatName()));
             //format.setDuration(avformat.getDuration() / 1000);
             //format.setBitrate((int)avformat.getBitrate());
-           
+            
             for(int i = 0; i < avformat.getNumberOfStreams(); i++)
             {
 
@@ -194,7 +197,7 @@ public class General
         {
             if(avformat != null)
             {
-                avformat.closeInput();
+                avformat.close();
             }
         }
     }

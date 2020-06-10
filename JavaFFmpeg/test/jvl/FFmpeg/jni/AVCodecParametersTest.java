@@ -36,8 +36,8 @@ public class AVCodecParametersTest
     @Before
     public void setUp()
     {
-        avformat = AVFormatContext.buildAVFormatContext();
-        avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
+        avformat = AVFormatContext.buildAVFormatInputContext("src/examples/SampleVideo_1280x720_1mb.mkv");
+        
         assertTrue(avformat.getPointer() > 0);
         avparamVideo = avformat.getAVCodecParameters(0);
         assertTrue(avparamVideo.getPointer() > 0);
@@ -49,7 +49,7 @@ public class AVCodecParametersTest
     @After
     public void tearDown()
     {
-        avformat.closeInput();
+        avformat.close();
     }
     
     @Test 

@@ -33,9 +33,9 @@ public class AVCodecTest
     @Before
     public void setUp()
     {
-        avformat = AVFormatContext.buildAVFormatContext();
+        avformat = AVFormatContext.buildAVFormatInputContext("src/examples/SampleVideo_1280x720_1mb.mkv");
         
-        avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
+        //avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
         //avformat.openInput("src/examples/H265_60_seconds.mkv");
         
         avformat.getNumberOfStreams();
@@ -49,7 +49,7 @@ public class AVCodecTest
     @After
     public void tearDown()
     {
-        avformat.closeInput();
+        avformat.close();
     }
 
     @Test
@@ -106,6 +106,7 @@ public class AVCodecTest
         
         System.out.println("PTS: " + packet.getPTS());
         System.out.println("DTS: " + packet.getDTS());
+        System.out.println("Size: " + packet.getSize());
         System.out.println("Position: " + packet.getPosition());
         
         packet.unreference();

@@ -10,6 +10,7 @@ package jvl.FFmpeg.jni;
 public class Global
 {
     private static boolean isLirariesLoaded = false;
+    private static final String version = "@VERSION@";
     
     public static void loadLibraries()
     {
@@ -30,6 +31,11 @@ public class Global
             
             isLirariesLoaded = true;
         }
+    }
+    
+    public static String getVersion()
+    {
+        return version;
     }
     
     public static boolean isLibrariesLoaded()

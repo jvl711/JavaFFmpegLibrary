@@ -13,7 +13,7 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_allocateContext(JNIE
     AVFormatContext *pTestContext = avformat_alloc_context();
     
     jlong pointer = (intptr_t)pTestContext;
-    
+            
     return pointer;
 }
 
@@ -63,7 +63,19 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_openInput(JNIEnv *env
     
     (*env)->ReleaseStringUTFChars(env, filePath, filePathPointer);
 
-    return avformat_open_input(&pFormatContext, filePathPointer, NULL, NULL);
+    int ret = avformat_open_input(&pFormatContext, filePathPointer, NULL, NULL);
+    
+    if(ret == 0)
+    {
+        pFormatContext->iformat->read_header(pFormatContext);
+    }
+    else
+    {
+        fprintf(stdout, "Could not open file: %s\n", av_err2str(ret));
+    }
+    
+    
+    return ret;
 }
 
 JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_closeInput(JNIEnv *env, jobject obj, jlong avFormatPointer)
@@ -85,7 +97,7 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_findStreamInfo(JNIEnv
 JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getDuration(JNIEnv *env, jobject obj, jlong avFormatPointer)
 {
     AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;
-
+    
     return (jlong)pFormatContext->duration;
 }
 
@@ -156,14 +168,117 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_readFrame(JNIEnv *env
     return av_read_frame(pFormatContext, pPacket);
 }
 
-JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_debug(JNIEnv *env, jobject obj, jlong avFormatPointer)
+JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getMetadataKey(JNIEnv* env, jobject obj, jlong avFormatPointer, jint index)
 {
     AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;
+    int cur = 0;
+    int size = 0;
     
-    //AVStream *pTestContext = pFormatContext->streams[0];
+    size = av_dict_count(pFormatContext->metadata);
     
-    
-    
-    //return av_read_frame(pFormatContext, pPacket);
+    if(pFormatContext->metadata != NULL || index >=  size)
+    {
+        AVDictionaryEntry *tag = NULL;
+        tag = av_dict_get(pFormatContext->metadata, "", tag, AV_DICT_IGNORE_SUFFIX); //get initial tag
+        cur++;
+        
+        while(tag != NULL && cur <= index)
+        {
+            tag = av_dict_get(pFormatContext->metadata, "", tag, AV_DICT_IGNORE_SUFFIX);
+            cur++;
+        }
+        
+        if(tag == NULL)
+        {
+            return NULL;
+        }
+                
+        return (*env)->NewStringUTF(env, tag->key);
+    }
+    else
+    {
+        return NULL;
+    }
 }
 
+JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getMetadataValue(JNIEnv* env, jobject obj, jlong avFormatPointer, jint index)
+{
+    AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;
+    int cur = 0;
+    int size = 0;
+    
+    size = av_dict_count(pFormatContext->metadata);
+    
+    
+    
+    if(pFormatContext->metadata != NULL || index >= size)
+    {
+        AVDictionaryEntry *tag = NULL;
+        tag = av_dict_get(pFormatContext->metadata, "", tag, AV_DICT_IGNORE_SUFFIX); //get initial tag
+        cur++;
+        
+        while(tag != NULL && cur <= index)
+        {
+            tag = av_dict_get(pFormatContext->metadata, "", tag, AV_DICT_IGNORE_SUFFIX);
+            cur++;
+        }
+        
+        if(tag == NULL)
+        {
+            return NULL;
+        }
+                
+        return (*env)->NewStringUTF(env, tag->value);
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
+JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getMetadataValueByKey(JNIEnv* env, jobject obj, jlong avFormatPointer, jstring key)
+{
+    AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;
+    const char * keyPointer;
+    
+    if(key == NULL)
+    {
+        return NULL;
+    }
+    
+    keyPointer = (*env)->GetStringUTFChars(env,key, 0);
+    
+    if(pFormatContext->metadata != NULL)
+    {
+        AVDictionaryEntry *tag = NULL;
+        
+        tag = av_dict_get(pFormatContext->metadata, keyPointer, NULL, 0);
+        (*env)->ReleaseStringUTFChars(env, key, keyPointer);
+        
+        if(tag == NULL)
+        {
+            return NULL;
+        }
+                
+        return (*env)->NewStringUTF(env, tag->value);
+    }
+    else
+    {
+        return NULL;
+    }
+    
+}
+
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_getMetadataCount(JNIEnv* env, jobject obj, jlong avFormatPointer)
+{
+    AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;
+
+    if(pFormatContext->metadata != NULL)
+    {
+        return av_dict_count(pFormatContext->metadata);
+    }
+    else
+    {
+        return 0;
+    }
+}

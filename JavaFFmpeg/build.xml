@@ -10,7 +10,51 @@
 <project name="JavaFFmpeg" default="default" basedir=".">
     <description>Builds, tests, and runs the project JavaFFmpeg.</description>
     <import file="nbproject/build-impl.xml"/>
-    <property name="version" value="0.3-alpha"/>
+    
+    <property name="build.version" value="0.4-alpha"/>
+    <buildnumber file="mybuild.number"/>
+    <tstamp>
+        <format property="build.time" pattern="MM/dd/yyyy HH:mm:ss"/>
+    </tstamp>
+    
+    <target name="-pre-compile">
+        
+        <delete file="./src/Version.java"/>
+        
+        <filter token="BUILDNUMBER" value="${build.number}" />
+        <filter token="BUILDTIME" value="${build.time}" />
+        <filter token="VERSION" value="${build.version}" />
+        <copy file="./versionTemplate" tofile="./src/Version.java" filtering="true"/>
+    </target>
+    
+    <target name="-post-jar">
+        
+        <javah destdir="../FFmpegJNIWrapper" force="yes" verbose="yes" classpath="${dist.jar}">
+            <class name="jvl.FFmpeg.jni.AVFormatContext"/>
+            <class name="jvl.FFmpeg.jni.AVCodecParameters"/>
+            <class name="jvl.FFmpeg.jni.AVCodec"/>
+            <class name="jvl.FFmpeg.jni.AVCodecContext"/>
+            <class name="jvl.FFmpeg.jni.AVFrame"/>
+            <class name="jvl.FFmpeg.jni.AVPacket"/>
+            <class name="jvl.FFmpeg.jni.AVStream"/>
+        </javah>
+        
+        <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${build.version}.zip">
+            <fileset dir="libraries/FFmpegJNIWrapperWin64"/>
+            <zipfileset  dir="${dist.jar.dir}" includes="*.jar" prefix="JARs"/>
+        </zip>
+        
+        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${build.version}.zip" fileext=".md5"/>
+        
+        <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${build.version}.zip">
+            <fileset dir="libraries/FFmpegJNIWrapperWin32"/>
+            <zipfileset  dir="${dist.jar.dir}" includes="*.jar" prefix="JARs"/>
+        </zip>
+        
+        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${build.version}.zip" fileext=".md5"/>
+        
+    </target>
+    
     <!--
 
     There exist several targets which are by default empty and which can be 
@@ -72,29 +116,6 @@
 
     -->
     
-    <target name="-post-jar">
-        <javah destdir="../FFmpegJNIWrapper" force="yes" verbose="yes" classpath="${dist.jar}">
-            <class name="jvl.FFmpeg.jni.AVFormatContext"/>
-            <class name="jvl.FFmpeg.jni.AVCodecParameters"/>
-            <class name="jvl.FFmpeg.jni.AVCodec"/>
-            <class name="jvl.FFmpeg.jni.AVCodecContext"/>
-            <class name="jvl.FFmpeg.jni.AVFrame"/>
-            <class name="jvl.FFmpeg.jni.AVPacket"/>
-            <class name="jvl.FFmpeg.jni.AVStream"/>
-        </javah>
-        
-        <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${version}.zip">
-            <fileset dir="libraries/FFmpegJNIWrapperWin64"/>
-            <zipfileset  dir="${dist.jar.dir}" includes="*.jar" prefix="JARs"/>
-        </zip>
-        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${version}.zip" fileext=".md5"/>
-        
-        <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${version}.zip">
-            <fileset dir="libraries/FFmpegJNIWrapperWin32"/>
-            <zipfileset  dir="${dist.jar.dir}" includes="*.jar" prefix="JARs"/>
-        </zip>
-        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${version}.zip" fileext=".md5"/>
-        
-    </target>
+    
     
 </project>

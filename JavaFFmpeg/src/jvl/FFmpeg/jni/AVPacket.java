@@ -1,6 +1,8 @@
 
 package jvl.FFmpeg.jni;
 
+import java.io.FileInputStream;
+
 public class AVPacket extends AbstractJNIObject
 {
     
@@ -70,6 +72,19 @@ public class AVPacket extends AbstractJNIObject
         return getPosition(this.getPointer());
     }
     
+    private native long getPosition(long AVPacketPointer);
+    
+    /**
+     * Used in occasions where FFmpeg does not set the position, and
+     * this library, or the user is able to find and set the position
+    */
+    public void setPosition(long value)
+    {
+        this.setPosition(this.getPointer(), value);
+    }
+    
+    private native void setPosition(long AVPacketPointer, long value);
+    
     public int getStreamIndex()
     {
         return this.getStreamIndex(getPointer());
@@ -77,7 +92,7 @@ public class AVPacket extends AbstractJNIObject
     
     private native int getStreamIndex(long AVPacketPointer);
     
-    private native long getPosition(long AVPacketPointer);
+    
     
     public void free()
     {
@@ -85,4 +100,84 @@ public class AVPacket extends AbstractJNIObject
     }
     
     private native void free(long AVPacketPointer);
+    
+    public int getSize()
+    {
+        return this.getSize(this.getPointer());
+    }
+    
+    private native int getSize(long AVPacketPointer);
+    
+    public byte[] getData()
+    {
+        return this.getData(this.getPointer());
+    }
+    
+    private native byte[] getData(long AVPacketPointer);
+    
+    /**
+     * Find the first occurrence of the packet in the given file.
+     * @param fileNamePath file to search
+     * @param searchLimitBytes How far into the file to search for the data
+     * @return Returns the start position of the data, or -1 if there was an error, or the data was not found.
+     */
+    public int findPositionInFile(String fileNamePath, int searchLimitBytes)
+    {
+        FileInputStream input = null;
+        int ret = -1;
+        
+        try
+        {
+            byte[] picture = this.getData();
+            input = new FileInputStream(fileNamePath);
+
+            byte value[] = new byte[1];
+            int inputPos = 0;
+            int picPos = 0;
+            int matchPos = 0;
+
+            
+            while(input.read(value) != -1 && inputPos < (searchLimitBytes + this.getSize()))
+            {
+                if(picPos == picture.length - 1)
+                {
+                    //Complete match found
+                    ret = matchPos;
+                    break;
+                }
+
+                if(value[0] == picture[picPos])
+                {
+                    //Current pos still matching
+                    picPos++;
+                    inputPos++;
+                }
+                else
+                {
+                    //Did not match.  Reset variables
+                    inputPos++;
+                    matchPos = inputPos;
+                    picPos = 0;
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        finally
+        {
+            if(input != null)
+            {
+                try
+                {
+                    input.close();
+                }
+                catch(Exception ex2){}
+            }
+        }
+        
+        return ret;
+    }
+    
 }

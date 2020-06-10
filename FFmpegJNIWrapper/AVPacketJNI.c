@@ -36,6 +36,43 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVPacket_getPosition(JNIEnv* env, jo
     return pAVPacket->pos;
 }
 
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVPacket_setPosition(JNIEnv* env, jobject obj, jlong AVPacketPointer, jlong value)
+{
+    AVPacket * pAVPacket = (AVPacket *)(intptr_t)AVPacketPointer;
+
+    pAVPacket->pos = value;
+}
+
+JNIEXPORT jbyteArray JNICALL Java_jvl_FFmpeg_jni_AVPacket_getData(JNIEnv* env, jobject obj, jlong AVPacketPointer)
+{
+    AVPacket * pAVPacket = (AVPacket *)(intptr_t)AVPacketPointer;
+    //jbyteArray result;
+    //jbyte temp[pAVPacket->size];
+    //result = (*env)->NewByteArray(env, pAVPacket->size);
+    jbyteArray result =(*env)->NewByteArray(env, pAVPacket->size);
+    
+    
+    
+    //for(int i = 0; i < pAVPacket->size; i++)
+    //{
+    //    temp[i] = pAVPacket->data[i];
+    //}
+    
+    //(*env)->SetByteArrayRegion(env, result, 0, pAVPacket->size, temp);
+    
+    //return result;
+    (*env)->SetByteArrayRegion(env, result, 0, pAVPacket->size, pAVPacket->data);
+            
+    return result;
+}
+
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVPacket_getSize(JNIEnv* env, jobject obj, jlong AVPacketPointer)
+{
+    AVPacket * pAVPacket = (AVPacket *)(intptr_t)AVPacketPointer;
+    
+    return pAVPacket->size;
+}
+
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVPacket_getStreamIndex(JNIEnv* env, jobject obj, jlong AVPacketPointer)
 {
     AVPacket * pAVPacket = (AVPacket *)(intptr_t)AVPacketPointer;
@@ -56,3 +93,14 @@ JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVPacket_unreference(JNIEnv* env, job
     
     av_packet_unref(pAVPacket);
 }
+
+/*
+jbyteArray ToJavaByteArray(JNIEnv* env, const uint8_t* bytes, size_t len) 
+{
+    jbyteArray byte_array =(*env)->NewByteArray(len);
+
+    (*env)->SetByteArrayRegion(env, byte_array, 0, len, bytes);
+
+    return byte_array;
+}
+*/

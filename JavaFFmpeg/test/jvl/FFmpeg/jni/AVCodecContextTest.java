@@ -41,9 +41,9 @@ public class AVCodecContextTest
     @Before
     public void setUp()
     {
-        avformat = AVFormatContext.buildAVFormatContext();
+        avformat = AVFormatContext.buildAVFormatInputContext("src/examples/SampleVideo_1280x720_1mb.mkv");
         
-        avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
+        //avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
         //avformat.openInput("src/examples/H265_60_seconds.mkv");
         
         avformat.getNumberOfStreams();

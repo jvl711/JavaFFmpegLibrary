@@ -7,27 +7,44 @@ package jvl.FFmpeg.jni;
 
 //TODO: Split out AVFormat and AVFormatContext.  Everything that needs the pointer shoulr probably use the context
 
+import java.util.HashMap;
+
+
 public class AVFormatContext extends AbstractJNIObject
 {
     //private final long AVFormatContextPointer;
     
     private boolean isFindStreamInfoCalled;
     private boolean isFileOpen;
+    private String fileNamePath;
     
     
-    private AVFormatContext(long AVFormatContextPointer)
+    private AVFormatContext(long AVFormatContextPointer, String fileNamePath)
     {
         super(AVFormatContextPointer);
         this.isFindStreamInfoCalled = false;
         this.isFileOpen = false;
-        //this.AVFormatContextPointer = AVFormatContextPointer;
+        this.fileNamePath = fileNamePath;
     }
     
-    public static AVFormatContext buildAVFormatContext()
+    public static AVFormatContext buildAVFormatInputContext(String fileNamePath)
     {
         long pointer = allocateContext();
+
+        AVFormatContext avformat = new AVFormatContext(pointer, fileNamePath);
         
-        return new AVFormatContext(pointer);
+        int ret = avformat.openInput(avformat.getPointer(), fileNamePath);
+        
+        if(ret < 0)
+        {
+            throw new RuntimeException("Error opening file.  ffmpeg error code: " + ret);
+        }
+        else
+        {
+            avformat.isFileOpen = true;
+        }
+        
+        return avformat;
     }
     
     /**
@@ -46,11 +63,15 @@ public class AVFormatContext extends AbstractJNIObject
     * @return >= 0 in case of success, a negative AVERROR code in case of
     * failure
     */
-    public static AVFormatContext buildAVFormatOutputContext(String filePath)
+    public static AVFormatContext buildAVFormatOutputContext(String fileNamePath)
     {
-        long pointer = allocateOutputContext(filePath);
+        long pointer = allocateOutputContext(fileNamePath);
         
-        return new AVFormatContext(pointer);
+        AVFormatContext avformat = new AVFormatContext(pointer, fileNamePath);
+        
+        avformat.isFileOpen = true;
+        
+        return avformat; 
     }
     
     private void validateFileOpen()
@@ -65,48 +86,33 @@ public class AVFormatContext extends AbstractJNIObject
     
     private static native long allocateOutputContext(String filePath);
     
+    /**
+    * Add a new stream to a media file.
+    *
+    * When demuxing, it is called by the demuxer in read_header(). If the
+    * flag AVFMTCTX_NOHEADER is set in s.ctx_flags, then it may also
+    * be called in read_packet().
+    *
+    * When muxing, should be called by the user before avformat_write_header().
+    *
+    * User is required to call avcodec_close() and avformat_free_context() to
+    * clean up the allocation by avformat_new_stream().
+    *
+    * @return newly created stream or NULL on error.
+    */
     public AVStream allocateNewStream()
     {
         long pointer = this.allocateNewStream(this.getPointer());
         
-        return new AVStream(pointer);
+        return new AVStream(pointer, this);
+    }
+    
+    public String getFileNamePath()
+    {
+        return this.fileNamePath;
     }
     
     private static native long allocateNewStream(long AVFormatPointer);
-    
-    
-    /*
-    public void freeContext()
-    {
-        this.freeContext(this.AVFormatContextPointer);
-    }
-    
-    private native void freeContext(long AVFormatPointer);
-    */
-    
-    /**
-    * Open an input stream and read the header. The codecs are not opened.
-    * The stream must be closed with closeInput()
-    *
-    * @param filePath URL of the stream to open.
-    *
-    * @return 0 on success, a negative AVERROR on failure.
-    */
-    public void openInput(String filePath)
-    {
-        int ret = openInput(this.getPointer(), filePath);
-
-        if(ret < 0)
-        {
-            throw new RuntimeException("Error opening file.  ffmpeg error code: " + ret);
-        }
-        else
-        {
-            isFileOpen = true;
-        }
-        
-        //:TODO get the error mesaage from ffmpeg library
-    }
     
     
     private native int openInput(long AVFormatPointer, String filePath);
@@ -115,7 +121,7 @@ public class AVFormatContext extends AbstractJNIObject
     * Close an opened input AVFormatContext. Free it and all its contents
     * and set *s to NULL.
     */
-    public void closeInput()
+    public void close()
     {
         //TODO: Change all pointer calls to getPointer, and throw error if deallocated
         
@@ -254,7 +260,7 @@ public class AVFormatContext extends AbstractJNIObject
         validateFileOpen();
         
         this.findStreamInfo();
-        return new AVStream(this.getAVStream(this.getPointer(), streamIndex));
+        return new AVStream(this.getAVStream(this.getPointer(), streamIndex), this);
     }
     
     private native long getAVStream(long AVFormatContextPointer, int streamIndex);
@@ -304,14 +310,62 @@ public class AVFormatContext extends AbstractJNIObject
     
     private native int readFrame(long AVFormatContextPointer, long AVFramePointer);
     
-    
-    public void debug()
+     public HashMap<String, String> getMetadata()
     {
-        validateFileOpen();
+        HashMap<String, String> metadata = new HashMap<>();
+        int count = this.getMetadataCount();
         
-        this.debug(this.getPointer());
+        for(int i = 0; i < count; i++)
+        {
+            System.out.println("Provcessing: " + i);
+            System.out.println("Provcessing: " + this.getMetadataKey(i));
+            metadata.put(this.getMetadataKey(i), this.getMetadataValue(i));
+        }
+        
+        return metadata;
     }
     
-    private native void debug(long pointer);
+    public int getMetadataCount()
+    {
+        return this.getMetadataCount(this.getPointer());
+    }
+    
+    private native int getMetadataCount(long AVFormatContextPointer);
+    
+    private String getMetadataKey(int index)
+    {
+       if(index >= this.getMetadataCount())
+       {
+           throw new IndexOutOfBoundsException();
+       }
+       
+       return this.getMetadataKey(this.getPointer(), index);
+    }
+    
+    private native String getMetadataKey(long AVFormatContextPointer, int index);
+    
+    private String getMetadataValue(int index)
+    {
+       if(index >= this.getMetadataCount())
+       {
+           throw new IndexOutOfBoundsException();
+       }
+        
+       return this.getMetadataValue(this.getPointer(), index);
+    }
+    
+    private native String getMetadataValue(long AVFormatContextPointer, int index);
+    
+    private String getMetadataValue(String key)
+    {
+        if(key == null)
+        {
+            return null;
+        }
+        
+       return this.getMetadataValueByKey(this.getPointer(), key);
+    }
+    
+    private native String getMetadataValueByKey(long AVFormatContextPointer, String key);
             
 }
