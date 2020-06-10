@@ -19,12 +19,12 @@
     
     <target name="-pre-compile">
         
-        <delete file="./src/Version.java"/>
+        <delete file="./src/jvl/FFmpeg/jni/Version.java"/>
         
         <filter token="BUILDNUMBER" value="${build.number}" />
         <filter token="BUILDTIME" value="${build.time}" />
         <filter token="VERSION" value="${build.version}" />
-        <copy file="./versionTemplate" tofile="./src/Version.java" filtering="true"/>
+        <copy file="./versionTemplate" tofile="./src/jvl/FFmpeg/jni/Version.java" filtering="true"/>
     </target>
     
     <target name="-post-jar">
