@@ -90,6 +90,18 @@ public class General
     }
     
     @Test
+    public void test2()
+    {
+        //AVFormatContext avformat = AVFormatContext.buildAVFormatInputContext("c:/users/jvl711.core/documents/testdatamusic/02 Awolnation - Some Sort of Creature2.flac");
+        AVFormatContext avformat = AVFormatContext.buildAVFormatInputContext("src/examples/Sample_BeeMoved_96kHz24bit.flac");
+        
+        System.out.println(avformat.getNumberOfStreams());
+        
+        
+    }
+            
+    
+    @Test
     public void testFormatParsing()
     {
         //ContainerFormat format = new ContainerFormat();
@@ -100,7 +112,7 @@ public class General
         {
             //"C:\\Users\\jvl711.CORE\\Documents\\TestData\\june.ts"
             System.out.println("MediaFormatParserPlugin processing: " + "src/examples/SampleVideo_1280x720_1mb.mkv");
-            avformat = AVFormatContext.buildAVFormatInputContext("src/examples/SampleVideo_1280x720_1mb.mkv");
+            
             //avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
         
             //format.setFormatName(FormatParser.substituteName(avformat.getFormatName()));
@@ -200,5 +212,12 @@ public class General
                 avformat.close();
             }
         }
+    }
+    
+    @Test
+    public void test()
+    {
+        boolean debug = true;
+        if(debug) System.out.println(Boolean.parseBoolean("rgln"));
     }
 }

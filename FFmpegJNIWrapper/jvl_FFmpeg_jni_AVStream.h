@@ -87,6 +87,14 @@ JNIEXPORT jstring JNICALL Java_jvl_FFmpeg_jni_AVStream_getMetadataValueByKey
 JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVStream_getAttachedPicturePacket
   (JNIEnv *, jobject, jlong);
 
+/*
+ * Class:     jvl_FFmpeg_jni_AVStream
+ * Method:    getDisposition
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVStream_getDisposition
+  (JNIEnv *, jobject, jlong);
+
 #ifdef __cplusplus
 }
 #endif

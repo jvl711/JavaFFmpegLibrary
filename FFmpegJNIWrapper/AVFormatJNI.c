@@ -67,7 +67,12 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_openInput(JNIEnv *env
     
     if(ret == 0)
     {
-        pFormatContext->iformat->read_header(pFormatContext);
+        ret = pFormatContext->iformat->read_header(pFormatContext);
+        
+        if(ret != 0)
+        {
+            fprintf(stdout, "Could not open file: %s\n", av_err2str(ret));
+        }
     }
     else
     {

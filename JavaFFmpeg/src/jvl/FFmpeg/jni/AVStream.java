@@ -224,4 +224,11 @@ public class AVStream extends AbstractJNIObject
     
     private native long getAttachedPicturePacket(long AVStreamPointer);
     
+    public int getDisposition()
+    {
+        return this.getDisposition(this.getPointer());
+    }
+    
+    private native int getDisposition(long AVStreamPointer);
+    
 }

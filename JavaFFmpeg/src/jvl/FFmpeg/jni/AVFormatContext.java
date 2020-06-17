@@ -189,8 +189,8 @@ public class AVFormatContext extends AbstractJNIObject
      */
     public long getDuration()
     {
-        validateFileOpen();
-        
+        validateFileOpen();   
+        this.findStreamInfo();
         return this.getDuration(this.getPointer());
     }
     
@@ -239,7 +239,7 @@ public class AVFormatContext extends AbstractJNIObject
     public int getNumberOfStreams()
     {
         validateFileOpen();
-        
+        this.findStreamInfo();
         return this.getNumberOfStreams(this.getPointer());
     }
     
@@ -248,7 +248,6 @@ public class AVFormatContext extends AbstractJNIObject
     public AVCodecParameters getAVCodecParameters(int streamIndex)
     {
         validateFileOpen();
-        
         this.findStreamInfo();
         return new AVCodecParameters(this.getAVCodecParameters(this.getPointer(), streamIndex), streamIndex);
     }
@@ -317,8 +316,6 @@ public class AVFormatContext extends AbstractJNIObject
         
         for(int i = 0; i < count; i++)
         {
-            System.out.println("Provcessing: " + i);
-            System.out.println("Provcessing: " + this.getMetadataKey(i));
             metadata.put(this.getMetadataKey(i), this.getMetadataValue(i));
         }
         

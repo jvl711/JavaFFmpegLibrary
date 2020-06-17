@@ -41,6 +41,13 @@ JNIEXPORT jboolean JNICALL Java_jvl_FFmpeg_jni_AVStream_isForced(JNIEnv* env, jo
     return false;
 }
 
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVStream_getDisposition(JNIEnv* env, jobject obj, jlong AVStreamPointer)
+{
+    AVStream * pAVStream = (AVStream *)(intptr_t)AVStreamPointer;
+
+    return pAVStream->disposition;
+}
+
 JNIEXPORT jboolean JNICALL Java_jvl_FFmpeg_jni_AVStream_isAttachedPicture(JNIEnv* env, jobject obj, jlong AVStreamPointer)
 {
     AVStream * pAVStream = (AVStream *)(intptr_t)AVStreamPointer;
