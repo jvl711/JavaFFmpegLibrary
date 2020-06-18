@@ -55,6 +55,46 @@
         
     </target>
     
+    <target name="sagetv">
+        <available property="sagetvx86.exists" file="C:\Program Files (x86)\SageTV\SageTV\SageTVClient.exe" type="file"/>
+       
+        <condition property="sagetvx86.path" value="C:\Program Files (x86)\SageTV\SageTV\">
+            <istrue value="${sagetvx86.exists}"></istrue>
+        </condition>
+        
+        <available property="sagetvx64.exists" file="C:\Program Files\SageTV\SageTV\SageTVClient.exe" type="file"/>
+        
+        <condition property="sagetvx64.path" value="C:\Program Files\SageTV\SageTV\">
+            <istrue value="${sagetvx64.exists}"></istrue>
+        </condition>
+        
+        <echo message="${sagetv.path}"/>
+    </target>
+    
+    <target name="deploy-for-testing" depends="jar, sagetv, deployx64, deployx86">
+        
+    </target>
+    
+    <target name="deployx64" depends="" if="sagetvx64.path">
+        
+        <echo message="Deploying to SageTV x64"/>
+        <copy file="${dist.jar}" toDir="${sagetvx64.path}\JARs"/>
+
+        <copy todir="${sagetvx64.path}">  
+            <fileset dir="libraries/FFmpegJNIWrapperWin64"/>
+        </copy>
+
+    </target>
+    
+    <target name="deployx86" depends="" if="sagetvx86.path">
+
+        <echo message="Deploying to SageTV x64"/>
+        <copy file="${dist.jar}" toDir="${sagetvx86.path}\JARs"/>
+        <echo message="Deploying to SageTV x86"/>
+ 
+    </target>
+
+    
     <!--
 
     There exist several targets which are by default empty and which can be 

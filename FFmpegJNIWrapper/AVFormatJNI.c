@@ -67,12 +67,14 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_openInput(JNIEnv *env
     
     if(ret == 0)
     {
-        ret = pFormatContext->iformat->read_header(pFormatContext);
+        //Reading the header caused incorrect number of streams to be read for flac files.
+        //Not sure why I was doing this.  It may need to be moved
+        //ret = pFormatContext->iformat->read_header(pFormatContext);
         
-        if(ret != 0)
-        {
-            fprintf(stdout, "Could not open file: %s\n", av_err2str(ret));
-        }
+        //if(ret != 0)
+        //{
+        //    fprintf(stdout, "Could not open file: %s\n", av_err2str(ret));
+        //}
     }
     else
     {

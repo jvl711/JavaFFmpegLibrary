@@ -92,8 +92,8 @@ public class General
     @Test
     public void test2()
     {
-        //AVFormatContext avformat = AVFormatContext.buildAVFormatInputContext("c:/users/jvl711.core/documents/testdatamusic/02 Awolnation - Some Sort of Creature2.flac");
-        AVFormatContext avformat = AVFormatContext.buildAVFormatInputContext("src/examples/Sample_BeeMoved_96kHz24bit.flac");
+        AVFormatContext avformat = AVFormatContext.buildAVFormatInputContext("c:/users/jvl711.core/documents/testdatamusic/02 Awolnation - Some Sort of Creature2.flac");
+        //AVFormatContext avformat = AVFormatContext.buildAVFormatInputContext("src/examples/Sample_BeeMoved_96kHz24bit.flac");
         
         System.out.println(avformat.getNumberOfStreams());
         
