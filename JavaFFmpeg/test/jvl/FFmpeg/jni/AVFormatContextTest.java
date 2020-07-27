@@ -110,22 +110,18 @@ public class AVFormatContextTest
     @Test
     public void getMetadataCount()
     {
-        AVFormatContext avformat2 = AVFormatContext.buildAVFormatInputContext("C:\\Users\\jvl711.CORE\\Documents\\TestDataMusic\\02 Awolnation - Some Sort of Creature2.flac");
-        //avformat2.openInput("C:\\Users\\jvl711.CORE\\Documents\\TestDataMusic\\02 Awolnation - Some Sort of Creature2.flac");
-        System.out.println(avformat2.getMetadataCount());
+        AVFormatContext context = AVFormatContext.buildAVFormatInputContext("src/examples/Sample_BeeMoved_96kHz24bit.flac");
+        //System.out.println(context.getMetadataCount());
+        Assert.assertEquals(context.getMetadataCount(), 5);
+        
     }
     
     @Test
     public void getMetadata()
     {
-        AVFormatContext avformat2 = AVFormatContext.buildAVFormatInputContext("C:\\Users\\jvl711.CORE\\Documents\\TestDataMusic\\02 Awolnation - Some Sort of Creature2.flac");
-        //avformat2.openInput("C:\\Users\\jvl711.CORE\\Documents\\TestDataMusic\\02 Awolnation - Some Sort of Creature2.flac");
-        
-        HashMap<String, String> metadata = avformat2.getMetadata();
-        
-        for(String key : metadata.keySet())
-        {
-            System.out.println("Key: " + key + " Value: " + metadata.get(key));
-        }
+        AVFormatContext context = AVFormatContext.buildAVFormatInputContext("src/examples/Sample_BeeMoved_96kHz24bit.flac");
+        HashMap<String, String> metadata = context.getMetadata();
+     
+        Assert.assertEquals(metadata.get("TITLE"), "Bee Moved");
     }
 }

@@ -33,18 +33,18 @@ JNIEXPORT jboolean JNICALL Java_jvl_FFmpeg_jni_AVStream_isDefault
 
 /*
  * Class:     jvl_FFmpeg_jni_AVStream
- * Method:    getFramerateNumerator
- * Signature: (J)I
+ * Method:    guessFramerate
+ * Signature: (JJ)Ljvl/FFmpeg/jni/AVRational;
  */
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVStream_getFramerateNumerator
-  (JNIEnv *, jobject, jlong);
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVStream_guessFramerate
+  (JNIEnv *, jobject, jlong, jlong);
 
 /*
  * Class:     jvl_FFmpeg_jni_AVStream
- * Method:    getFramerateDenominator
- * Signature: (J)I
+ * Method:    getFramerate
+ * Signature: (J)Ljvl/FFmpeg/jni/AVRational;
  */
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVStream_getFramerateDenominator
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVStream_getFramerate
   (JNIEnv *, jobject, jlong);
 
 /*

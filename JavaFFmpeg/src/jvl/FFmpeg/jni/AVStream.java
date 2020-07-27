@@ -63,50 +63,25 @@ public class AVStream extends AbstractJNIObject
     
     private native boolean isDefault(long AVStreamPointer);
     
-    /**
-     * The Numerator of the framerate or 0 if it is unknown
-     * 
-     * @return Numerator 
-     */
-    public int getFramerateNumerator()
+    public AVRational guessFramerate()
     {
-        return this.getFramerateNumerator(this.getPointer());
+        return this.guessFramerate(this.avFormat.getPointer(), this.getPointer());
     }
     
-    private native int getFramerateNumerator(long AVStreamPointer);
+    private native AVRational guessFramerate(long AVFormatContextPointer, long AVStreamPointer);
     
     /**
-     * The denominator of the framerate
+     * Gets the framerate in AVRational object. If the Denominator is 0 than the framerate is unknown 
      * 
-     * @return Denominator 
+     * @return Framerate in AVRational 
      */
-    public int getFramerateDenominator()
+    public AVRational getFramerate()
     {
-        return this.getFramerateDenominator(this.getPointer());
+        return this.getFramerate(this.getPointer());
     }
     
-    private native int getFramerateDenominator(long AVStreamPointer);
-    
-    /**
-     * Takes the num / den and returns it.  If either num or den are 0 then
-     * if is assumed the framerate is unknown
-     * 
-     * @return The framerate if known, or 0 
-     */
-    public double getFramerate()
-    {
-        int num = this.getFramerateNumerator();
-        int den = this.getFramerateDenominator();
-        
-        if(num == 0 || den == 0)
-        {
-            return 0;
-        }
-        else
-        {
-            return (num * 1.0) / (den * 1.0);
-        }
-    }
+     
+    private native AVRational getFramerate(long AVStreamPointer);
     
     /**
      * This will return the language from the metadata associated with the

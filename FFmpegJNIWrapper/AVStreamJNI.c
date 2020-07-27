@@ -3,7 +3,26 @@
 #include "jvl_FFmpeg_jni_AVStream.h"
 #include "libavformat/avformat.h"
 #include <stdbool.h> 
+#include "Utility.h"
 
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVStream_guessFramerate(JNIEnv* env, jobject obj, jlong AVformatContextPointer, jlong AVStreamPointer)
+{
+    AVFormatContext * pAVFormatConext = (AVFormatContext *)(intptr_t)AVformatContextPointer;
+    AVStream * pAVStream = (AVStream *)(intptr_t)AVStreamPointer;
+    
+    AVRational framerate = av_guess_frame_rate(pAVFormatConext, pAVStream, NULL);
+    
+    return constructAVRational(env, framerate.num, framerate.den);
+}
+
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVStream_getFramerate(JNIEnv* env, jobject obj, jlong AVStreamPointer)
+{
+    AVStream * pAVStream = (AVStream *)(intptr_t)AVStreamPointer;
+    
+    return constructAVRational(env, pAVStream->r_frame_rate.num, pAVStream->r_frame_rate.den);
+}
+
+/*
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVStream_getFramerateNumerator(JNIEnv* env, jobject obj, jlong AVStreamPointer)
 {
     AVStream * pAVStream = (AVStream *)(intptr_t)AVStreamPointer;
@@ -15,11 +34,9 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVStream_getFramerateDenominator(JNIE
 {
     AVStream * pAVStream = (AVStream *)(intptr_t)AVStreamPointer;
     
-    
-    
     return pAVStream->r_frame_rate.den;
 }
-
+*/
 JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVStream_getAttachedPicturePacket(JNIEnv* env, jobject obj, jlong AVStreamPointer)
 {
     AVStream * pAVStream = (AVStream *)(intptr_t)AVStreamPointer;

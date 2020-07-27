@@ -49,6 +49,22 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getFramerateDenominato
 
 /*
  * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    setFramerate
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setFramerate
+  (JNIEnv *, jobject, jlong, jint, jint);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    getFramerate
+ * Signature: (J)Ljvl/FFmpeg/jni/AVRational;
+ */
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getFramerate
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
  * Method:    setHeight
  * Signature: (JI)V
  */

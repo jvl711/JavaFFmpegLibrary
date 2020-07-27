@@ -181,6 +181,8 @@ public class AVFormatContext extends AbstractJNIObject
     */
     private native int findStreamInfo(long AVFormatPointer);
     
+    public static native AVRational guessFramerate();
+    
     /**
      * The duration in microseconds
      * 

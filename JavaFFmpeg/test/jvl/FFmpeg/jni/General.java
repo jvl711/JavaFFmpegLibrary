@@ -47,6 +47,15 @@ public class General
     }
 
     @Test
+    public void test3()
+    {
+        AVRational rational = AVFormatContext.guessFramerate();
+        
+        System.out.println(rational.getDenominator());
+        System.out.println(rational.getNumerator());
+    }
+    
+    @Test
     public void transcodeDevelopmentTesting() 
     {
         //"C:\\Users\\jvl711.CORE\\Documents\\TestData\\june.ts"
@@ -75,6 +84,15 @@ public class General
             //Copy of parameters happens automatically in my code.
             //Opening of the codec also occurs?  The example code does not open subtitles.  May need to change this as well
             AVCodecContext avcodeccontext = avcodec.allocateContext();
+            
+            if(avparams.getCodecType() == AVMediaType.AUDIO || avparams.getCodecType() == AVMediaType.VIDEO)
+            {
+                if(avparams.getCodecType() == AVMediaType.VIDEO)
+                {
+                    avcodeccontext.setFramerate(avstream.guessFramerate());
+                    System.out.println(avcodeccontext.getFramerate().getValue());
+                }
+            }
             
             //stream_ctx[i].dec_ctx = codec_ctx;
             streamMaps[i] = new AVStreamMap();
@@ -112,6 +130,8 @@ public class General
         {
             //"C:\\Users\\jvl711.CORE\\Documents\\TestData\\june.ts"
             System.out.println("MediaFormatParserPlugin processing: " + "src/examples/SampleVideo_1280x720_1mb.mkv");
+            
+            avformat = AVFormatContext.buildAVFormatInputContext("src/examples/SampleVideo_1280x720_1mb.mkv");
             
             //avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
         
@@ -157,8 +177,8 @@ public class General
                     System.out.println("\tAspect Ratio: " + (float)avparm.getAspectRatio());
                     assertTrue(avparm.getAspectRatio() > 0);
                     //video.setFps((float)avstream.getFramerate());
-                    System.out.println("\tFramerate: " + avstream.getFramerate());
-                    assertTrue(avstream.getFramerate() > 0);
+                    System.out.println("\tFramerate: " + avstream.getFramerate().getValue());
+                    assertTrue(avstream.getFramerate().getDenominator() > 0);
                     //video.setWidth(avparm.getWidth());
                     System.out.println("\tWdith: " + avparm.getWidth());
                     assertTrue(avparm.getWidth() > 0);

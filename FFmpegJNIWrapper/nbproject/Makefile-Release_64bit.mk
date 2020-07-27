@@ -42,6 +42,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/AVFrameJNI.o \
 	${OBJECTDIR}/AVPacketJNI.o \
 	${OBJECTDIR}/AVStreamJNI.o \
+	${OBJECTDIR}/_ext/fc0756ea/Utility.o \
 	${OBJECTDIR}/test.o
 
 
@@ -103,6 +104,11 @@ ${OBJECTDIR}/AVStreamJNI.o: AVStreamJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -Ilibraries/ffmpeg-4.2.2-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_231/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVStreamJNI.o AVStreamJNI.c
+
+${OBJECTDIR}/_ext/fc0756ea/Utility.o: /C/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.c
+	${MKDIR} -p ${OBJECTDIR}/_ext/fc0756ea
+	${RM} "$@.d"
+	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -Ilibraries/ffmpeg-4.2.2-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_231/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fc0756ea/Utility.o /C/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.c
 
 ${OBJECTDIR}/test.o: test.c
 	${MKDIR} -p ${OBJECTDIR}

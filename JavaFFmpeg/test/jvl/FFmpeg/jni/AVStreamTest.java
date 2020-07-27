@@ -97,11 +97,22 @@ public class AVStreamTest
     }
 
     @Test
+    public void testGuessFramerate()
+    {
+        AVRational rational = avstreamVideo.guessFramerate();
+        
+        Assert.assertEquals(rational.getDenominator(), 1);
+        Assert.assertEquals(rational.getNumerator(), 25);
+    }
+    
+    @Test
     public void testFramerate()
     {
-        Assert.assertEquals(avstreamVideo.getFramerateDenominator(), 1);
-        Assert.assertEquals(avstreamVideo.getFramerateNumerator(), 25);
-        Assert.assertEquals(avstreamVideo.getFramerate(), 25.0,  0.0);
+        AVRational rational = avstreamVideo.getFramerate();
+        
+        Assert.assertEquals(rational.getDenominator(), 1);
+        Assert.assertEquals(rational.getNumerator(), 25);
+        Assert.assertEquals(rational.getValue(), 25.0,  0.0);
     }
 
     @Test

@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include "jvl_FFmpeg_jni_AVFormatContext.h"
 #include "libavformat/avformat.h"
+#include "Utility.h"
 
 
 JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_allocateContext(JNIEnv* env, jobject obj)
@@ -98,6 +99,39 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_findStreamInfo(JNIEnv
     
     
     return avformat_find_stream_info(pFormatContext, NULL);
+}
+
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_guessFramerate(JNIEnv *env, jobject obj)
+{
+    //AVFormatContext * pFormatContext = (AVFormatContext *)(intptr_t)avFormatPointer;
+    
+    /*
+    jclass javaClass = (*env)->FindClass(env, "jvl/FFmpeg/jni/AVRational");
+    
+    if (javaClass == NULL) 
+    {
+        printf("Find Class Failed.\n");
+    } 
+    else 
+    {
+        printf("Found class.\n");
+    }
+
+    jmethodID constructor = (*env)->GetMethodID(env, javaClass, "<init>", "(II)V");
+    
+    if (constructor == 0) 
+    {
+        printf("Find method Failed.\n");
+    }
+    else 
+    {
+        printf("Found method.\n");
+    }
+    
+    return (*env)->NewObject(env, javaClass, constructor, 16, 9);
+    */
+    
+    return constructAVRational(env, 16, 9);
 }
 
 

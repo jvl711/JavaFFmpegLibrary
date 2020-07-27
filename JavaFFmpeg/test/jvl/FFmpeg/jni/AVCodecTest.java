@@ -188,21 +188,6 @@ public class AVCodecTest
         System.out.println(AVFrame.buildAVFrame().getPointer());
     }
     
-    @Test
-    public void testFramerate()
-    {
-        
-        AVCodecContext avcodecContext = avcodecVideo.allocateContext();
-        
-        //avcodecVideo.copyParamsToContext(avcodecContext, avparamVideo);
-        
-        //avcodecVideo.open(avcodecContext);
-        
-        System.out.println("Framerate den: " + avcodecContext.getFrameRateDenominator());
-        System.out.println("Framerate num: " + avcodecContext.getFrameRateNumerator());
-        System.out.println("Framerate " + avcodecContext.getFramerate());
-       
-    }
     
     @Test
     public void test()

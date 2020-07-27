@@ -17,9 +17,11 @@ public class AVRational
     /**
     * Rational number (pair of numerator and denominator).  Used for hold aspect ratios
     */
-    public AVRational(int den, int num)
+    public AVRational(int num, int den)
     {
-        
+        this.den = den;
+        this.num = num;
+                
     }
     
     public int getDenominator()
@@ -30,6 +32,18 @@ public class AVRational
     public int getNumerator()
     {
         return this.num;
+    }
+    
+    public double getValue()
+    {
+        if(num == 0 || den == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return (num * 1.0) / (den * 1.0);
+        }
     }
     
 }

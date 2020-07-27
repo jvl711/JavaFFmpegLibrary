@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>C:/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.h</itemPath>
       <itemPath>jvl_FFmpeg_jni_AVCodec.h</itemPath>
       <itemPath>jvl_FFmpeg_jni_AVCodecContext.h</itemPath>
       <itemPath>jvl_FFmpeg_jni_AVCodecParameters.h</itemPath>
@@ -26,6 +27,7 @@
       <itemPath>AVFrameJNI.c</itemPath>
       <itemPath>AVPacketJNI.c</itemPath>
       <itemPath>AVStreamJNI.c</itemPath>
+      <itemPath>C:/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.c</itemPath>
       <itemPath>test.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -101,6 +103,16 @@
       </item>
       <item path="AVStreamJNI.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="C:/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="C:/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="jvl_FFmpeg_jni_AVCodec.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="jvl_FFmpeg_jni_AVCodecContext.h" ex="false" tool="3" flavor2="0">
@@ -164,6 +176,16 @@
       </item>
       <item path="AVStreamJNI.c" ex="false" tool="0" flavor2="9">
       </item>
+      <item path="C:/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="C:/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="jvl_FFmpeg_jni_AVCodec.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="jvl_FFmpeg_jni_AVCodecContext.h" ex="false" tool="3" flavor2="0">
@@ -225,6 +247,16 @@
       </item>
       <item path="AVStreamJNI.c" ex="false" tool="0" flavor2="9">
       </item>
+      <item path="C:/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="C:/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="jvl_FFmpeg_jni_AVCodec.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="jvl_FFmpeg_jni_AVCodecContext.h" ex="false" tool="3" flavor2="0">
@@ -285,6 +317,16 @@
       <item path="AVPacketJNI.c" ex="false" tool="0" flavor2="9">
       </item>
       <item path="AVStreamJNI.c" ex="false" tool="0" flavor2="9">
+      </item>
+      <item path="C:/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="C:/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="jvl_FFmpeg_jni_AVCodec.h" ex="false" tool="3" flavor2="0">
       </item>

@@ -3,6 +3,7 @@
 #include "jvl_FFmpeg_jni_AVCodecContext.h"
 #include "libavcodec/avcodec.h"
 #include "libavformat/avformat.h"
+#include "Utility.h"
 
 JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_freeContext(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)
 {
@@ -29,18 +30,19 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_receiveFrame(JNIEnv* e
     return avcodec_receive_frame(pAVCodecContext, pAVFrame);;
 }
 
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getFramerateNumerator(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getFramerate(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)
 {
     AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
     
-    return pAVCodecContext->framerate.num;
+    return constructAVRational(env, pAVCodecContext->framerate.num, pAVCodecContext->framerate.den);
 }
 
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getFramerateDenominator(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setFramerate(JNIEnv* env, jobject obj, jlong AVCodecContextPointer, jint num, jint den)
 {
     AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
     
-    return pAVCodecContext->framerate.den;
+    pAVCodecContext->framerate.num = num;
+    pAVCodecContext->framerate.den = den;
 }
 
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getHeight(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)

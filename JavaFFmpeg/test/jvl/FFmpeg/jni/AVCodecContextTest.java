@@ -79,4 +79,19 @@ public class AVCodecContextTest
     {
         System.out.println(avcodecVideoContext.getHeight());
     }
+    
+    @Test
+    public void testGetFramerate()
+    {
+        System.out.println(avcodecVideoContext.getFramerate().getDenominator());
+        System.out.println(avcodecVideoContext.getFramerate().getNumerator());
+        AVRational rational = new AVRational(25, 1);
+        
+        avcodecVideoContext.setFramerate(rational);
+        
+        System.out.println(avcodecVideoContext.getFramerate().getDenominator());
+        System.out.println(avcodecVideoContext.getFramerate().getNumerator());
+        System.out.println(avcodecVideoContext.getFramerate().getValue());
+        
+    }
 }

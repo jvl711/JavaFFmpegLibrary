@@ -57,6 +57,14 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_findStreamInfo
 
 /*
  * Class:     jvl_FFmpeg_jni_AVFormatContext
+ * Method:    guessFramerate
+ * Signature: ()Ljvl/FFmpeg/jni/AVRational;
+ */
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_guessFramerate
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVFormatContext
  * Method:    getDuration
  * Signature: (J)J
  */

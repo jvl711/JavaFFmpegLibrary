@@ -8,14 +8,7 @@ public class AVCodecContext extends AbstractJNIObject
     {
         super(AVCodecContextPointer);
     }
-    
-    /*
-    public long getPointer()
-    {
-        return this.
-    }
-    */
-    
+   
     public void freeContext()
     {
         this.freeContext(this.getPointer());
@@ -37,51 +30,19 @@ public class AVCodecContext extends AbstractJNIObject
     
     private native int receiveFrame(long AVCodecContextPointer, long AVFramePointer);
     
-    /**
-     * The Numerator of the framerate or 0 if it is unknown
-     * 
-     * @return Numerator 
-     */
-    public int getFrameRateNumerator()
+    public void setFramerate(AVRational framerate)
     {
-        return this.getFramerateNumerator(getPointer());
+        this.setFramerate(this.getPointer(), framerate.getNumerator(), framerate.getDenominator());
     }
     
-    private native int getFramerateNumerator(long AVCodecContextPointer);
+    private native void setFramerate(long AVCodecContextPointer, int num, int den);
     
-    /**
-     * The denominator of the framerate
-     * 
-     * @return Denominator 
-     */
-    public int getFrameRateDenominator()
+    public AVRational getFramerate()
     {
-        return this.getFramerateDenominator(getPointer());
+        return this.getFramerate(this.getPointer());
     }
-   
-    private native int getFramerateDenominator(long AVCodecContextPointer);
     
-    
-    /**
-     * Takes the num / den and returns it.  If either num or den are 0 then
-     * if is assumed the framerate is unknown
-     * 
-     * @return The framerate if known, or 0 
-     */
-    public double getFramerate()
-    {
-        int num = this.getFrameRateNumerator();
-        int den = this.getFrameRateDenominator();
-        
-        if(num == 0 || den == 0)
-        {
-            return 0;
-        }
-        else
-        {
-            return (num * 1.0) / (den * 1.0);
-        }
-    }
+    private native AVRational getFramerate(long AVCodecContextPointer);
     
     public void setHeight(int value)
     {

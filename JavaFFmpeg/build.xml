@@ -24,7 +24,9 @@
         <filter token="BUILDNUMBER" value="${build.number}" />
         <filter token="BUILDTIME" value="${build.time}" />
         <filter token="VERSION" value="${build.version}" />
-        <copy file="./versionTemplate" tofile="./src/jvl/FFmpeg/jni/Version.java" filtering="true"/>
+        <copy file="./version.template" tofile="./src/jvl/FFmpeg/jni/Version.java" filtering="true"/>
+        
+        
     </target>
     
     <target name="-post-jar">
