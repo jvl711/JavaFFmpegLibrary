@@ -19,6 +19,8 @@
     
     <target name="-pre-compile">
         
+        
+        
         <delete file="./src/jvl/FFmpeg/jni/Version.java"/>
         
         <filter token="BUILDNUMBER" value="${build.number}" />
