@@ -212,15 +212,14 @@
       <compileType>
         <cTool>
           <incDir>
-            <pElem>C:/Program Files/Java/jdk1.8.0_231/include/win32</pElem>
             <pElem>libraries/ffmpeg-4.2.2-win64-dev/include</pElem>
-            <pElem>C:/Program Files/Java/jdk1.8.0_231/include/</pElem>
+            <pElem>libraries/jni</pElem>
+            <pElem>libraries/jni/win32</pElem>
           </incDir>
         </cTool>
         <linkerTool>
           <linkerAddLib>
             <pElem>libraries/ffmpeg-4.2.2-win64-dev/lib</pElem>
-            <pElem>"C:/Program Files/Java/jdk1.8.0_231/lib"</pElem>
           </linkerAddLib>
           <linkerLibItems>
             <linkerLibLibItem>avcodec</linkerLibLibItem>
