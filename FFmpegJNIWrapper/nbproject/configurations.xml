@@ -141,15 +141,14 @@
           <architecture>1</architecture>
           <incDir>
             <pElem>libraries/ffmpeg-4.2.2-win32-dev/include</pElem>
-            <pElem>C:/Program Files (x86)/Java/jdk1.8.0_251/include</pElem>
-            <pElem>C:/Program Files (x86)/Java/jdk1.8.0_251/include/win32</pElem>
+            <pElem>libraries/jni</pElem>
+            <pElem>libraries/jni/win32</pElem>
           </incDir>
           <commandLine>-static-libgcc -Wl,--add-stdcall-alias</commandLine>
         </cTool>
         <linkerTool>
           <linkerAddLib>
             <pElem>libraries/ffmpeg-4.2.2-win32-dev/lib</pElem>
-            <pElem>"C:/Program Files (x86)/Java/jdk1.8.0_251/lib"</pElem>
           </linkerAddLib>
           <linkerLibItems>
             <linkerLibLibItem>avcodec</linkerLibLibItem>
