@@ -42,7 +42,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/AVFrameJNI.o \
 	${OBJECTDIR}/AVPacketJNI.o \
 	${OBJECTDIR}/AVStreamJNI.o \
-	${OBJECTDIR}/_ext/fc0756ea/Utility.o \
+	${OBJECTDIR}/Utility.o \
 	${OBJECTDIR}/test.o
 
 
@@ -105,10 +105,10 @@ ${OBJECTDIR}/AVStreamJNI.o: AVStreamJNI.c
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Ilibraries/ffmpeg-4.2.2-win64-dev/include -Ilibraries/jni -Ilibraries/jni/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVStreamJNI.o AVStreamJNI.c
 
-${OBJECTDIR}/_ext/fc0756ea/Utility.o: /C/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.c
-	${MKDIR} -p ${OBJECTDIR}/_ext/fc0756ea
+${OBJECTDIR}/Utility.o: Utility.c
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Ilibraries/ffmpeg-4.2.2-win64-dev/include -Ilibraries/jni -Ilibraries/jni/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fc0756ea/Utility.o /C/Users/jvl711.CORE/Documents/code/git_convert/JavaFFmpegLibrary/FFmpegJNIWrapper/Utility.c
+	$(COMPILE.c) -g -Ilibraries/ffmpeg-4.2.2-win64-dev/include -Ilibraries/jni -Ilibraries/jni/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Utility.o Utility.c
 
 ${OBJECTDIR}/test.o: test.c
 	${MKDIR} -p ${OBJECTDIR}
