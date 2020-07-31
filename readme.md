@@ -5,7 +5,10 @@ of this library is to be able to more easily utilize the functionality of FFmpeg
 of SageTV customizations.  I plan on adding additional functionallity to this library
 as it is needed.  Right now the library contained enough of the FFmpeg functionality
 to be able to determine the contents of a media file for creating a format detection
-plugin for SageTV.   
+plugin for SageTV.
+
+## Build Status ##
+![Project CI CI](https://github.com/jvl711/JavaFFmpegLibrary/workflows/Project%20CI%20CI/badge.svg)
 
 ## Getting Started
 
