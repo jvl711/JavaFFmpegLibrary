@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: make
-      run: make FFmpegJNIWrapper/Makefile
+      run: make -f FFmpegJNIWrapper/Makefile all
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
