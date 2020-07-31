@@ -168,6 +168,7 @@ public class AVCodecParameters extends AbstractJNIObject
     
     /**
      * Video only. The order of the fields in interlaced video.
+     * @return The filed order
      */
     public AVFieldOrder getFieldOrder()
     {

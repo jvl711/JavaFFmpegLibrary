@@ -28,6 +28,7 @@ public class AVStream extends AbstractJNIObject
     * Track should be used during playback by default.
     * Useful for subtitle track that should be displayed
     * even when user did not explicitly ask for subtitles.
+    * @return true id this is a forced stream
     */
     public boolean isForced()
     {
@@ -205,5 +206,19 @@ public class AVStream extends AbstractJNIObject
     }
     
     private native int getDisposition(long AVStreamPointer);
+    
+    /**
+     * Format-specific stream ID.
+     * decoding: set by libavformat
+     * encoding: set by the user, replaced by libavformat if left unset
+     * 
+     * @return The id of the stream
+     */
+    public int getID()
+    {
+        return this.getID(this.getPointer());
+    }
+    
+    private native int getID(long AVStreamPointer);
     
 }

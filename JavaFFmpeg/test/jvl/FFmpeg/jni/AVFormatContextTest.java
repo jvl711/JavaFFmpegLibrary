@@ -53,7 +53,7 @@ public class AVFormatContextTest
     @Test
     public void buildInputContext()
     {
-        AVFormatContext context = AVFormatContext.buildAVFormatInputContext("test.mkv");
+        AVFormatContext context = AVFormatContext.buildAVFormatInputContext("src/examples/SampleVideo_1280x720_1mb.mkv");
         assertTrue(context.getPointer() > 0);
     }
     

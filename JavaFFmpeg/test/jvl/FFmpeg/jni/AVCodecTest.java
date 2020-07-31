@@ -33,6 +33,8 @@ public class AVCodecTest
     @Before
     public void setUp()
     {
+        System.out.println("Setup");
+        
         avformat = AVFormatContext.buildAVFormatInputContext("src/examples/SampleVideo_1280x720_1mb.mkv");
         
         //avformat.openInput("src/examples/SampleVideo_1280x720_1mb.mkv");
@@ -49,12 +51,14 @@ public class AVCodecTest
     @After
     public void tearDown()
     {
+        System.out.println("Tear Down");
         avformat.close();
     }
 
     @Test
     public void testGetLongName()
     {
+        System.out.println("testGetLongName");
         System.out.println(avcodecVideo.getLongName());
     }
     
@@ -188,33 +192,19 @@ public class AVCodecTest
         System.out.println(AVFrame.buildAVFrame().getPointer());
     }
     
+    @Test
+    public void testGetPixelFormatsCount()
+    {
+        Assert.assertEquals(avcodecVideo.getPixelFormatsCount(), 2);
+    }
     
     @Test
-    public void test()
+    public void testGetPixelFormat()
     {
-        long temp = gcd(1920, 1080);
-        
-        System.out.println(temp);
-        
-        System.out.println((1920 / temp) + ":" + (1080 / temp));
-                
+        Assert.assertEquals(avcodecVideo.getPixelFormat(0).getId(), 119);
+        Assert.assertEquals(avcodecVideo.getPixelFormat(0).getName(), "cuda");
     }
     
-    private static long lcm(long a, long b)
-    {
-        return a * (b / gcd(a, b));
-    }
-    
-    private static long gcd(long a, long b)
-    {
-        while (b > 0)
-        {
-            long temp = b;
-            b = a % b; // % is remainder
-            a = temp;
-        }
-        return a;
-    }
 }
 
     

@@ -17,6 +17,22 @@ JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_freeContext
 
 /*
  * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    copyParamsToContext
+ * Signature: (JJ)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_copyParamsToContext
+  (JNIEnv *, jobject, jlong, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    open
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_open
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
  * Method:    sendPacket
  * Signature: (JJ)I
  */
@@ -30,22 +46,6 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_sendPacket
  */
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_receiveFrame
   (JNIEnv *, jobject, jlong, jlong);
-
-/*
- * Class:     jvl_FFmpeg_jni_AVCodecContext
- * Method:    getFramerateNumerator
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getFramerateNumerator
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     jvl_FFmpeg_jni_AVCodecContext
- * Method:    getFramerateDenominator
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getFramerateDenominator
-  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     jvl_FFmpeg_jni_AVCodecContext
@@ -97,19 +97,35 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getWidth
 
 /*
  * Class:     jvl_FFmpeg_jni_AVCodecContext
- * Method:    getSampleAspectRatioDen
- * Signature: (J)I
+ * Method:    getSampleAspectRatio
+ * Signature: (J)Ljvl/FFmpeg/jni/AVRational;
  */
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getSampleAspectRatioDen
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getSampleAspectRatio
   (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     jvl_FFmpeg_jni_AVCodecContext
- * Method:    getSampleAspectRatioNum
- * Signature: (J)I
+ * Method:    setSampleAspectRatio
+ * Signature: (JII)V
  */
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getSampleAspectRatioNum
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setSampleAspectRatio
+  (JNIEnv *, jobject, jlong, jint, jint);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    getPixelFormat
+ * Signature: (J)Ljvl/FFmpeg/jni/AVPixelFormat;
+ */
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getPixelFormat
   (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    setPixelFormat
+ * Signature: (JILjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setPixelFormat
+  (JNIEnv *, jobject, jlong, jint, jstring);
 
 #ifdef __cplusplus
 }

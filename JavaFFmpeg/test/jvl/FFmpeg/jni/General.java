@@ -46,14 +46,6 @@ public class General
     {
     }
 
-    @Test
-    public void test3()
-    {
-        AVRational rational = AVFormatContext.guessFramerate();
-        
-        System.out.println(rational.getDenominator());
-        System.out.println(rational.getNumerator());
-    }
     
     @Test
     public void transcodeDevelopmentTesting() 

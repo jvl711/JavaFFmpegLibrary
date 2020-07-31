@@ -57,19 +57,19 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVCodec_allocateContext
 
 /*
  * Class:     jvl_FFmpeg_jni_AVCodec
- * Method:    copyParamsToContext
- * Signature: (JJ)I
+ * Method:    getPixelFormatsCount
+ * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodec_copyParamsToContext
-  (JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodec_getPixelFormatsCount
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     jvl_FFmpeg_jni_AVCodec
- * Method:    open
- * Signature: (JJ)I
+ * Method:    getPixelFormat
+ * Signature: (JI)Ljvl/FFmpeg/jni/AVPixelFormat;
  */
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodec_open
-  (JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodec_getPixelFormat
+  (JNIEnv *, jobject, jlong, jint);
 
 #ifdef __cplusplus
 }

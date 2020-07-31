@@ -3,6 +3,7 @@
 #include "jvl_FFmpeg_jni_AVCodecContext.h"
 #include "libavcodec/avcodec.h"
 #include "libavformat/avformat.h"
+#include "libavutil/pixdesc.h"
 #include "Utility.h"
 
 JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_freeContext(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)
@@ -12,6 +13,25 @@ JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_freeContext(JNIEnv* en
     
     
     avcodec_free_context(&pAVCodecContext);
+}
+
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_copyParamsToContext(JNIEnv* env, jobject obj, jlong AVCodecContextPointer, jlong AVCodecParamPointer)
+{
+    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
+    AVCodecParameters * pAVCodecParamContext = (AVCodecParameters *)(intptr_t)AVCodecParamPointer;
+    
+    int ret = avcodec_parameters_to_context(pAVCodecContext, pAVCodecParamContext);
+    
+    return ret;
+}
+
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_open(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)
+{
+    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
+        
+    int ret = avcodec_open2(pAVCodecContext, NULL, NULL);
+    
+    return ret;
 }
 
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_sendPacket(JNIEnv* env, jobject obj, jlong AVCodecContextPointer, jlong AVPacketPointer)
@@ -71,4 +91,38 @@ JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setWidth(JNIEnv* env, 
     AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
     
     pAVCodecContext->width = value;
+}
+
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getSampleAspectRatio(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)
+{
+    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
+    
+    return constructAVRational(env, pAVCodecContext->sample_aspect_ratio.num, pAVCodecContext->sample_aspect_ratio.den);
+}
+
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setSampleAspectRatio(JNIEnv* env, jobject obj, jlong AVCodecContextPointer, jint num, jint den)
+{
+    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
+    
+    pAVCodecContext->sample_aspect_ratio.num = num;
+    pAVCodecContext->sample_aspect_ratio.den = den;
+}
+
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getPixelFormat(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)
+{
+    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
+
+    return constructAVPixelFormat(env, pAVCodecContext->pix_fmt, av_get_pix_fmt_name(pAVCodecContext->pix_fmt));
+}
+
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setPixelFormat(JNIEnv* env, jobject obj, jlong AVCodecContextPointer, jint id, jstring name)
+{
+    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
+    const char * namePointer;
+    
+    namePointer = (*env)->GetStringUTFChars(env,name, 0);
+
+    pAVCodecContext->pix_fmt = av_get_pix_fmt(namePointer);
+    
+    (*env)->ReleaseStringUTFChars(env, name, namePointer);
 }

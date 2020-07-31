@@ -52,15 +52,8 @@ public class AVFormatContext extends AbstractJNIObject
     * avformat_free_context() can be used to free the context and
     * everything allocated by the framework within it.
     *
-    * @param *ctx is set to the created format context, or to NULL in
-    * case of failure
-    * @param oformat format to use for allocating the context, if NULL
-    * format_name and filename are used instead
-    * @param format_name the name of output format to use for allocating the
-    * context, if NULL filename is used instead
-    * @param filename the name of the filename to use for allocating the
-    * context, may be NULL
-    * @return >= 0 in case of success, a negative AVERROR code in case of
+    * @param fileNamePath Full path to the file
+    * @return avformant context if there is no error opening file
     * failure
     */
     public static AVFormatContext buildAVFormatOutputContext(String fileNamePath)
@@ -143,7 +136,7 @@ public class AVFormatContext extends AbstractJNIObject
     * The logical file position is not changed by this function;
     * examined packets may be buffered for later processing.
     *
-    * @note this function isn't guaranteed to open all the codecs, so
+    * note: this function isn't guaranteed to open all the codecs, so
     *       options being non-empty at return is a perfectly normal behavior.
     */
     public void findStreamInfo()
@@ -187,7 +180,7 @@ public class AVFormatContext extends AbstractJNIObject
      * The duration in microseconds
      * 
      * Note: Divide by 1000 to get milliseconds
-     * @return 
+     * @return Duration in microseconds
      */
     public long getDuration()
     {
@@ -202,6 +195,8 @@ public class AVFormatContext extends AbstractJNIObject
      * Descriptive name for the format, meant to be more human-readable
      * than name. You should use the NULL_IF_CONFIG_SMALL() macro
      * to define it.
+     * 
+     * @return Format name in long form
      */
     public String getFormatLongName()
     {
@@ -215,6 +210,7 @@ public class AVFormatContext extends AbstractJNIObject
     /**
      * A comma separated list of short names for the format. New names
      * may be appended with a minor bump.
+     * @return Format name
      */
     public String getFormatName()
     {
@@ -228,6 +224,7 @@ public class AVFormatContext extends AbstractJNIObject
     /**
      * Comma-separated list of mime types.
      * It is used check for matching mime types while probing.
+     * @return Mime type
      */
     public String getMimeType()
     {
@@ -284,23 +281,9 @@ public class AVFormatContext extends AbstractJNIObject
     * omit invalid data between valid frames so as to give the decoder the maximum
     * information possible for decoding.
     *
-    * If pkt->buf is NULL, then the packet is valid until the next
-    * av_read_frame() or until avformat_close_input(). Otherwise the packet
-    * is valid indefinitely. In both cases the packet must be freed with
-    * av_packet_unref when it is no longer needed. For video, the packet contains
-    * exactly one frame. For audio, it contains an integer number of frames if each
-    * frame has a known fixed size (e.g. PCM or ADPCM data). If the audio frames
-    * have a variable size (e.g. MPEG audio), then it contains one frame.
-    *
-    * pkt->pts, pkt->dts and pkt->duration are always set to correct
-    * values in AVStream.time_base units (and guessed if the format cannot
-    * provide them). pkt->pts can be AV_NOPTS_VALUE if the video format
-    * has B-frames, so it is better to rely on pkt->dts if you do not
-    * decompress the payload.
-    *
     * @param  packet A packet to read the frame into
     * 
-    * @return 0 if OK, < 0 on error or end of file
+    * @return 0 if OK, less than 0 on error or end of file
     */
     public int readFrame(AVPacket packet)
     {

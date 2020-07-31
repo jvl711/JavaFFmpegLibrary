@@ -22,6 +22,8 @@ extern "C" {
 
 jobject constructAVRational(JNIEnv *env, int num, int den);
 
+jobject constructAVPixelFormat(JNIEnv *env, int id, char * name);
+
 
 #ifdef __cplusplus
 }

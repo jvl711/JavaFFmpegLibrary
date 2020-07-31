@@ -16,6 +16,8 @@ public class AVRational
     
     /**
     * Rational number (pair of numerator and denominator).  Used for hold aspect ratios
+    * @param num Numerator
+    * @param den denominator
     */
     public AVRational(int num, int den)
     {

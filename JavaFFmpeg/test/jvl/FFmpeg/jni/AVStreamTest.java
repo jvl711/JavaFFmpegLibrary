@@ -25,6 +25,7 @@ public class AVStreamTest
     
     AVFormatContext avformat;
     AVFormatContext avformat2;
+    AVFormatContext avformat3;
     AVCodecParameters avparams;
     AVCodec avcodec;
     AVStream avstreamVideo;
@@ -62,6 +63,12 @@ public class AVStreamTest
         avformat2.close();
     }
 
+    @Test
+    public void TestID()
+    {
+        Assert.assertEquals(avstreamAudio.getID(), 2);
+    }
+    
     @Test 
     public void TestIsDefault()
     {

@@ -3,6 +3,7 @@
 #include "jvl_FFmpeg_jni_AVCodec.h"
 #include "libavformat/avformat.h"
 #include "libavcodec/avcodec.h"
+#include "libavutil/pixdesc.h"
 
 JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVCodec_findDecoder(JNIEnv* env, jobject obj, jint codec_id)
 {
@@ -62,22 +63,37 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVCodec_allocateContext(JNIEnv* env,
     return pointer;
 }
 
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodec_copyParamsToContext(JNIEnv* env, jobject obj, jlong AVCodecContextPointer, jlong AVCodecParamPointer)
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodec_getPixelFormatsCount(JNIEnv* env, jobject obj, jlong AVCodecPointer)
 {
-    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
-    AVCodecParameters * pAVCodecParamContext = (AVCodecParameters *)(intptr_t)AVCodecParamPointer;
+    AVCodec * pAVCodec = (AVCodec *)(intptr_t)AVCodecPointer;
+    int i = 0;
     
-    int ret = avcodec_parameters_to_context(pAVCodecContext, pAVCodecParamContext);
+    if(pAVCodec->pix_fmts != NULL)
+    {
+        while(pAVCodec->pix_fmts[i] != AV_PIX_FMT_NONE)
+        {
+            i++;
+        }
+    }
     
-    return ret;
+    return i;
 }
 
-JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodec_open(JNIEnv* env, jobject obj, jlong AVCodecContextPointer, jlong AVCodecPointer)
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodec_getPixelFormat(JNIEnv* env, jobject obj, jlong AVCodecPointer, jint index)
 {
-    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
     AVCodec * pAVCodec = (AVCodec *)(intptr_t)AVCodecPointer;
+    //enum AVPixelFormat src_pix_fmt = AV_PIX_FMT_CUDA;
+    //enum AVPixelFormat pix_fmt;
     
-    int ret = avcodec_open2(pAVCodecContext, pAVCodec, NULL);
+    //pix_fmt = AV_PIX_FMT_CUDA;
     
-    return ret;
+    //return constructAVPixelFormat(env, 0, av_get_pix_fmt_name(pAVCodec->pix_fmts[index]));
+    
+    //char * name = av_get_pix_fmt_name(src_pix_fmt);    
+    
+    
+    
+    //printf("\nvalue of a_static: %s\n", av_get_pix_fmt_name(pAVCodec->pix_fmts[index]));
+    
+    return constructAVPixelFormat(env, pAVCodec->pix_fmts[index], av_get_pix_fmt_name(pAVCodec->pix_fmts[index]));
 }

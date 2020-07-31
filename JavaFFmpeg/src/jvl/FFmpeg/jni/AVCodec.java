@@ -4,12 +4,12 @@ package jvl.FFmpeg.jni;
 
 public class AVCodec extends AbstractJNIObject
 {
-    private final AVCodecParameters avparams;
+    //private final AVCodecParameters avparams;
 
-    protected AVCodec(long AVCodecPointer, AVCodecParameters avparams)
+    protected AVCodec(long AVCodecPointer)
     {
         super(AVCodecPointer);        
-        this.avparams = avparams;
+        //this.avparams = avparams;
     }
     
     public static AVCodec getAVCodecDecoder(AVCodecParameters avparam)
@@ -21,7 +21,7 @@ public class AVCodec extends AbstractJNIObject
             throw new RuntimeException("Codec not found");
         }
         
-        AVCodec avcodec = new AVCodec(pointer, avparam);
+        AVCodec avcodec = new AVCodec(pointer);
         
         return avcodec;
     }
@@ -42,7 +42,7 @@ public class AVCodec extends AbstractJNIObject
             throw new RuntimeException("Codec not found");
         }
         
-        AVCodec avcodec = new AVCodec(pointer, avparam);
+        AVCodec avcodec = new AVCodec(pointer);
         
         return avcodec;
     }
@@ -58,7 +58,21 @@ public class AVCodec extends AbstractJNIObject
             throw new RuntimeException("Codec not found");
         }
         
-        AVCodec avcodec = new AVCodec(pointer, avparam);
+        AVCodec avcodec = new AVCodec(pointer);
+        
+        return avcodec;
+    }
+    
+    public static AVCodec getAVCodecEncoder(int codecID)
+    {
+        long pointer = findEncoder(codecID);
+        
+        if(pointer == 0)
+        {
+            throw new RuntimeException("Codec not found");
+        }
+        
+        AVCodec avcodec = new AVCodec(pointer);
         
         return avcodec;
     }
@@ -75,7 +89,7 @@ public class AVCodec extends AbstractJNIObject
     private native String getName(long AVCodecPointer);
     
     /**
-     * Allocates the context, Copies the Codec Parameters and opens the Codec
+     * Allocates the context
      * 
      * Make sure to free the resource when done with it.
      * 
@@ -87,37 +101,29 @@ public class AVCodec extends AbstractJNIObject
         
         AVCodecContext context = new AVCodecContext(pointer);
         
-        this.copyParamsToContext(context, this.avparams);
-        this.open(context);
+        //this.copyParamsToContext(context, this.avparams);
+        //this.open(context);
         
         return context;
     }
     
     private native long allocateContext(long AVCodecPointer);
     
-    private void copyParamsToContext(AVCodecContext avcodecContext, AVCodecParameters avcodecParameters)
+    public int getPixelFormatsCount()
     {
-        int ret = copyParamsToContext(avcodecContext.getPointer(), avcodecParameters.getPointer());
-        
-        if(ret < 0)
-        {
-            throw new RuntimeException("Error copying parameters to context");
-        }
+        return this.getPixelFormatsCount(this.getPointer());
     }
     
-    private native int copyParamsToContext(long AVCodePointer, long AVCodecParamPointer);
+    private native int getPixelFormatsCount(long AVCodecPointer);
     
-    private void open(AVCodecContext avcodeccontext)
+    public AVPixelFormat getPixelFormat(int index)
     {
-        int ret = open(avcodeccontext.getPointer(), this.getPointer());
-        
-        if (ret < 0)
-        {
-            throw new RuntimeException("Error open codec");
-        }
+        return this.getPixelFormat(this.getPointer(), index);
     }
     
-    private native int open(long AVCodecContextPointer, long AVCodecPointer);
+    private native AVPixelFormat getPixelFormat(long AVCodecPointer, int index);
+    
+    
     
     
 }

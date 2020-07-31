@@ -33,7 +33,7 @@ public class AVPacket extends AbstractJNIObject
     private native void unreference(long AVPacketPointer);
     
     /**
-     * Presentation timestamp in AVStream->time_base units; the time at which
+     * Presentation timestamp in AVStream time_base units; the time at which
      * the decompressed packet will be presented to the user.
      * Can be AV_NOPTS_VALUE if it is not stored in the file.
      * pts MUST be larger or equal to dts as presentation cannot happen before
@@ -41,7 +41,7 @@ public class AVPacket extends AbstractJNIObject
      * the terms dts and pts/cts to mean something different. Such timestamps
      * must be converted to true pts/dts before they are stored in AVPacket.
      * 
-     * @return Presentation timestamp in AVStream->time_base units
+     * @return Presentation timestamp in AVStream time_base units
      */
     public long getPTS()
     {
@@ -51,11 +51,11 @@ public class AVPacket extends AbstractJNIObject
     private native long getPTS(long AVPacketPointer);
     
     /**
-     * Decompression timestamp in AVStream->time_base units; the time at which
+     * Decompression timestamp in AVStream time_base units; the time at which
      * the packet is decompressed.
      * Can be AV_NOPTS_VALUE if it is not stored in the file.
      * 
-     * @return Decompression timestamp in AVStream->time_base units
+     * @return Decompression timestamp in AVStream time_base units
      */
     public long getDTS()
     {
@@ -66,6 +66,7 @@ public class AVPacket extends AbstractJNIObject
     
     /**
      * Byte position in the stream or -1 if not known
+     * @return position in stream
      */
     public long getPosition()
     {
@@ -77,6 +78,8 @@ public class AVPacket extends AbstractJNIObject
     /**
      * Used in occasions where FFmpeg does not set the position, and
      * this library, or the user is able to find and set the position
+     * @param value Position to set
+     * 
     */
     public void setPosition(long value)
     {
