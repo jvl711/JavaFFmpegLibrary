@@ -21,8 +21,8 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: make.exe -f Makefile CONF=Release_64bit
+    - name: make.exe
       working-directory: ./FFmpegJNIWrapper
-      run: make  
+      run: make -f Makefile CONF=Release_64bit
     - name: Build with Ant
       run: ant -noinput -buildfile JavaFFmpeg/build.xml
