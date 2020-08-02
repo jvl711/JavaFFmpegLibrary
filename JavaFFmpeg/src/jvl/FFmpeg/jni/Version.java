@@ -3,8 +3,8 @@ package jvl.FFmpeg.jni;
 
 public class Version
 {
-    private final static String BUILDTIME = "07/31/2020 13:45:13";
-    private final static String BUILDNUMBER = "483";
+    private final static String BUILDTIME = "08/02/2020 10:35:32";
+    private final static String BUILDNUMBER = "499";
     private final static String VERSION = "0.4-alpha";
     
     public static String getVersion()

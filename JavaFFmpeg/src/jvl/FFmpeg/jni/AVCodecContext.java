@@ -156,6 +156,31 @@ public class AVCodecContext extends AbstractJNIObject
     
     private native void setPixelFormat(long AVCodecContextPointer, int pixelFormatID, String pixelFormatName);
     
+    public int getSampleRate()
+    {
+        return this.getSampleRate(this.getPointer());
+    }
     
+    private native int getSampleRate(long AVCodecContextPointer);
     
+    public void setSampleRate(int sampleRate)
+    {
+        this.setSampleRate(this.getPointer(), sampleRate);
+    }
+    
+    private native void setSampleRate(long AVCodecContextPointer, int sampleRate);
+    
+    public void setChannels(int channels)
+    {
+        this.setChannels(this.getPointer(), channels);
+    }
+    
+    private native void setChannels(long AVCodecContextPointer, int channels);
+    
+    public int getChannels()
+    {
+        return this.getChannels(this.getPointer());
+    }
+    
+    private native int getChannels(long AVCodecContextPointer);
 }

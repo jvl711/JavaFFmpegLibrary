@@ -149,7 +149,34 @@ public class AVCodecContextTest
         
         Assert.assertEquals(avcodecVideoContext.getPixelFormat().getName(), name);
         Assert.assertEquals(avcodecVideoContext.getPixelFormat().getId(), id);
-        
-        
+
+    }
+    
+    @Test
+    public void testGetSampleRate()
+    {
+        Assert.assertEquals(avcodecVideoContext.getSampleRate(), 0);
+    }
+    
+    
+    @Test
+    public void testSetSampleRate()
+    {
+        avcodecVideoContext.setSampleRate(64);
+        Assert.assertEquals(avcodecVideoContext.getSampleRate(), 64);
+    }
+    
+    @Test
+    public void testGetChannels()
+    {
+        Assert.assertEquals(avcodecVideoContext.getChannels(), 0);
+    }
+    
+    
+    @Test
+    public void testSetChannels()
+    {
+        avcodecVideoContext.setChannels(6);
+        Assert.assertEquals(avcodecVideoContext.getChannels(), 6);
     }
 }

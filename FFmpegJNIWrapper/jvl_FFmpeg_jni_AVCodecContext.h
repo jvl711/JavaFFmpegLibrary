@@ -127,6 +127,38 @@ JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getPixelFormat
 JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setPixelFormat
   (JNIEnv *, jobject, jlong, jint, jstring);
 
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    getSampleRate
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getSampleRate
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    setSampleRate
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setSampleRate
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    setChannels
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setChannels
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    getChannels
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getChannels
+  (JNIEnv *, jobject, jlong);
+
 #ifdef __cplusplus
 }
 #endif
