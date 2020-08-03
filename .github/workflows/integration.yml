@@ -26,5 +26,8 @@ jobs:
     - name: Archive Compilation Output
       uses: actions/upload-artifact@v2
       with:
-        name: output files
-        path: JavaFFmpeg\dist
+        name: Winows x64 Output Files
+        path: |
+          JavaFFmpeg/dist/JavaFFmpegLibraryWin64_v*.zip
+          JavaFFmpeg/dist/JavaFFmpegLibraryWin64_v*.zip.md5
+          
