@@ -10,13 +10,10 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  windows_x64_build:
     runs-on: windows-latest
-
     steps:
     - uses: actions/checkout@v2
-    
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
@@ -26,3 +23,8 @@ jobs:
       run: make -f Makefile CONF=Release_64bit
     - name: Build with Ant
       run: ant -noinput -buildfile JavaFFmpeg/build.xml
+    - name: Archive Compilation Output
+      uses: actions/upload-artifact@v2
+      with:
+        name: output files
+        path: JavaFFmpeg\dist
