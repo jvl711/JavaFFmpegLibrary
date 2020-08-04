@@ -26,7 +26,7 @@ jobs:
         msystem: MINGW32
     - name: Compile x32 Windows C library
       working-directory: ./FFmpegJNIWrapper 
-      run: make CC=clang -f Makefile CONF=Release_32bit
+      run: make -f Makefile CONF=Release_32bit
     - name: Build with Ant
       run: ant -noinput -buildfile JavaFFmpeg/build.xml
     - name: Archive Compilation Output
