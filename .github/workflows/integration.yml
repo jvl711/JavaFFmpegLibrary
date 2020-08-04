@@ -21,6 +21,7 @@ jobs:
     - name: Compile x64 Windows C library
       working-directory: ./FFmpegJNIWrapper
       run: make -f Makefile CONF=Release_64bit
+    - uses: msys2/setup-msys2@v2
     - run: pacman --noconfirm -S mingw-w64-i686-clang
     - run: mingw32 --version
     - name: Compile x32 Windows C library
