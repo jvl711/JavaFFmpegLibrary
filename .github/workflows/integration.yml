@@ -21,8 +21,10 @@ jobs:
     - name: Compile x64 Windows C library
       working-directory: ./FFmpegJNIWrapper
       run: make -f Makefile CONF=Release_64bit
+    - run: pacman --noconfirm -S mingw-w64-i686-clang
+    - run: mingw32 --version
     - name: Compile x32 Windows C library
-      working-directory: ./FFmpegJNIWrapper
+      working-directory: ./FFmpegJNIWrapper 
       run: make CC=MINGW32 -f Makefile CONF=Release_32bit
     - name: Build with Ant
       run: ant -noinput -buildfile JavaFFmpeg/build.xml
