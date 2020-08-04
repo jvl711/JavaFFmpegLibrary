@@ -18,9 +18,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: make.exe
+    - name: Compile x64 Windows C library
       working-directory: ./FFmpegJNIWrapper
       run: make -f Makefile CONF=Release_64bit
+    - name: Compile x32 Windows C library
+      working-directory: ./FFmpegJNIWrapper
+      run: make -f Makefile CONF=Release_32bit
     - name: Build with Ant
       run: ant -noinput -buildfile JavaFFmpeg/build.xml
     - name: Archive Compilation Output
