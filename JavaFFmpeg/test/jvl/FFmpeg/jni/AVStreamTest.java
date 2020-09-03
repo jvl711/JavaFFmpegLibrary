@@ -25,11 +25,11 @@ public class AVStreamTest
     
     AVFormatContext avformat;
     AVFormatContext avformat2;
-    AVFormatContext avformat3;
     AVCodecParameters avparams;
     AVCodec avcodec;
     AVStream avstreamVideo;
     AVStream avstreamAudio;
+    
     AVStream avstreamAttachedPicture;
     
     public AVStreamTest() 
@@ -62,11 +62,17 @@ public class AVStreamTest
         avformat.close();
         avformat2.close();
     }
-
+  
     @Test
     public void TestID()
     {
         Assert.assertEquals(avstreamAudio.getID(), 2);
+    }
+    
+    @Test
+    public void TestIDHex()
+    {
+        Assert.assertEquals(avstreamAudio.getIDHex(), "2");
     }
     
     @Test 

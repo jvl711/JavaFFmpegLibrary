@@ -6,6 +6,34 @@
 
 #include "Utility.h"
 
+jobject constructAVSampleFormat(JNIEnv *env, int id, char * name)
+{
+    jclass javaClass = (*env)->FindClass(env, "jvl/FFmpeg/jni/AVSampleFormat");
+    
+    if (javaClass == NULL) 
+    {
+        printf("Find Class Failed.\n");
+    } 
+    else 
+    {
+        printf("Found class.\n");
+    }
+
+    jmethodID constructor = (*env)->GetMethodID(env, javaClass, "<init>", "(ILjava/lang/String;)V");
+    
+    if (constructor == 0) 
+    {
+        printf("Find method Failed.\n");
+    }
+    else 
+    {
+        printf("Found method.\n");
+    }
+    
+    //(*env)->NewStringUTF(env, tag->value)
+    return (*env)->NewObject(env, javaClass, constructor, id, (*env)->NewStringUTF(env, name));
+}
+
 jobject constructAVPixelFormat(JNIEnv *env, int id, char * name)
 {
     jclass javaClass = (*env)->FindClass(env, "jvl/FFmpeg/jni/AVPixelFormat");

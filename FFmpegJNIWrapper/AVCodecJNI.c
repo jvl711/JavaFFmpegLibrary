@@ -82,18 +82,31 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodec_getPixelFormatsCount(JNIEnv* 
 JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodec_getPixelFormat(JNIEnv* env, jobject obj, jlong AVCodecPointer, jint index)
 {
     AVCodec * pAVCodec = (AVCodec *)(intptr_t)AVCodecPointer;
-    //enum AVPixelFormat src_pix_fmt = AV_PIX_FMT_CUDA;
-    //enum AVPixelFormat pix_fmt;
-    
-    //pix_fmt = AV_PIX_FMT_CUDA;
-    
-    //return constructAVPixelFormat(env, 0, av_get_pix_fmt_name(pAVCodec->pix_fmts[index]));
-    
-    //char * name = av_get_pix_fmt_name(src_pix_fmt);    
     
     
-    
-    //printf("\nvalue of a_static: %s\n", av_get_pix_fmt_name(pAVCodec->pix_fmts[index]));
     
     return constructAVPixelFormat(env, pAVCodec->pix_fmts[index], av_get_pix_fmt_name(pAVCodec->pix_fmts[index]));
+}
+
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodec_getSampleFormatsCount(JNIEnv* env, jobject obj, jlong AVCodecPointer)
+{
+    AVCodec * pAVCodec = (AVCodec *)(intptr_t)AVCodecPointer;
+    int i = 0;
+    
+    if(pAVCodec->sample_fmts != NULL)
+    {
+        while(pAVCodec->sample_fmts[i] != AV_PIX_FMT_NONE)
+        {
+            i++;
+        }
+    }
+    
+    return i;
+}
+
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodec_getSampleFormat(JNIEnv* env, jobject obj, jlong AVCodecPointer, jint index)
+{
+    AVCodec * pAVCodec = (AVCodec *)(intptr_t)AVCodecPointer;
+    
+    return constructAVSampleFormat(env, pAVCodec->sample_fmts[index], av_get_sample_fmt_name(pAVCodec->sample_fmts[index]));
 }

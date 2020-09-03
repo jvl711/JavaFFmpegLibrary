@@ -159,6 +159,9 @@ public class General
                         catch(Exception ex){}
                     }
 
+                    System.out.println("\tID: " + avstream.getIDHex());
+                    assertTrue(avstream.getID() == 0);
+                    assertTrue(avstream.getIDHex().equals("0"));
                     //video.setArNum(arNum);
                     System.out.println("\tAspect Ratio Num: " + arNum);
                     assertTrue(arNum > 0);
@@ -180,19 +183,12 @@ public class General
                     //video.setInterlaced(avparm.getFieldOrder().isInterlaced());
                     System.out.println("\tInteflaced: " + avparm.getFieldOrder().isInterlaced());
                     //TODO: Add colorspace
+                    
                 }
                 else if(avparm.getCodecType() == AVMediaType.AUDIO)
                 {
                      
-                    /*
-                     * If the first stream is audio lets not process for now.
-                     * Need to properly handle metadata and audio files that
-                     * include video tracks.
-                     */
-                    if(i == 0)
-                    {
-                        return;
-                    }
+                    
                      
                     //audio.setFormatName(FormatParser.substituteName(avcodec.getName()));
                     //audio.setAudioTransport(); TODO: See if I can find this 
@@ -229,7 +225,11 @@ public class General
     @Test
     public void test()
     {
-        boolean debug = true;
-        if(debug) System.out.println(Boolean.parseBoolean("rgln"));
+        String str = "container=matroska;videobitrate=2000000;resolution=720;audiocodec=AC3;audiobitrate=128000;audiochannels=2;";
+        
+        java.util.StringTokenizer toker = new java.util.StringTokenizer(str, ";");
+        
+        System.out.println(toker.countTokens());
+        
     }
 }

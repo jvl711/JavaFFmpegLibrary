@@ -11,7 +11,7 @@
     <description>Builds, tests, and runs the project JavaFFmpeg.</description>
     <import file="nbproject/build-impl.xml"/>
     
-    <property name="build.version" value="0.4-alpha"/>
+    <property name="build.version" value="0.5"/>
     <buildnumber file="mybuild.number"/>
     <tstamp>
         <format property="build.time" pattern="MM/dd/yyyy HH:mm:ss"/>

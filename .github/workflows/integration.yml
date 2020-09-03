@@ -21,12 +21,6 @@ jobs:
     - name: Compile x64 Windows C library
       working-directory: ./FFmpegJNIWrapper
       run: make -f Makefile CONF=Release_64bit
-    - uses: msys2/setup-msys2@v2
-      with: 
-        msystem: MINGW32
-    - name: Compile x32 Windows C library
-      working-directory: ./FFmpegJNIWrapper 
-      run: make CC=MINGW32 -f Makefile CONF=Release_32bit
     - name: Build with Ant
       run: ant -noinput -buildfile JavaFFmpeg/build.xml
     - name: Archive Compilation Output

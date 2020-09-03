@@ -159,6 +159,22 @@ JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setChannels
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getChannels
   (JNIEnv *, jobject, jlong);
 
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    getSampleFormat
+ * Signature: (J)Ljvl/FFmpeg/jni/AVSampleFormat;
+ */
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getSampleFormat
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodecContext
+ * Method:    setSampleFormat
+ * Signature: (JILjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setSampleFormat
+  (JNIEnv *, jobject, jlong, jint, jstring);
+
 #ifdef __cplusplus
 }
 #endif

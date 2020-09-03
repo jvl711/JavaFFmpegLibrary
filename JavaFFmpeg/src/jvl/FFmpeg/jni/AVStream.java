@@ -219,6 +219,21 @@ public class AVStream extends AbstractJNIObject
         return this.getID(this.getPointer());
     }
     
+    /**
+     * Format-specific stream ID.
+     * decoding: set by libavformat
+     * encoding: set by the user, replaced by libavformat if left unset
+     * 
+     * Note: This is the same value as getID, but converted to a Hex String 
+     * 
+     * @return The id of the stream
+     */
+    public String getIDHex()
+    {
+        
+        return Integer.toHexString(this.getID(this.getPointer()));
+    }
+    
     private native int getID(long AVStreamPointer);
     
 }

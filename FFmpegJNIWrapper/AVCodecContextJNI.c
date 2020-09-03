@@ -152,3 +152,22 @@ JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setChannels(JNIEnv* en
     
     return pAVCodecContext->channels = channels;
 }
+
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getSampleFormat(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)
+{
+    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
+
+    return constructAVSampleFormat(env, pAVCodecContext->sample_fmt, av_get_sample_fmt_name(pAVCodecContext->sample_fmt));
+}
+
+JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setSampleFormat(JNIEnv* env, jobject obj, jlong AVCodecContextPointer, jint id, jstring name)
+{
+    AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
+    const char * namePointer;
+    
+    namePointer = (*env)->GetStringUTFChars(env,name, 0);
+
+    pAVCodecContext->sample_fmt = av_get_sample_fmt(namePointer);
+    
+    (*env)->ReleaseStringUTFChars(env, name, namePointer);
+}

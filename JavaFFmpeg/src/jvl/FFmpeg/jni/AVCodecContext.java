@@ -183,4 +183,24 @@ public class AVCodecContext extends AbstractJNIObject
     }
     
     private native int getChannels(long AVCodecContextPointer);
+    
+    public AVSampleFormat getSampleFormat()
+    {
+        return this.getSampleFormat(this.getPointer());
+    }
+    
+    private native AVSampleFormat getSampleFormat(long AVCodecContextPointer);
+    
+    /**
+     * audio sample format
+     * - encoding: Set by user.
+     * - decoding: Set by libavcodec.
+     * @param format The AVSampleFormat
+     */
+    public void setSampleFormat(AVSampleFormat format)
+    {
+        this.setSampleFormat(this.getPointer(), format.getId(), format.getName());
+    }
+    
+    private native void setSampleFormat(long AVCodecContextPointer, int id, String name);
 }

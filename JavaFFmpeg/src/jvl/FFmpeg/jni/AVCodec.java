@@ -123,7 +123,17 @@ public class AVCodec extends AbstractJNIObject
     
     private native AVPixelFormat getPixelFormat(long AVCodecPointer, int index);
     
+    public int getSampleFormatsCount()
+    {
+        return this.getSampleFormatsCount(this.getPointer());
+    }
     
+    private native int getSampleFormatsCount(long AVCodecPointer);
     
+    public AVSampleFormat getSampleFormat(int index)
+    {
+        return this.getSampleFormat(this.getPointer(), index);
+    }
     
+    private native AVSampleFormat getSampleFormat(long AVCodecPointer, int index);
 }

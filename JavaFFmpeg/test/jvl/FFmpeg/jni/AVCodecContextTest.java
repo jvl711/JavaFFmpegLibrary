@@ -172,11 +172,28 @@ public class AVCodecContextTest
         Assert.assertEquals(avcodecVideoContext.getChannels(), 0);
     }
     
-    
     @Test
     public void testSetChannels()
     {
         avcodecVideoContext.setChannels(6);
         Assert.assertEquals(avcodecVideoContext.getChannels(), 6);
+    }
+    
+    @Test
+    public void testGetSampleFormat()
+    {        
+        assertEquals(avcodecVideoContext.getSampleFormat().getId(), -1);
+    }
+    
+    @Test
+    public void testSetSampleFormat()
+    {        
+        AVSampleFormat format = new AVSampleFormat(-1, "fltp");
+        
+        avcodecVideoContext.setSampleFormat(format);
+        format = avcodecVideoContext.getSampleFormat();
+        
+        assertEquals(format.getName(), "fltp");
+        
     }
 }

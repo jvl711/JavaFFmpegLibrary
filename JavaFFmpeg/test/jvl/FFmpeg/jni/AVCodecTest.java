@@ -14,6 +14,7 @@ public class AVCodecTest
     AVCodecParameters avparamVideo;
     AVCodecParameters avparamAudio;
     AVCodec avcodecVideo;
+    AVCodec avcodecAudio;
     
     public AVCodecTest()
     {
@@ -46,6 +47,8 @@ public class AVCodecTest
         avparamAudio = avformat.getAVCodecParameters(1);
         
         avcodecVideo = AVCodec.getAVCodecDecoder(avparamVideo);
+        avcodecAudio = AVCodec.getAVCodecDecoder(avparamAudio);
+        
     }
     
     @After
@@ -203,6 +206,13 @@ public class AVCodecTest
     {
         Assert.assertEquals(avcodecVideo.getPixelFormat(0).getId(), 119);
         Assert.assertEquals(avcodecVideo.getPixelFormat(0).getName(), "cuda");
+    }
+    
+    @Test
+    public void testGetSampleFormatsCount()
+    {
+        System.out.println(avcodecAudio.getSampleFormatsCount());
+        System.out.println(avcodecAudio.getSampleFormat(0).getName());
     }
     
 }

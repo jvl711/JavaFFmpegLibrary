@@ -71,6 +71,22 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodec_getPixelFormatsCount
 JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodec_getPixelFormat
   (JNIEnv *, jobject, jlong, jint);
 
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodec
+ * Method:    getSampleFormatsCount
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodec_getSampleFormatsCount
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     jvl_FFmpeg_jni_AVCodec
+ * Method:    getSampleFormat
+ * Signature: (JI)Ljvl/FFmpeg/jni/AVSampleFormat;
+ */
+JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodec_getSampleFormat
+  (JNIEnv *, jobject, jlong, jint);
+
 #ifdef __cplusplus
 }
 #endif
