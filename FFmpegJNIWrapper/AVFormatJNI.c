@@ -25,10 +25,10 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_allocateOutputContex
     
     filePathPointer = (*env)->GetStringUTFChars(env,filePath, 0);
     
-    (*env)->ReleaseStringUTFChars(env, filePath, filePathPointer);
-    
     avformat_alloc_output_context2(&pTestContext, NULL, NULL, filePathPointer);
     
+    (*env)->ReleaseStringUTFChars(env, filePath, filePathPointer);
+
     jlong pointer = (intptr_t)pTestContext;
     
     return pointer;
@@ -61,11 +61,11 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFormatContext_openInput(JNIEnv *env
     const char * filePathPointer;
     
     filePathPointer = (*env)->GetStringUTFChars(env,filePath, 0);
-    
-    (*env)->ReleaseStringUTFChars(env, filePath, filePathPointer);
 
     int ret = avformat_open_input(&pFormatContext, filePathPointer, NULL, NULL);
     
+    (*env)->ReleaseStringUTFChars(env, filePath, filePathPointer);
+
     if(ret == 0)
     {
         //Reading the header caused incorrect number of streams to be read for flac files.
