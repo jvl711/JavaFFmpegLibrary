@@ -27,7 +27,7 @@ public class Global
             System.loadLibrary("avdevice-58");
 
             /* Load JNI library */
-            System.loadLibrary("libFFmpegJNIWrapper");           
+            System.loadLibrary("FFmpegJNIWrapper");
             
             isLirariesLoaded = true;
         }
