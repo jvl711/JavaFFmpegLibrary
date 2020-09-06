@@ -44,14 +44,14 @@
         </javah>
         
         <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${build.version}.zip">
-            <fileset dir="libraries/FFmpegJNIWrapperWin64"/>
+            <fileset dir="Libraries/FFmpegJNIWrapperWin64"/>
             <zipfileset  dir="${dist.jar.dir}" includes="*.jar" prefix="JARs"/>
         </zip>
         
         <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${build.version}.zip" fileext=".md5"/>
         
         <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${build.version}.zip">
-            <fileset dir="libraries/FFmpegJNIWrapperWin32"/>
+            <fileset dir="Libraries/FFmpegJNIWrapperWin32"/>
             <zipfileset  dir="${dist.jar.dir}" includes="*.jar" prefix="JARs"/>
         </zip>
         
@@ -85,7 +85,7 @@
         <copy file="${dist.jar}" toDir="${sagetvx64.path}\JARs"/>
 
         <copy todir="${sagetvx64.path}">  
-            <fileset dir="libraries/FFmpegJNIWrapperWin64"/>
+            <fileset dir="Libraries/FFmpegJNIWrapperWin64"/>
         </copy>
 
     </target>
