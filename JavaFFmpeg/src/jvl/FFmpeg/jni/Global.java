@@ -9,7 +9,7 @@ package jvl.FFmpeg.jni;
 
 public class Global
 {
-    private static boolean isLirariesLoaded = false;
+    private static boolean isLibrariesLoaded = false;
     private static final String version = "@VERSION@";
     
     public static void loadLibraries()
@@ -29,7 +29,7 @@ public class Global
             /* Load JNI library */
             System.loadLibrary("FFmpegJNIWrapper");
             
-            isLirariesLoaded = true;
+            isLibrariesLoaded = true;
         }
     }
     
@@ -40,7 +40,7 @@ public class Global
     
     public static boolean isLibrariesLoaded()
     {
-        return isLirariesLoaded;
+        return isLibrariesLoaded;
     }
     
 }
