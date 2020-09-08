@@ -64,17 +64,17 @@ build: .build-post
         ifeq (${CONF}, Release_32bit)
 		@echo 32 ------------------------------------------------- 
 	
-		if [ ! -d "../JavaFFmpeg/libraries/FFmpegJNIWrapperWin32" ];then \
+		if [ ! -d "../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin32" ];then \
 			mkdir -p ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin32; \
 		fi
 	
-		cp -u -v ${CND_ARTIFACT_DIR_${CONF}}/${CND_ARTIFACT_NAME_${CONF}} ../JavaFFmpeg/libraries/FFmpegJNIWrapperWin32
-		cp -u -v libraries/ffmpeg-4.2.2-win32-dev/lib/*.dll ../JavaFFmpeg/libraries/FFmpegJNIWrapperWin32
+		cp -u -v ${CND_ARTIFACT_DIR_${CONF}}/${CND_ARTIFACT_NAME_${CONF}} ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin32
+		cp -u -v libraries/ffmpeg-4.2.2-win32-dev/lib/*.dll ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin32
 
         else ifeq (${CONF}, Release_64bit)
 		@echo 64 -------------------------------------------------
 	
-		if [ ! -d "../JavaFFmpeg/libraries/FFmpegJNIWrapperWin64" ];then \
+		if [ ! -d "../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64" ];then \
 			mkdir -p ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64; \
 		fi
 	
