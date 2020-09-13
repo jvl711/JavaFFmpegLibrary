@@ -135,8 +135,8 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getSampleRate(JNIEnv* 
 JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setSampleRate(JNIEnv* env, jobject obj, jlong AVCodecContextPointer, jint samprate)
 {
     AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
-    
-    return pAVCodecContext->sample_rate = samprate;
+
+    pAVCodecContext->sample_rate = samprate;
 }
 
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getChannels(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)
@@ -149,8 +149,8 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getChannels(JNIEnv* en
 JNIEXPORT void JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_setChannels(JNIEnv* env, jobject obj, jlong AVCodecContextPointer, jint channels)
 {
     AVCodecContext * pAVCodecContext = (AVCodecContext *)(intptr_t)AVCodecContextPointer;
-    
-    return pAVCodecContext->channels = channels;
+
+    pAVCodecContext->channels = channels;
 }
 
 JNIEXPORT jobject JNICALL Java_jvl_FFmpeg_jni_AVCodecContext_getSampleFormat(JNIEnv* env, jobject obj, jlong AVCodecContextPointer)
