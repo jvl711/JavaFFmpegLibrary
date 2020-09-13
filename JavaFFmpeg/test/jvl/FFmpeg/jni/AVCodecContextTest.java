@@ -131,7 +131,7 @@ public class AVCodecContextTest
     }
     
     @Test
-    public void testGetPixelForamt()
+    public void testGetPixelFormat()
     {
         AVPixelFormat pixelFormat = avcodecVideoContext.getPixelFormat();
         
