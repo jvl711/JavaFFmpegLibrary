@@ -24,6 +24,7 @@ jobject constructAVRational(JNIEnv *env, int num, int den);
 
 jobject constructAVPixelFormat(JNIEnv *env, int id, char * name);
 
+jobject constructAVSampleFormat(JNIEnv *env, int id, char * name);
 
 #ifdef __cplusplus
 }
