@@ -76,7 +76,7 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVFrame_getLineSize(JNIEnv* env, jobj
         if(pAVFrame->linesize[i] > 0)
         {
             uint8_t * data = pAVFrame->data[i];
-            printf("\tDatalength: %d\n", sizeof(data));
+            printf("\tDatalength: %ld\n", sizeof(data));
         }
     }
     

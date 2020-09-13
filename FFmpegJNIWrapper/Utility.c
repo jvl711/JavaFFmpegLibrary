@@ -6,7 +6,7 @@
 
 #include "Utility.h"
 
-jobject constructAVSampleFormat(JNIEnv *env, int id, char * name)
+jobject constructAVSampleFormat(JNIEnv *env, int id, const char * name)
 {
     jclass javaClass = (*env)->FindClass(env, "jvl/FFmpeg/jni/AVSampleFormat");
     
@@ -34,7 +34,7 @@ jobject constructAVSampleFormat(JNIEnv *env, int id, char * name)
     return (*env)->NewObject(env, javaClass, constructor, id, (*env)->NewStringUTF(env, name));
 }
 
-jobject constructAVPixelFormat(JNIEnv *env, int id, char * name)
+jobject constructAVPixelFormat(JNIEnv *env, int id, const char * name)
 {
     jclass javaClass = (*env)->FindClass(env, "jvl/FFmpeg/jni/AVPixelFormat");
     
