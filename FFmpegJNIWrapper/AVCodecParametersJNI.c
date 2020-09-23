@@ -105,7 +105,7 @@ JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVCodecParameters_getBitrate(JNIEnv*
 {
     AVCodecParameters * pAVCodecParamContext = (AVCodecParameters *)(intptr_t)AVCodecParametersPointer;
     
-    printf("Bitrate: %I64d\n", pAVCodecParamContext->bit_rate);
+    printf("Bitrate: %ld\n", pAVCodecParamContext->bit_rate);
     
     return pAVCodecParamContext->bit_rate;
 }

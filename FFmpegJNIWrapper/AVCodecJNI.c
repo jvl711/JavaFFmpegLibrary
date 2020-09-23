@@ -4,6 +4,7 @@
 #include "libavformat/avformat.h"
 #include "libavcodec/avcodec.h"
 #include "libavutil/pixdesc.h"
+#include "Utility.h"
 
 JNIEXPORT jlong JNICALL Java_jvl_FFmpeg_jni_AVCodec_findDecoder(JNIEnv* env, jobject obj, jint codec_id)
 {
