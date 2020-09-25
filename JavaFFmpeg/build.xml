@@ -16,10 +16,11 @@
     <tstamp>
         <format property="build.time" pattern="MM/dd/yyyy HH:mm:ss"/>
     </tstamp>
+    <tstamp>
+        <format property="build.date" pattern="yyyy.MM.dd"/>
+    </tstamp>
     
     <target name="-pre-compile">
-        
-        
         
         <delete file="./src/jvl/FFmpeg/jni/Version.java"/>
         
@@ -27,37 +28,78 @@
         <filter token="BUILDTIME" value="${build.time}" />
         <filter token="VERSION" value="${build.version}" />
         <copy file="./version.template" tofile="./src/jvl/FFmpeg/jni/Version.java" filtering="true"/>
-        
+            
+    </target>
+    
+    <target name="generate-c-headers">
+
+        <echo>Generate c JNI headers for FFmpegJNIWrapper project</echo>
+        <exec executable="javac">
+          <arg value="-h"/>
+          <arg value="../FFmpegJNIWrapper"/>
+          <arg value="src/jvl/FFmpeg/jni/*.java"/>
+        </exec>
         
     </target>
     
-    <target name="-post-jar">
-        
-        <javah destdir="../FFmpegJNIWrapper" force="yes" verbose="yes" classpath="${dist.jar}">
-            <class name="jvl.FFmpeg.jni.AVFormatContext"/>
-            <class name="jvl.FFmpeg.jni.AVCodecParameters"/>
-            <class name="jvl.FFmpeg.jni.AVCodec"/>
-            <class name="jvl.FFmpeg.jni.AVCodecContext"/>
-            <class name="jvl.FFmpeg.jni.AVFrame"/>
-            <class name="jvl.FFmpeg.jni.AVPacket"/>
-            <class name="jvl.FFmpeg.jni.AVStream"/>
-        </javah>
+    <target name="-post-jar" depends="generate-c-headers">
+       
+        <echo>Packaging Windows x64 Build</echo>
         
         <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${build.version}.zip">
             <fileset dir="Libraries/FFmpegJNIWrapperWin64"/>
             <zipfileset  dir="${dist.jar.dir}" includes="*.jar" prefix="JARs"/>
         </zip>
         
-        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${build.version}.zip" fileext=".md5"/>
+        <delete file="${dist.jar.dir}/JavaFFmpegLibraryWinx64.xml"/>
         
+        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${build.version}.zip" property="jarmd5"/>
+        
+        <filter token="BUILDDATE" value="${build.date}" />
+        <filter token="VERSION" value="${build.version}" />
+        <filter token="JARMD5" value="${jarmd5}" />
+        <copy file="./JavaFFmpegLibraryWinx64.template" tofile="${dist.jar.dir}/JavaFFmpegLibraryWinx64.xml" filtering="true"/>
+        
+        <echo>Packaging Windows x32 Build</echo> 
+
         <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${build.version}.zip">
             <fileset dir="Libraries/FFmpegJNIWrapperWin32"/>
             <zipfileset  dir="${dist.jar.dir}" includes="*.jar" prefix="JARs"/>
         </zip>
         
-        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${build.version}.zip" fileext=".md5"/>
+        <delete file="${dist.jar.dir}/JavaFFmpegLibraryWinx32.xml"/>
+       
+        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${build.version}.zip" property="jarmd5"/>
+        
+        <filter token="BUILDDATE" value="${build.date}" />
+        <filter token="VERSION" value="${build.version}" />
+        <filter token="JARMD5" value="${jarmd5}" />
+        <copy file="./JavaFFmpegLibraryWinx32.template" tofile="${dist.jar.dir}/JavaFFmpegLibraryWinx32.xml" filtering="true"/>
         
     </target>
+    
+    <!--
+    <target name="-post-jar">
+        
+        <echo>POST JAR</echo>
+        
+        <zip destfile="${dist.jar.dir}/MediaFormatParserPlugin_v${build.version}.zip">
+            <zipfileset  dir="${dist.jar.dir}" includes="*.jar"/>
+        </zip>
+        <checksum file="${dist.jar.dir}/MediaFormatParserPlugin_v${build.version}.zip" property="jarmd5"/>
+        
+        <delete file="${dist.jar.dir}/MediaFormatParserPluginWinx32.xml"/>
+        <delete file="${dist.jar.dir}/MediaFormatParserPluginWinx64.xml"/>
+        
+       
+        <filter token="BUILDTIME" value="${build.date}" />
+        <filter token="VERSION" value="${build.version}" />
+        <filter token="JARMD5" value="${jarmd5}" />
+        <copy file="./MediaFormatParserPluginWinx32.template" tofile="${dist.jar.dir}/MediaFormatParserPluginWinx32.xml" filtering="true"/>
+        <copy file="./MediaFormatParserPluginWinx64.template" tofile="${dist.jar.dir}/MediaFormatParserPluginWinx64.xml" filtering="true"/>
+        
+    </target>
+    -->
     
     <target name="sagetv">
         <available property="sagetvx86.exists" file="C:\Program Files (x86)\SageTV\SageTV\SageTVClient.exe" type="file"/>
