@@ -11,7 +11,7 @@
     <description>Builds, tests, and runs the project JavaFFmpeg.</description>
     <import file="nbproject/build-impl.xml"/>
     
-    <property name="build.version" value="0.5"/>
+    <property name="build.version" value="0.6"/>
     <buildnumber file="mybuild.number"/>
     <tstamp>
         <format property="build.time" pattern="MM/dd/yyyy HH:mm:ss"/>
@@ -37,8 +37,12 @@
         <exec executable="javac">
           <arg value="-h"/>
           <arg value="../FFmpegJNIWrapper"/>
-          <arg value="src/jvl/FFmpeg/jni/*.java"/>
+          <arg value="src/jvl/FFmpeg/jni/*.java"/>          
         </exec>
+        
+        <delete>
+            <fileset dir="src/jvl/FFmpeg/jni/" includes="*.class"/>
+        </delete>
         
     </target>
     

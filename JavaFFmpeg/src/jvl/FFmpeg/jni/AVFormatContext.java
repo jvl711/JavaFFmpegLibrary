@@ -7,6 +7,7 @@ package jvl.FFmpeg.jni;
 
 //TODO: Split out AVFormat and AVFormatContext.  Everything that needs the pointer shoulr probably use the context
 
+import java.io.File;
 import java.util.HashMap;
 
 
@@ -31,13 +32,39 @@ public class AVFormatContext extends AbstractJNIObject
     {
         long pointer = allocateContext();
 
+        try
+        {
+            /* Perform some basic checks */
+            File file = new File(fileNamePath);
+            
+            if(!file.exists())
+            {
+                System.out.println("File: " + file.getAbsolutePath());
+                System.out.println("Warning: It does not appear that the file exists");
+            }
+            
+            if(!file.canRead())
+            {
+                System.out.println("File: " + file.getAbsolutePath());
+                System.out.println("Warning: It does not appear that there is read access to the file");
+            }
+            
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Unexpected exeception checking access to file: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+        
+        
+        
         AVFormatContext avformat = new AVFormatContext(pointer, fileNamePath);
         
         int ret = avformat.openInput(avformat.getPointer(), fileNamePath);
         
         if(ret < 0)
         {
-            throw new RuntimeException("Error opening file.  ffmpeg error code: " + ret);
+            throw new RuntimeException("Error opening file.  ffmpeg error : " + ret + " - " + AVGlobal.getAVError(ret));
         }
         else
         {

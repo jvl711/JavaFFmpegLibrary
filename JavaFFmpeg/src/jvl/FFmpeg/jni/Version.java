@@ -3,9 +3,9 @@ package jvl.FFmpeg.jni;
 
 public class Version
 {
-    private final static String BUILDTIME = "09/25/2020 12:37:44";
-    private final static String BUILDNUMBER = "678";
-    private final static String VERSION = "0.5";
+    private final static String BUILDTIME = "12/04/2021 08:55:10";
+    private final static String BUILDNUMBER = "707";
+    private final static String VERSION = "0.6";
     
     public static String getVersion()
     {
