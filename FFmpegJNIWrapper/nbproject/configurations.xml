@@ -25,6 +25,7 @@
       <itemPath>AVCodecParametersJNI.c</itemPath>
       <itemPath>AVFormatJNI.c</itemPath>
       <itemPath>AVFrameJNI.c</itemPath>
+      <itemPath>AVGlobalJNI.c</itemPath>
       <itemPath>AVPacketJNI.c</itemPath>
       <itemPath>AVStreamJNI.c</itemPath>
       <itemPath>Utility.c</itemPath>
@@ -61,23 +62,23 @@
   <confs>
     <conf name="Debug" type="2">
       <toolsSet>
-        <compilerSet>MinGW_64|MinGW</compilerSet>
+        <compilerSet>MinGW64|MinGW</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
         <cTool>
           <incDir>
-            <pElem>C:/Program Files/Java/jdk1.8.0_231/include/win32</pElem>
+            <pElem>C:/Program Files/Java/jdk1.8.0_202/include/win32</pElem>
             <pElem>libraries/ffmpeg-4.2.1-win64-dev/include</pElem>
-            <pElem>C:/Program Files/Java/jdk1.8.0_231/include/</pElem>
+            <pElem>C:/Program Files/Java/jdk1.8.0_202/include/</pElem>
           </incDir>
         </cTool>
         <linkerTool>
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/FFmpegJNIWrapper.${CND_DLIB_EXT}</output>
           <linkerAddLib>
             <pElem>libraries/ffmpeg-4.1.3/lib</pElem>
-            <pElem>"C:/Program Files/Java/jdk1.8.0_231/lib"</pElem>
+            <pElem>"C:/Program Files/Java/jdk1.8.0_202/lib"</pElem>
           </linkerAddLib>
           <linkerLibItems>
             <linkerLibLibItem>avcodec</linkerLibLibItem>
@@ -99,6 +100,8 @@
       <item path="AVFormatJNI.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="AVFrameJNI.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="AVGlobalJNI.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="AVPacketJNI.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -127,7 +130,7 @@
     </conf>
     <conf name="Release_32bit" type="2">
       <toolsSet>
-        <compilerSet>MinGW|MinGW</compilerSet>
+        <compilerSet>MinGW32|MinGW</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
@@ -167,6 +170,8 @@
       </item>
       <item path="AVFrameJNI.c" ex="false" tool="0" flavor2="9">
       </item>
+      <item path="AVGlobalJNI.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="AVPacketJNI.c" ex="false" tool="0" flavor2="9">
       </item>
       <item path="AVStreamJNI.c" ex="false" tool="0" flavor2="9">
@@ -194,7 +199,7 @@
     </conf>
     <conf name="Release_64bit" type="2">
       <toolsSet>
-        <compilerSet>MinGW_64|MinGW</compilerSet>
+        <compilerSet>MinGW64|MinGW</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
@@ -231,6 +236,8 @@
       <item path="AVFormatJNI.c" ex="false" tool="0" flavor2="9">
       </item>
       <item path="AVFrameJNI.c" ex="false" tool="0" flavor2="9">
+      </item>
+      <item path="AVGlobalJNI.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="AVPacketJNI.c" ex="false" tool="0" flavor2="9">
       </item>
@@ -294,6 +301,8 @@
       <item path="AVFormatJNI.c" ex="false" tool="0" flavor2="9">
       </item>
       <item path="AVFrameJNI.c" ex="false" tool="0" flavor2="9">
+      </item>
+      <item path="AVGlobalJNI.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="AVPacketJNI.c" ex="false" tool="0" flavor2="9">
       </item>

@@ -21,7 +21,7 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=MinGW_64-Windows
+CND_PLATFORM=MinGW64-Windows
 CND_DLIB_EXT=dll
 CND_CONF=Release_64bit
 CND_DISTDIR=dist
@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/AVCodecParametersJNI.o \
 	${OBJECTDIR}/AVFormatJNI.o \
 	${OBJECTDIR}/AVFrameJNI.o \
+	${OBJECTDIR}/AVGlobalJNI.o \
 	${OBJECTDIR}/AVPacketJNI.o \
 	${OBJECTDIR}/AVStreamJNI.o \
 	${OBJECTDIR}/Utility.o \
@@ -94,6 +95,11 @@ ${OBJECTDIR}/AVFrameJNI.o: AVFrameJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Ilibraries/ffmpeg-4.2.2-win64-dev/include -Ilibraries/jni -Ilibraries/jni/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVFrameJNI.o AVFrameJNI.c
+
+${OBJECTDIR}/AVGlobalJNI.o: AVGlobalJNI.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -Ilibraries/ffmpeg-4.2.2-win64-dev/include -Ilibraries/jni -Ilibraries/jni/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVGlobalJNI.o AVGlobalJNI.c
 
 ${OBJECTDIR}/AVPacketJNI.o: AVPacketJNI.c
 	${MKDIR} -p ${OBJECTDIR}

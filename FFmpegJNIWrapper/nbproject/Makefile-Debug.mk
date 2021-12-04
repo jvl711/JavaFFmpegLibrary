@@ -21,7 +21,7 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=MinGW_64-Windows
+CND_PLATFORM=MinGW64-Windows
 CND_DLIB_EXT=dll
 CND_CONF=Debug
 CND_DISTDIR=dist
@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/AVCodecParametersJNI.o \
 	${OBJECTDIR}/AVFormatJNI.o \
 	${OBJECTDIR}/AVFrameJNI.o \
+	${OBJECTDIR}/AVGlobalJNI.o \
 	${OBJECTDIR}/AVPacketJNI.o \
 	${OBJECTDIR}/AVStreamJNI.o \
 	${OBJECTDIR}/Utility.o \
@@ -60,7 +61,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-Llibraries/ffmpeg-4.1.3/lib -L\"C\:/Program\ Files/Java/jdk1.8.0_231/lib\" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lpostproc -lswscale
+LDLIBSOPTIONS=-Llibraries/ffmpeg-4.1.3/lib -L\"C\:/Program\ Files/Java/jdk1.8.0_202/lib\" -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lpostproc -lswscale
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -73,47 +74,52 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/FFmpegJNIWrapper.${CND_DLIB_EXT}: ${O
 ${OBJECTDIR}/AVCodecContextJNI.o: AVCodecContextJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_231/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVCodecContextJNI.o AVCodecContextJNI.c
+	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_202/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_202/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVCodecContextJNI.o AVCodecContextJNI.c
 
 ${OBJECTDIR}/AVCodecJNI.o: AVCodecJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_231/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVCodecJNI.o AVCodecJNI.c
+	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_202/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_202/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVCodecJNI.o AVCodecJNI.c
 
 ${OBJECTDIR}/AVCodecParametersJNI.o: AVCodecParametersJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_231/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVCodecParametersJNI.o AVCodecParametersJNI.c
+	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_202/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_202/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVCodecParametersJNI.o AVCodecParametersJNI.c
 
 ${OBJECTDIR}/AVFormatJNI.o: AVFormatJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_231/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVFormatJNI.o AVFormatJNI.c
+	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_202/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_202/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVFormatJNI.o AVFormatJNI.c
 
 ${OBJECTDIR}/AVFrameJNI.o: AVFrameJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_231/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVFrameJNI.o AVFrameJNI.c
+	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_202/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_202/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVFrameJNI.o AVFrameJNI.c
+
+${OBJECTDIR}/AVGlobalJNI.o: AVGlobalJNI.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_202/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_202/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVGlobalJNI.o AVGlobalJNI.c
 
 ${OBJECTDIR}/AVPacketJNI.o: AVPacketJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_231/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVPacketJNI.o AVPacketJNI.c
+	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_202/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_202/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVPacketJNI.o AVPacketJNI.c
 
 ${OBJECTDIR}/AVStreamJNI.o: AVStreamJNI.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_231/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVStreamJNI.o AVStreamJNI.c
+	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_202/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_202/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AVStreamJNI.o AVStreamJNI.c
 
 ${OBJECTDIR}/Utility.o: Utility.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_231/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Utility.o Utility.c
+	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_202/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_202/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Utility.o Utility.c
 
 ${OBJECTDIR}/test.o: test.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_231/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_231/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/test.o test.c
+	$(COMPILE.c) -g -I/C/Program\ Files/Java/jdk1.8.0_202/include/win32 -Ilibraries/ffmpeg-4.2.1-win64-dev/include -I/C/Program\ Files/Java/jdk1.8.0_202/include/  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/test.o test.c
 
 # Subprojects
 .build-subprojects:
