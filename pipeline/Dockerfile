@@ -10,7 +10,7 @@ RUN apt-get install build-essential -y
 RUN apt-get install mingw-w64 -y
 
 #Install ant to build netbeans project
-RUN apt-get install -y ant
+RUN apt-get install ant -y
 
 #Install go and github-release app
 RUN apt-get install -y golang
