@@ -11,7 +11,12 @@
     <description>Builds, tests, and runs the project JavaFFmpeg.</description>
     <import file="nbproject/build-impl.xml"/>
     
-    <property name="build.version" value="0.6"/>
+    
+    <property name="c.build.dir.win64" value="../FFmpegJNIWrapper/build/win64"/>
+    <property name="c.build.dir.win32" value="../FFmpegJNIWrapper/build/win32"/>
+    <property name="c.build.dir.linux" value="../FFmpegJNIWrapper/build/linux"/>
+    
+    <property name="build.version" value="0.6"/>    
     <buildnumber file="mybuild.number"/>
     <tstamp>
         <format property="build.time" pattern="MM/dd/yyyy HH:mm:ss"/>
@@ -20,7 +25,63 @@
         <format property="build.date" pattern="yyyy.MM.dd"/>
     </tstamp>
     
-    <target name="-pre-compile">
+    <target name="clean-c-libraries">
+	
+	<echo>Clean FFmpegJNIWrapper library files</echo>
+
+	<!-- Compile linux -->
+	<echo>Cleaning linux</echo>
+        <exec dir="../FFmpegJNIWrapper" executable="make">
+	  <arg value="clean"/>
+        </exec>
+
+	<!-- Compile win64 -->
+	<echo>Cleaning win64</echo>
+        <exec dir="../FFmpegJNIWrapper" executable="make">
+	  <arg value="clean"/>
+	  <arg value="CROSS_PREFIX=x86_64-w64-mingw32-"/>
+        </exec>
+	
+	<!-- Compile win32 -->
+	<echo>Cleaning win32</echo>
+        <exec dir="../FFmpegJNIWrapper" executable="make">
+	  <arg value="clean"/>
+	  <arg value="CROSS_PREFIX=i686-w64-mingw32-"/>
+        </exec>
+	
+    </target>
+    
+    <target name="compile-c-libraries">
+	
+	<echo>Generate FFmpegJNIWrapper library files</echo>
+
+	<!-- Compile linux -->
+	<echo>Building linux</echo>
+        <exec dir="../FFmpegJNIWrapper" executable="make">
+	  <arg value="all"/>
+        </exec>
+
+	<!-- Compile win64 -->
+	<echo>Building win64</echo>
+        <exec dir="../FFmpegJNIWrapper" executable="make">
+	  <arg value="all"/>
+	  <arg value="CROSS_PREFIX=x86_64-w64-mingw32-"/>
+        </exec>
+	
+	<!-- Compile win32 -->
+	<echo>Building win32</echo>
+        <exec dir="../FFmpegJNIWrapper" executable="make">
+	  <arg value="all"/>
+	  <arg value="CROSS_PREFIX=i686-w64-mingw32-"/>
+        </exec>
+	
+    </target>
+    
+    <target name="-pre-compile-test-single" depends="compile-c-libraries">
+	
+    </target>
+    
+    <target name="-pre-compile" depends="compile-c-libraries">
         
         <delete file="./src/jvl/FFmpeg/jni/Version.java"/>
         
@@ -34,10 +95,10 @@
     <target name="generate-c-headers">
 
         <echo>Generate c JNI headers for FFmpegJNIWrapper project</echo>
-        <exec executable="javac">
-          <arg value="-h"/>
-          <arg value="../FFmpegJNIWrapper"/>
-          <arg value="src/jvl/FFmpeg/jni/*.java"/>          
+        <exec executable="javac" dir=".">
+          <arg value="-h ../FFmpegJNIWrapper src/jvl/FFmpeg/jni/*.java"/>
+          <!--<arg value=""/>
+          <arg value=""/>-->
         </exec>
         
         <delete>
@@ -51,7 +112,7 @@
         <echo>Packaging Windows x64 Build</echo>
         
         <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${build.version}.zip">
-            <fileset dir="Libraries/FFmpegJNIWrapperWin64"/>
+            <fileset dir="${c.build.dir.win64}"/>
             <zipfileset  dir="${dist.jar.dir}" includes="*.jar" prefix="JARs"/>
         </zip>
         
@@ -67,7 +128,7 @@
         <echo>Packaging Windows x32 Build</echo> 
 
         <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${build.version}.zip">
-            <fileset dir="Libraries/FFmpegJNIWrapperWin32"/>
+            <fileset dir="${c.build.dir.win32}"/>
             <zipfileset  dir="${dist.jar.dir}" includes="*.jar" prefix="JARs"/>
         </zip>
         
@@ -79,31 +140,24 @@
         <filter token="VERSION" value="${build.version}" />
         <filter token="JARMD5" value="${jarmd5}" />
         <copy file="./JavaFFmpegLibraryWinx32.template" tofile="${dist.jar.dir}/JavaFFmpegLibraryWinx32.xml" filtering="true"/>
-        
-    </target>
-    
-    <!--
-    <target name="-post-jar">
-        
-        <echo>POST JAR</echo>
-        
-        <zip destfile="${dist.jar.dir}/MediaFormatParserPlugin_v${build.version}.zip">
-            <zipfileset  dir="${dist.jar.dir}" includes="*.jar"/>
+	
+	<echo>Packaging Linux Build</echo> 
+
+        <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryLinux_v${build.version}.zip">
+            <fileset dir="${c.build.dir.linux}"/>
+            <zipfileset  dir="${dist.jar.dir}" includes="*.jar" prefix="JARs"/>
         </zip>
-        <checksum file="${dist.jar.dir}/MediaFormatParserPlugin_v${build.version}.zip" property="jarmd5"/>
         
-        <delete file="${dist.jar.dir}/MediaFormatParserPluginWinx32.xml"/>
-        <delete file="${dist.jar.dir}/MediaFormatParserPluginWinx64.xml"/>
-        
+        <delete file="${dist.jar.dir}/JavaFFmpegLibraryLinux.xml"/>
        
-        <filter token="BUILDTIME" value="${build.date}" />
+        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryLinux_v${build.version}.zip" property="jarmd5"/>
+        
+        <filter token="BUILDDATE" value="${build.date}" />
         <filter token="VERSION" value="${build.version}" />
         <filter token="JARMD5" value="${jarmd5}" />
-        <copy file="./MediaFormatParserPluginWinx32.template" tofile="${dist.jar.dir}/MediaFormatParserPluginWinx32.xml" filtering="true"/>
-        <copy file="./MediaFormatParserPluginWinx64.template" tofile="${dist.jar.dir}/MediaFormatParserPluginWinx64.xml" filtering="true"/>
+        <copy file="./JavaFFmpegLibraryLinux.template" tofile="${dist.jar.dir}/JavaFFmpegLibraryLinux.xml" filtering="true"/>
         
     </target>
-    -->
     
     <target name="sagetv">
         <available property="sagetvx86.exists" file="C:\Program Files (x86)\SageTV\SageTV\SageTVClient.exe" type="file"/>
@@ -144,6 +198,11 @@
  
     </target>
 
+    
+    <target name="-post-clean" depends="clean-c-libraries">
+	
+	
+    </target>
     
     <!--
 

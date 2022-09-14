@@ -481,6 +481,7 @@ static int flush_encoder(unsigned int stream_index)
 
 int main(int argc, char **argv)
 {
+    /*
     int ret;
     AVPacket packet = { .data = NULL, .size = 0 };
     AVFrame *frame = NULL;
@@ -502,7 +503,7 @@ int main(int argc, char **argv)
     if ((ret = init_filters()) < 0)
         goto end;
 
-    /* read all packets */
+    // read all packets 
     while (1) {
         if ((ret = av_read_frame(ifmt_ctx, &packet)) < 0)
             break;
@@ -541,7 +542,7 @@ int main(int argc, char **argv)
                 av_frame_free(&frame);
             }
         } else {
-            /* remux this frame without reencoding */
+            // remux this frame without reencoding 
             av_packet_rescale_ts(&packet,
                                  ifmt_ctx->streams[stream_index]->time_base,
                                  ofmt_ctx->streams[stream_index]->time_base);
@@ -553,9 +554,9 @@ int main(int argc, char **argv)
         av_packet_unref(&packet);
     }
 
-    /* flush filters and encoders */
+    // flush filters and encoders 
     for (i = 0; i < ifmt_ctx->nb_streams; i++) {
-        /* flush filter */
+        // flush filter 
         if (!filter_ctx[i].filter_graph)
             continue;
         ret = filter_encode_write_frame(NULL, i);
@@ -564,7 +565,7 @@ int main(int argc, char **argv)
             goto end;
         }
 
-        /* flush encoder */
+        // flush encoder 
         ret = flush_encoder(i);
         if (ret < 0) {
             av_log(NULL, AV_LOG_ERROR, "Flushing encoder failed\n");
@@ -594,4 +595,5 @@ end:
         av_log(NULL, AV_LOG_ERROR, "Error occurred: %s\n", av_err2str(ret));
 
     return ret ? 1 : 0;
+     */
 }

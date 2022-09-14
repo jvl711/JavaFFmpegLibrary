@@ -1,160 +1,136 @@
-#
-#  There exist several targets which are by default empty and which can be 
-#  used for execution of your targets. These targets are usually executed 
-#  before and after some main targets. They are: 
-#
-#     .build-pre:              called before 'build' target
-#     .build-post:             called after 'build' target
-#     .clean-pre:              called before 'clean' target
-#     .clean-post:             called after 'clean' target
-#     .clobber-pre:            called before 'clobber' target
-#     .clobber-post:           called after 'clobber' target
-#     .all-pre:                called before 'all' target
-#     .all-post:               called after 'all' target
-#     .help-pre:               called before 'help' target
-#     .help-post:              called after 'help' target
-#
-#  Targets beginning with '.' are not intended to be called on their own.
-#
-#  Main targets can be executed directly, and they are:
-#  
-#     build                    build a specific configuration
-#     clean                    remove built files from a configuration
-#     clobber                  remove all built files
-#     all                      build all configurations
-#     help                     print help mesage
-#  
-#  Targets .build-impl, .clean-impl, .clobber-impl, .all-impl, and
-#  .help-impl are implemented in nbproject/makefile-impl.mk.
-#
-#  Available make variables:
-#
-#     CND_BASEDIR                base directory for relative paths
-#     CND_DISTDIR                default top distribution directory (build artifacts)
-#     CND_BUILDDIR               default top build directory (object files, ...)
-#     CONF                       name of current configuration
-#     CND_PLATFORM_${CONF}       platform name (current configuration)
-#     CND_ARTIFACT_DIR_${CONF}   directory of build artifact (current configuration)
-#     CND_ARTIFACT_NAME_${CONF}  name of build artifact (current configuration)
-#     CND_ARTIFACT_PATH_${CONF}  path to build artifact (current configuration)
-#     CND_PACKAGE_DIR_${CONF}    directory of package (current configuration)
-#     CND_PACKAGE_NAME_${CONF}   name of package (current configuration)
-#     CND_PACKAGE_PATH_${CONF}   path to package (current configuration)
-#
-# NOCDDL
+SHELL = /bin/sh
+#Possible location for download ffmpeg libraries: https://github.com/BtbN/FFmpeg-Builds/releases
 
+#CROSS_PREFIX is used for cross compiling to other formats (i686-w64-mingw32-, x86_64-w64-mingw32-)
+CC = $(CROSS_PREFIX)gcc 
 
-# Environment 
-MKDIR=mkdir
-CP=cp
-CCADMIN=CCadmin
+#Determine what build target we are creating.  Winx32, Winx64 or Linux
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
 
+	TARGET = linux
+	OUTPUT_PREFIX = lib
+	OUTPUT_EXT = .so
 
-# build
-build: .build-post
+	ifeq ($(CROSS_PREFIX),i686-w64-mingw32-)
 
-.build-pre:
-# Add your pre 'build' code here...
+		OUTPUT_PREFIX = 
+		TARGET = win32
+		OUTPUT_EXT = .dll
 
-.build-post: .build-impl
+	endif
+	ifeq ($(CROSS_PREFIX),x86_64-w64-mingw32-)
 
-	@echo ${CONF}
-	@echo ${CND_ARTIFACT_NAME_${CONF}}
-	@echo ${CND_ARTIFACT_DIR_${CONF}}
-        ifeq (${CONF}, Release_32bit)
-		@echo 32 ------------------------------------------------- 
+		OUTPUT_PREFIX =
+		TARGET = win64
+		OUTPUT_EXT = .dll
+
+	endif
+
+else
+
+	TARGET =
+
+endif
+
+FFMPEG_BIN = ./libraries/ffmpeg-4.4.2-$(TARGET)/bin
+FFMPEG_LIB = ./libraries/ffmpeg-4.4.2-$(TARGET)/lib
+FFMPEG_INCLUDE = ./libraries/ffmpeg-4.4.2-$(TARGET)/include
+JAVA_PLATFORM_INCLUDE = ./libraries/jni/$(TARGET)
+JAVA_INCLUDE = ./libraries/jni
+
+CFLAGS = -fPIC
+INCLUDE = -I$(FFMPEG_INCLUDE) -I$(JAVA_INCLUDE) -I$(JAVA_PLATFORM_INCLUDE)
+LDLIBSOPTIONS=-L$(FFMPEG_LIB) -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lpostproc -lswscale
+OBJECTDIR = obj/$(TARGET)
+OUTPUTDIR = ./build/$(TARGET)
+
+.PHONY: all
+all: prereqs $(OUTPUTDIR)/$(OUTPUT_PREFIX)FFmpegJNIWrapper$(OUTPUT_EXT) copydepends
 	
-		if [ ! -d "../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin32" ];then \
-			mkdir -p ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin32; \
-		fi
-	
-		cp -u -v ${CND_ARTIFACT_DIR_${CONF}}/${CND_ARTIFACT_NAME_${CONF}} ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin32
-		cp -u -v libraries/ffmpeg-4.2.2-win32-dev/lib/*.dll ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin32
+$(OUTPUTDIR)/$(OUTPUT_PREFIX)FFmpegJNIWrapper$(OUTPUT_EXT):  ${OBJECTDIR}/Utility.o ${OBJECTDIR}/AVCodecContextJNI.o ${OBJECTDIR}/AVCodecJNI.o ${OBJECTDIR}/AVCodecParametersJNI.o ${OBJECTDIR}/AVFormatJNI.o ${OBJECTDIR}/AVFrameJNI.o ${OBJECTDIR}/AVGlobalJNI.o ${OBJECTDIR}/AVPacketJNI.o ${OBJECTDIR}/AVStreamJNI.o 
+	$(CC) -shared -o $@ $^ ${LDLIBSOPTIONS}
 
-        else ifeq (${CONF}, Release_64bit)
-		@echo 64 -------------------------------------------------
-	
-		if [ ! -d "../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64" ];then \
-			mkdir -p ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64; \
-		fi
-	
-		cp -u -v ${CND_ARTIFACT_DIR_${CONF}}/${CND_ARTIFACT_NAME_${CONF}} ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64
-		cp -u -v libraries/ffmpeg-4.2.2-win64-dev/lib/*.dll ../JavaFFmpeg/Libraries/FFmpegJNIWrapperWin64
-	
-        else ifeq (${CONF}, TESTING_64bit)
-	    
-		@echo Testing build ----------------------------------------------------------------------------------
-	
-		cp -u -v libraries/ffmpeg-4.2.2-win64-dev/lib/*.dll ${CND_ARTIFACT_DIR_${CONF}}
-	
-        else
-		@echo Unknown build profile
-	
-        endif
-	
-# clean
-clean: .clean-post
+${OBJECTDIR}/AVCodecContextJNI.o: AVCodecContextJNI.c
+	$(CC) ${CFLAGS} ${INCLUDE} -c $< -o $@
 
-.clean-pre:
-# Add your pre 'clean' code here...
+${OBJECTDIR}/AVCodecJNI.o: AVCodecJNI.c
+	$(CC) ${CFLAGS} ${INCLUDE} -c $< -o $@
 
-.clean-post: .clean-impl
-# Add your post 'clean' code here...
+${OBJECTDIR}/AVCodecParametersJNI.o: AVCodecParametersJNI.c
+	$(CC) ${CFLAGS} ${INCLUDE} -c $< -o $@
 
+${OBJECTDIR}/AVFormatJNI.o: AVFormatJNI.c
+	$(CC) ${CFLAGS} ${INCLUDE} -c $< -o $@
 
-# clobber
-clobber: .clobber-post
+${OBJECTDIR}/AVFrameJNI.o: AVFrameJNI.c
+	$(CC) ${CFLAGS} ${INCLUDE} -c $< -o $@
 
-.clobber-pre:
-# Add your pre 'clobber' code here...
+${OBJECTDIR}/AVGlobalJNI.o: AVGlobalJNI.c
+	$(CC) ${CFLAGS} ${INCLUDE} -c $< -o $@
 
-.clobber-post: .clobber-impl
-# Add your post 'clobber' code here...
+${OBJECTDIR}/AVPacketJNI.o: AVPacketJNI.c
+	$(CC) ${CFLAGS} ${INCLUDE} -c $< -o $@
 
+${OBJECTDIR}/AVStreamJNI.o: AVStreamJNI.c
+	$(CC) ${CFLAGS} ${INCLUDE} -c $< -o $@
 
-# all
-all: .all-post
+${OBJECTDIR}/Utility.o: Utility.c
+	$(CC) ${CFLAGS} ${INCLUDE} -c $< -o $@
 
-.all-pre:
-# Add your pre 'all' code here...
+.PHONY: copydepends 
+copydepends:
+ifeq ($(TARGET),linux)
+	cp -u $(FFMPEG_LIB)/libavcodec.so $(OUTPUTDIR)/libavcodec-58.so
+	cp -u $(FFMPEG_LIB)/libavdevice.so $(OUTPUTDIR)/libavdevice-58.so
+	cp -u $(FFMPEG_LIB)/libavfilter.so $(OUTPUTDIR)/libavfilter-7.so
+	cp -u $(FFMPEG_LIB)/libavformat.so $(OUTPUTDIR)/libavformat-58.so
+	cp -u $(FFMPEG_LIB)/libavutil.so $(OUTPUTDIR)/libavutil-56.so
+	cp -u $(FFMPEG_LIB)/libavfilter.so $(OUTPUTDIR)/libavfilter-7.so
+	cp -u $(FFMPEG_LIB)/libpostproc.so $(OUTPUTDIR)/libpostproc-55.so
+	cp -u $(FFMPEG_LIB)/libswresample.so $(OUTPUTDIR)/libswresample-3.so
+	cp -u $(FFMPEG_LIB)/libswscale.so $(OUTPUTDIR)/libswscale-5.so
+endif
+ifeq ($(TARGET),win32)
+	cp -u $(FFMPEG_BIN)/avcodec-58.dll $(OUTPUTDIR)/avcodec-58.dll
+	cp -u $(FFMPEG_BIN)/avdevice-58.dll $(OUTPUTDIR)/avdevice-58.dll
+	cp -u $(FFMPEG_BIN)/avfilter-7.dll $(OUTPUTDIR)/avfilter-7.dll
+	cp -u $(FFMPEG_BIN)/avformat-58.dll $(OUTPUTDIR)/avformat-58.dll
+	cp -u $(FFMPEG_BIN)/avutil-56.dll $(OUTPUTDIR)/avutil-56.dll
+	cp -u $(FFMPEG_BIN)/avfilter-7.dll $(OUTPUTDIR)/avfilter-7.dll
+	cp -u $(FFMPEG_BIN)/postproc-55.dll $(OUTPUTDIR)/postproc-55.dll
+	cp -u $(FFMPEG_BIN)/swresample-3.dll $(OUTPUTDIR)/swresample-3.dll
+	cp -u $(FFMPEG_BIN)/swscale-5.dll $(OUTPUTDIR)/swscale-5.dll
+endif
+ifeq ($(TARGET),win64)
+	cp -u $(FFMPEG_BIN)/avcodec-58.dll $(OUTPUTDIR)/avcodec-58.dll
+	cp -u $(FFMPEG_BIN)/avdevice-58.dll $(OUTPUTDIR)/avdevice-58.dll
+	cp -u $(FFMPEG_BIN)/avfilter-7.dll $(OUTPUTDIR)/avfilter-7.dll
+	cp -u $(FFMPEG_BIN)/avformat-58.dll $(OUTPUTDIR)/avformat-58.dll
+	cp -u $(FFMPEG_BIN)/avutil-56.dll $(OUTPUTDIR)/avutil-56.dll
+	cp -u $(FFMPEG_BIN)/avfilter-7.dll $(OUTPUTDIR)/avfilter-7.dll
+	cp -u $(FFMPEG_BIN)/postproc-55.dll $(OUTPUTDIR)/postproc-55.dll
+	cp -u $(FFMPEG_BIN)/swresample-3.dll $(OUTPUTDIR)/swresample-3.dll
+	cp -u $(FFMPEG_BIN)/swscale-5.dll $(OUTPUTDIR)/swscale-5.dll
+endif
 
-.all-post: .all-impl
-# Add your post 'all' code here...
+.PHONY: prereqs 
+prereqs:
+ifndef TARGET
+	$(error TEST is not set)
+endif
+	mkdir -p $(OBJECTDIR)
+	mkdir -p $(OUTPUTDIR)
 
-
-# build tests
-build-tests: .build-tests-post
-
-.build-tests-pre:
-# Add your pre 'build-tests' code here...
-
-.build-tests-post: .build-tests-impl
-# Add your post 'build-tests' code here...
-
-
-# run tests
-test: .test-post
-
-.test-pre: build-tests
-# Add your pre 'test' code here...
-
-.test-post: .test-impl
-# Add your post 'test' code here...
-
-
-# help
-help: .help-post
-
-.help-pre:
-# Add your pre 'help' code here...
-
-.help-post: .help-impl
-# Add your post 'help' code here...
+.PHONY: clean
+clean:
+	rm -fr $(OBJECTDIR)
+	rm -fr $(OUTPUTDIR)
 
 
+test: test.o
+	$(CC) -o test test.o -Llibraries/ffmpeg-4.4.2-win64-dev/lib -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lpostproc -lswscale -static
 
-# include project implementation makefile
-include nbproject/Makefile-impl.mk
+test.o: test.c
+	$(CC) -Ilibraries/ffmpeg-4.4.2-win64-dev/include -c test.c -o test.o
 
-# include project make variables
-include nbproject/Makefile-variables.mk

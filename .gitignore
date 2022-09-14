@@ -1,3 +1,5 @@
+
+
 # NetBeans specific #
 JavaFFmpeg/nbproject/private/
 JavaFFmpeg/build/
@@ -18,3 +20,4 @@ FFmpegJNIWrapper/dist/
 FFmpegJNIWrapper/nbdist/
 FFmpegJNIWrapper/nbactions.xml
 FFmpegJNIWrapper/nb-configuration.xml
+FFmpegJNIWrapper/obj/
