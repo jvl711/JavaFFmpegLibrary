@@ -1,4 +1,4 @@
-FROM openjdk:8-buster
+FROM openjdk:8-bullseye
 
 WORKDIR project/
 
