@@ -96,9 +96,9 @@
 
         <echo>Generate c JNI headers for FFmpegJNIWrapper project</echo>
         <exec executable="javac" dir=".">
-          <arg value="-h ../FFmpegJNIWrapper src/jvl/FFmpeg/jni/*.java"/>
-          <!--<arg value=""/>
-          <arg value=""/>-->
+          <arg value="-h"/>
+          <arg value="../FFmpegJNIWrapper"/>
+          <arg value="src/jvl/FFmpeg/jni/*.java"/>          
         </exec>
         
         <delete>
