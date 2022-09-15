@@ -145,7 +145,7 @@ pipeline
                 script
                 {
                     BRANCH = getBranch()
-                    sh('git remote set-url origin https://${GIT_HUB_TOKEN}@github.com/jvl711/JavaFFmpegLibrary/JavaFFmpegLibrary.git')
+                    sh('git remote set-url origin https://${GIT_HUB_TOKEN}@github.com/jvl711/JavaFFmpegLibrary.git')
                     sh('git config --global user.email "josh@joshandmonique.com"')
                     sh('git config --global user.name "Joshua Lewis"')
                     //Delete the tag remote an local incase it already exists

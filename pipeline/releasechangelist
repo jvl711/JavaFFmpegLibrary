@@ -1,0 +1,4 @@
+- Updated FFmpeg library to 4.4.2
+- Added linux build
+- Redesigned build process for C portion of the library
+- Add Jenkins pipeline
