@@ -107,7 +107,14 @@ pipeline
 					dir("${env.WORKSPACE}/JavaFFmpeg")
 					{
 						sh "ant jar"
-						//archiveArtifacts artifacts: "dist/TheMovieDB.jar", onlyIfSuccessful: true
+
+						archiveArtifacts artifacts: "dist/JavaFFmpeg.jar", onlyIfSuccessful: true
+						archiveArtifacts artifacts: "dist/JavaFFmpegLibraryLinux.xml", onlyIfSuccessful: true
+						archiveArtifacts artifacts: "dist/JavaFFmpegLibraryLinux_v${version}.zip", onlyIfSuccessful: true
+						archiveArtifacts artifacts: "dist/JavaFFmpegLibraryWinx32.xml", onlyIfSuccessful: true
+						archiveArtifacts artifacts: "dist/JavaFFmpegLibraryWin32_v${version}.zip", onlyIfSuccessful: true
+						archiveArtifacts artifacts: "dist/JavaFFmpegLibraryWinx64.xml", onlyIfSuccessful: true
+						archiveArtifacts artifacts: "dist/JavaFFmpegLibraryWin64_v${version}.zip", onlyIfSuccessful: true
 					}
                 }
             }
