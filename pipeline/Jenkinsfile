@@ -75,8 +75,8 @@ pipeline
         GIT_HUB_USER = credentials('GitHubUser')
         GIT_HUB_TOKEN = credentials('GitHubToken')
 
-        version = sh (script: "ant -S version | grep \"Version:\" | awk '{print \$2}'", returnStdout: true).trim()
-        buildnumber = sh (script: "ant -S buildnumber | grep \"Build Number:\" | awk '{print \$2}'", returnStdout: true).trim()        
+        version = sh (script: "ant -f JavaFFmpeg/build.xml -S version | grep \"Version:\" | awk '{print \$2}'", returnStdout: true).trim()
+        buildnumber = sh (script: "ant -f JavaFFmpeg/build.xml -S buildnumber | grep \"Build Number:\" | awk '{print \$2}'", returnStdout: true).trim()        
     }
 
     stages
