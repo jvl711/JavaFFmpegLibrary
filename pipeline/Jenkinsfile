@@ -175,12 +175,12 @@ pipeline
                     sh("sleep 5s")
                     //Add apk to the release
                     sh("github-release upload -s ${GIT_HUB_TOKEN} --user jvl711 --repo \"JavaFFmpegLibrary\" --tag \"v${version}\" --name \"JavaFFmpeg.jar\" --file \"JavaFFmpeg/dist/JavaFFmpeg.jar\"")
-                    sh("github-release upload -s ${GIT_HUB_TOKEN} --user jvl711 --repo \"JavaFFmpegLibrary\" --tag \"v${version}\" --name \"JavaFFmpeg.jar\" --file \"JavaFFmpeg/dist/JavaFFmpegLibraryLinux.xml"")
-                    sh("github-release upload -s ${GIT_HUB_TOKEN} --user jvl711 --repo \"JavaFFmpegLibrary\" --tag \"v${version}\" --name \"JavaFFmpeg.jar\" --file \"JavaFFmpeg/dist/JavaFFmpegLibraryLinux_v${version}.zip"")
-                    sh("github-release upload -s ${GIT_HUB_TOKEN} --user jvl711 --repo \"JavaFFmpegLibrary\" --tag \"v${version}\" --name \"JavaFFmpeg.jar\" --file \"JavaFFmpeg/dist/JavaFFmpegLibraryWinx32.xml"")
-                    sh("github-release upload -s ${GIT_HUB_TOKEN} --user jvl711 --repo \"JavaFFmpegLibrary\" --tag \"v${version}\" --name \"JavaFFmpeg.jar\" --file \"JavaFFmpeg/dist/JavaFFmpegLibraryWin32_v${version}.zip"")
-                    sh("github-release upload -s ${GIT_HUB_TOKEN} --user jvl711 --repo \"JavaFFmpegLibrary\" --tag \"v${version}\" --name \"JavaFFmpeg.jar\" --file \"JavaFFmpeg/dist/JavaFFmpegLibraryWinx64.xml"")
-                    sh("github-release upload -s ${GIT_HUB_TOKEN} --user jvl711 --repo \"JavaFFmpegLibrary\" --tag \"v${version}\" --name \"JavaFFmpeg.jar\" --file \"JavaFFmpeg/dist/JavaFFmpegLibraryWin64_v${version}.zip"")
+                    sh("github-release upload -s ${GIT_HUB_TOKEN} --user jvl711 --repo \"JavaFFmpegLibrary\" --tag \"v${version}\" --name \"JavaFFmpeg.jar\" --file \"JavaFFmpeg/dist/JavaFFmpegLibraryLinux.xml\"")
+                    sh("github-release upload -s ${GIT_HUB_TOKEN} --user jvl711 --repo \"JavaFFmpegLibrary\" --tag \"v${version}\" --name \"JavaFFmpeg.jar\" --file \"JavaFFmpeg/dist/JavaFFmpegLibraryLinux_v${version}.zip"\")
+                    sh("github-release upload -s ${GIT_HUB_TOKEN} --user jvl711 --repo \"JavaFFmpegLibrary\" --tag \"v${version}\" --name \"JavaFFmpeg.jar\" --file \"JavaFFmpeg/dist/JavaFFmpegLibraryWinx32.xml\"")
+                    sh("github-release upload -s ${GIT_HUB_TOKEN} --user jvl711 --repo \"JavaFFmpegLibrary\" --tag \"v${version}\" --name \"JavaFFmpeg.jar\" --file \"JavaFFmpeg/dist/JavaFFmpegLibraryWin32_v${version}.zip\"")
+                    sh("github-release upload -s ${GIT_HUB_TOKEN} --user jvl711 --repo \"JavaFFmpegLibrary\" --tag \"v${version}\" --name \"JavaFFmpeg.jar\" --file \"JavaFFmpeg/dist/JavaFFmpegLibraryWinx64.xml\"")
+                    sh("github-release upload -s ${GIT_HUB_TOKEN} --user jvl711 --repo \"JavaFFmpegLibrary\" --tag \"v${version}\" --name \"JavaFFmpeg.jar\" --file \"JavaFFmpeg/dist/JavaFFmpegLibraryWin64_v${version}.zip\"")
                 }
             }
         }
