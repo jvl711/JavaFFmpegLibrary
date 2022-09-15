@@ -76,7 +76,7 @@ pipeline
         GIT_HUB_TOKEN = credentials('GitHubToken')
 
         version = sh (script: "ant -f JavaFFmpeg/build.xml -S version | grep \"Version:\" | awk '{print \$2}'", returnStdout: true).trim()
-        buildnumber = sh (script: "ant -f JavaFFmpeg/build.xml -S buildnumber | grep \"Build Number:\" | awk '{print \$2}'", returnStdout: true).trim()        
+        buildnumber = sh (script: "ant -f JavaFFmpeg/build.xml -S buildnumber | grep \"BuildNumber:\" | awk '{print \$2}'", returnStdout: true).trim()        
     }
 
     stages
@@ -114,16 +114,18 @@ pipeline
         }
 
 
-        /*
+        
         stage('Publish local')
         {
              steps
              {
-                cifsPublisher(publishers: [[configName: 'Jars', transfers: [[cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: "builds/${version}", remoteDirectorySDF: false, removePrefix: "dist", sourceFiles: "dist/TheMovieDB.jar"]], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true]])
+                cifsPublisher(publishers: [[configName: 'Jars', transfers: [[cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: "builds/JavaFFmpeg/${version}", remoteDirectorySDF: false, removePrefix: "dist", sourceFiles: "dist/JavaFFmpeg.jar"]], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true]])
+				cifsPublisher(publishers: [[configName: 'Jars', transfers: [[cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: "builds/JavaFFmpeg/${version}", remoteDirectorySDF: false, removePrefix: "dist", sourceFiles: "dist/JavaFFmpegLibraryLinux.xml"]], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true]])
+				cifsPublisher(publishers: [[configName: 'Jars', transfers: [[cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: "builds/JavaFFmpeg/${version}", remoteDirectorySDF: false, removePrefix: "dist", sourceFiles: "JavaFFmpegLibraryLinux_v0.6.zip"]], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true]])
 
              }
         }
-		*/
+		
         
 
         /*
