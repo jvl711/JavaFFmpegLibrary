@@ -92,6 +92,14 @@
             
     </target>
     
+    <target name="version">
+        <echo>Version: ${build.version}</echo>
+    </target>
+    
+    <target name="buildnumber">
+        <echo>BuildNumber: ${build.number}</echo>
+    </target>
+    
     <target name="generate-c-headers">
 
         <echo>Generate c JNI headers for FFmpegJNIWrapper project</echo>
