@@ -13,6 +13,7 @@ RUN apt-get install mingw-w64 -y
 RUN apt-get install ant -y
 
 #Install go and github-release app
+ENV PATH="/root/go/bin:$PATH"
 RUN apt-get install -y golang
 RUN go get github.com/github-release/github-release
 
