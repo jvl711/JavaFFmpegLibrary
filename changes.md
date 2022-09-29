@@ -1,5 +1,14 @@
 # CHANGES
 
+## v0.6
+- Added Jenkins pipline to automate the build process of win32, win64 and linux builds
+- Removed netbeans automated Makefile and created a custom one for the C portion of the project
+- Added Linux build to the library
+
+## v0.5
+* Added Stream ID to the AVStreams. This is required for SageTV for .ts/.ps files. 
+* Added a bunch of additional functionality working towards the ability to transcode 
+
 ## v.0.4-alpha
 * Added the ability to get metadata from containers and streams
 * Added the ability to get embeded pictures from stream
