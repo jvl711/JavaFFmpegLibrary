@@ -208,6 +208,6 @@ JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVStream_getMetadataCount(JNIEnv* env
 JNIEXPORT jint JNICALL Java_jvl_FFmpeg_jni_AVStream_getID(JNIEnv* env, jobject obj, jlong AVStreamPointer)
 {
     AVStream * pAVStream = (AVStream *)(intptr_t)AVStreamPointer;
-
+    
     return pAVStream->id;
 }

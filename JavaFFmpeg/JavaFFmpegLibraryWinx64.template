@@ -13,7 +13,7 @@
 	<Webpage>https://github.com/jvl711/JavaFFmpegLibrary</Webpage>
 	<Package>
         <PackageType>System</PackageType>
-        <Location>https://github.com/jvl711/JavaFFmpegLibrary/releases/download/@VERSION@/JavaFFmpegLibraryWin64_v@VERSION@.zip</Location>
+        <Location>https://github.com/jvl711/JavaFFmpegLibrary/releases/download/v@VERSION@/JavaFFmpegLibraryWin64_v@VERSION@.zip</Location>
         <MD5>@JARMD5@</MD5>
     </Package>
 </SageTVPlugin>

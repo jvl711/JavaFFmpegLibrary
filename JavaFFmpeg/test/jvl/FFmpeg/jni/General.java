@@ -163,6 +163,8 @@ public class General
 		    System.out.println("\tID: " + avstream.getID());
                     //assertTrue(avstream.getID() == 0);
 		    
+		    
+		    
                     //assertTrue(avstream.getIDHex().equals("1"));
                     //video.setArNum(arNum);
                     System.out.println("\tAspect Ratio Num: " + arNum);
