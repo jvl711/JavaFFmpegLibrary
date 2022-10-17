@@ -4,7 +4,7 @@
 	<Identifier>JavaFFmpegLibraryLinux</Identifier>
 	<Description>JNI Wrapper library around FFmpeg library for SageTV</Description>
 	<Author>jvl711</Author>
-	<OS>Windows</OS>
+	<OS>Linux</OS>
 	<CreationDate>2020.05.01</CreationDate>
 	<ModificationDate>@BUILDDATE@</ModificationDate>
 	<Version>@VERSION@</Version>

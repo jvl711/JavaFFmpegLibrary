@@ -11,7 +11,6 @@
     <description>Builds, tests, and runs the project JavaFFmpeg.</description>
     <import file="nbproject/build-impl.xml"/>
     
-    
     <property name="c.build.dir.win64" value="../FFmpegJNIWrapper/build/win64"/>
     <property name="c.build.dir.win32" value="../FFmpegJNIWrapper/build/win32"/>
     <property name="c.build.dir.linux" value="../FFmpegJNIWrapper/build/linux"/>
