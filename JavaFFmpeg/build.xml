@@ -125,11 +125,11 @@
         
         <delete file="${dist.jar.dir}/JavaFFmpegLibraryWinx64.xml"/>
         
-        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${build.version}.zip" property="jarmd5"/>
+        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${build.version}.zip" property="jarmd5win64"/>
         
         <filter token="BUILDDATE" value="${build.date}" />
         <filter token="VERSION" value="${build.version}" />
-        <filter token="JARMD5" value="${jarmd5}" />
+        <filter token="JARMD5" value="${jarmd5win64}" />
         <copy file="./JavaFFmpegLibraryWinx64.template" tofile="${dist.jar.dir}/JavaFFmpegLibraryWinx64.xml" filtering="true"/>
         
         <echo>Packaging Windows x32 Build</echo> 
@@ -141,11 +141,11 @@
         
         <delete file="${dist.jar.dir}/JavaFFmpegLibraryWinx32.xml"/>
        
-        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${build.version}.zip" property="jarmd5"/>
+        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryWin32_v${build.version}.zip" property="jarmd5win32"/>
         
         <filter token="BUILDDATE" value="${build.date}" />
         <filter token="VERSION" value="${build.version}" />
-        <filter token="JARMD5" value="${jarmd5}" />
+        <filter token="JARMD5" value="${jarmd5win32}" />
         <copy file="./JavaFFmpegLibraryWinx32.template" tofile="${dist.jar.dir}/JavaFFmpegLibraryWinx32.xml" filtering="true"/>
 	
 	<echo>Packaging Linux Build</echo> 
@@ -157,11 +157,11 @@
         
         <delete file="${dist.jar.dir}/JavaFFmpegLibraryLinux.xml"/>
        
-        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryLinux_v${build.version}.zip" property="jarmd5"/>
+        <checksum file="${dist.jar.dir}/JavaFFmpegLibraryLinux_v${build.version}.zip" property="jarmd5linux"/>
         
         <filter token="BUILDDATE" value="${build.date}" />
         <filter token="VERSION" value="${build.version}" />
-        <filter token="JARMD5" value="${jarmd5}" />
+        <filter token="JARMD5" value="${jarmd5linux}" />
         <copy file="./JavaFFmpegLibraryLinux.template" tofile="${dist.jar.dir}/JavaFFmpegLibraryLinux.xml" filtering="true"/>
         
     </target>
