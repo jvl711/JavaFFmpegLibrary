@@ -106,7 +106,9 @@
         <exec executable="javac" dir=".">
           <arg value="-h"/>
           <arg value="../FFmpegJNIWrapper"/>
-          <arg value="src/jvl/FFmpeg/jni/*.java"/>          
+          <arg value="-classpath"/>
+          <arg value="src"/>
+          <arg line="src/jvl/FFmpeg/jni/AbstractJNIObject.java src/jvl/FFmpeg/jni/AVPacket.java src/jvl/FFmpeg/jni/AVCodecContext.java src/jvl/FFmpeg/jni/AVPixelFormat.java src/jvl/FFmpeg/jni/AVCodec.java src/jvl/FFmpeg/jni/AVRational.java src/jvl/FFmpeg/jni/AVCodecParameters.java src/jvl/FFmpeg/jni/AVSampleFormat.java src/jvl/FFmpeg/jni/AVFieldOrder.java src/jvl/FFmpeg/jni/AVStream.java src/jvl/FFmpeg/jni/AVFormatContext.java src/jvl/FFmpeg/jni/AVStreamMap.java src/jvl/FFmpeg/jni/AVFrame.java src/jvl/FFmpeg/jni/Global.java src/jvl/FFmpeg/jni/AVGlobal.java src/jvl/FFmpeg/jni/Version.java src/jvl/FFmpeg/jni/AVMediaType.java"/>
         </exec>
         
         <delete>
