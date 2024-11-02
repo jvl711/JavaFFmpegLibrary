@@ -125,7 +125,7 @@
             
         </copy>
         
-        <copy file="${dist.jar.dir}/*.jar" todir="${dist.jar.dir}/JavaFFmpegLibraryWin64"/> 
+        <copy file="${dist.jar.dir}/JavaFFmpeg.jar" todir="${dist.jar.dir}/JavaFFmpegLibraryWin64"/> 
         
         <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${build.version}.zip">
             <fileset dir="${c.build.dir.win64}"/>
