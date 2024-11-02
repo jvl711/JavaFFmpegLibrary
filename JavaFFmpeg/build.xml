@@ -121,7 +121,7 @@
         <echo>Packaging Windows x64 Build</echo>
         
         <copy todir="${dist.jar.dir}/JavaFFmpegLibraryWin64">
-            <fileset dir="${c.build.dir.win64}" includes="*.dll"/>
+            <fileset dir="${c.build.dir.win64}" includes="**"/>
         </copy>
 
         <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${build.version}.zip">
@@ -155,6 +155,10 @@
         <copy file="./JavaFFmpegLibraryWinx32.template" tofile="${dist.jar.dir}/JavaFFmpegLibraryWinx32.xml" filtering="true"/>
 	
 	<echo>Packaging Linux Build</echo> 
+
+        <copy todir="${dist.jar.dir}/JavaFFmpegLibraryLinux">
+            <fileset dir="${c.build.dir.linux}" includes="**"/>
+        </copy>
 
         <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryLinux_v${build.version}.zip">
             <fileset dir="${c.build.dir.linux}"/>
