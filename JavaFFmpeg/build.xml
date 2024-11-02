@@ -121,7 +121,7 @@
         <echo>Packaging Windows x64 Build</echo>
         
         <copy todir="${dist.jar.dir}/JavaFFmpegLibraryWin64">
-            <fileset dir="${c.build.dir.win64}"/>
+            <fileset dir="${c.build.dir.win64}" includes="*.dll"/>
         </copy>
 
         <zip destfile="${dist.jar.dir}/JavaFFmpegLibraryWin64_v${build.version}.zip">
